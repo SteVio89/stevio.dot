@@ -14,11 +14,8 @@ alias vim="nvim"
 alias ll="eza -l -g --icons --git"
 alias llt="eza -1 --icons --tree --git-ignore"
 alias terraform="tofu"
-alias cm="chezmoi"
-alias cm+="chezmoi add"
-alias cma="chezmoi apply"
-alias cme="chezmoi edit"
-alias cmd="chezmoi diff"
+alias cma="dotfiles add -u" 
+alias cmd="dotfiles status"
 alias ..="cd .."
 alias files="yazi"
 alias wfi="caffeinate -d"
@@ -77,9 +74,8 @@ function prev() {
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/stefan/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/stefan/Applications/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
-# if [ -f '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc'; fi
 
 # source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
