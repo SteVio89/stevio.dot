@@ -54,7 +54,7 @@ export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 #export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 
 export EDITOR="$(which nvim)"
-export VISUAL="$(which NotepadNext)"
+export VISUAL="$(which Neovide)"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 

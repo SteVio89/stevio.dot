@@ -13,8 +13,8 @@ restart-desktop:
   brew services restart sketchybar
 
 update-brewfile:
-  rm /Users/stefan/.local/share/chezmoi/Brewfile
-  brew bundle dump --file /Users/stefan/.local/share/chezmoi/Brewfile
+  rm /Users/stefan/Brewfile
+  brew bundle dump --file /Users/stefan/Brewfile
 
 clean-brew:
   brew autoremove
