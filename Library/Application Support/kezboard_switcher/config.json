@@ -1,0 +1,52 @@
+{
+ "keyboards": [
+  {
+   "Name": "Apple Internal Keyboard / Trackpad",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.German",
+    "LayoutName": "German"
+   }
+  },
+  {
+   "Name": "NuPhy Halo96 V2-1",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.US",
+    "LayoutName": "U.S."
+   }
+  },
+  {
+   "Name": "YubiKey OTP+FIDO+CCID",
+   "Status": 2,
+   "LayoutInfo": {
+    "LayoutId": "",
+    "LayoutName": ""
+   }
+  },
+  {
+   "Name": "silakka54",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.US",
+    "LayoutName": "U.S."
+   }
+  },
+  {
+   "Name": "NuPhy Kick75 IO",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.US",
+    "LayoutName": "U.S."
+   }
+  },
+  {
+   "Name": "Nuphy Kick75 IO-1",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.US",
+    "LayoutName": "U.S."
+   }
+  }
+ ]
+}
