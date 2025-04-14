@@ -1,0 +1,6 @@
+macos-titlebar-style=tabs
+font-size=16
+font-family = "JetBrainsMono Nerd Font"
+command=zellij
+term=xterm-256color
+quit-after-last-window-closed=true

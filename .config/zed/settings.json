@@ -1,0 +1,116 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "auto_update": false, //managed with brew
+  "base_keymap": "VSCode",
+  "ui_font_size": 15,
+  "buffer_font_size": 17,
+  "use_system_path_prompts": false,
+  "use_system_prompts": false,
+  "show_completions_on_input": true,
+  "auto_signature_help": true,
+  "show_signature_help_after_edits": true,
+  "file_finder": {
+    "modal_max_width": "large"
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "default_mode": "normal",
+    // "enable_vi_sneak": true,
+    "use_system_clipboard": "on_yank"
+  },
+  "active_pane_modifiers": {
+    // "magnification": 1.3,
+    "inactive_opacity": 0.5
+  },
+  "scrollbar": {
+    "show": "always"
+  },
+  "tabs": {
+    "git_status": true,
+    "file_icons": true,
+    "show_diagnostics": "all"
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+    "background_coloring": "indent_aware"
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15
+  },
+  "assistant": {
+    "default_profile": "write",
+    "always_allow_tool_actions": false,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "version": "2"
+  },
+  "inlay_hints": {
+    "enabled": false,
+    "show_background": true,
+    "toggle_on_modifiers_press": {
+      "alt": true
+    }
+  },
+  "edit_predictions": {
+    "mode": "subtle",
+    "enabled_in_assistant": true
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "theme": {
+    "mode": "dark",
+    "dark": "Ayu Dark",
+    "light": "Catppuccin Mocha - No Italics"
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "vim_mode": true,
+  "confirm_quit": true,
+  "show_whitespaces": "selection",
+  "calls": {
+    "mute_on_join": true,
+    "share_on_join": false
+  },
+  "preview_tabs": {
+    "enabled": true
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "diagnostics": {
+    "include_warnings": true,
+    "inline": {
+      "enabled": true
+    }
+  },
+  "lsp": {
+    "golangci-lint": {
+      "initialization_options": {
+        "command": [
+          "golangci-lint",
+          "run",
+          "--output.json.path=stdout",
+          "--issues-exit-code=1",
+          "--show-stats=false"
+        ]
+      }
+    }
+  },
+  "languages": {
+    "Go": {
+      "language_servers": ["gopls", "golangci-lint"]
+    }
+  }
+}
