@@ -1,0 +1,16 @@
+[user]
+	name = Stefan Viol
+	email = stefan@stevio.de
+	signingKey = 0AEE3156CB8E4846
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+  autocrlf = input
+  excludesfile = /Users/stefan/.gitignore_global
