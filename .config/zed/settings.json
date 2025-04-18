@@ -1,11 +1,4 @@
 // Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
 {
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
@@ -22,11 +15,9 @@
   "vim": {
     "toggle_relative_line_numbers": true,
     "default_mode": "normal",
-    // "enable_vi_sneak": true,
     "use_system_clipboard": "on_yank"
   },
   "active_pane_modifiers": {
-    // "magnification": 1.3,
     "inactive_opacity": 0.5
   },
   "scrollbar": {
@@ -43,15 +34,15 @@
     "background_coloring": "indent_aware"
   },
   "centered_layout": {
-    "left_padding": 0.15,
-    "right_padding": 0.15
+    "left_padding": 0.1,
+    "right_padding": 0.1
   },
   "assistant": {
     "default_profile": "write",
     "always_allow_tool_actions": false,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "provider": "copilot_chat",
+      "model": "gemini-2.5-pro"
     },
     "version": "2"
   },

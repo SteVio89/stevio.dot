@@ -2,13 +2,40 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
-      "space f f": "file_finder::Toggle",
       "space f e": "workspace::ToggleLeftDock",
+      "space f f": "file_finder::Toggle",
       "space f g": "workspace::NewSearch",
       "space f d": "diagnostics::Deploy",
-      //todo adding keybind to move through diagnostics
-      "space c a": "editor::SelectAllMatches",
+      "space g t": "git_panel::ToggleFocus",
+      "space s a": "editor::SelectAllMatches",
+      "space z f": "zed::ToggleFullScreen",
       "space z z": "workspace::ToggleCenteredLayout"
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "space c a": "editor::ToggleCodeActions",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w /": "pane::SplitRight",
+      "ctrl-w -": "pane::SplitDown",
+      "g d": "editor::GoToDefinition",
+      "g D": "editor::GoToDefinitionSplit",
+      "g i": "editor::GoToImplementation",
+      "g I": "editor::GoToImplementationSplit",
+      "g t": "editor::GoToTypeDefinition",
+      "g T": "editor::GoToTypeDefinitionSplit",
+      "g r": "editor::FindAllReferences"
     }
   },
   {
@@ -36,14 +63,6 @@
       "b": "vim::PreviousSubwordStart",
       "e": "vim::NextSubwordEnd",
       "g e": "vim::PreviousSubwordEnd"
-    }
-  },
-  {
-    "context": "EmptyPane || SharedScreen",
-    "bindings": {
-      // Put key bindings here (in addition to the context above) if you want them to
-      // work when no editor exists.
-      // "space f": "file_finder::Toggle"
     }
   }
 ]
