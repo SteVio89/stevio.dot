@@ -22,6 +22,8 @@ alias wfi="caffeinate -d"
 alias ktx="kubie ctx"
 alias snippets="pet search"
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias get_esprs=". $HOME/export-esp.sh"
+#alias get_espidf=". $HOME/code/esp/esp-idf/export.sh"
 #alias find="fd"
 #alias mvn="mvnd"
 
@@ -58,9 +60,6 @@ export VISUAL="$(which Neovide)"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
-# ESP32 stuff
-#export LIBCLANG_PATH="/Users/stefan/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-17.0.1_20240419/esp-clang/lib"
-#export PATH="/Users/stefan/.rustup/toolchains/esp/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:$PATH"
 # Tools
 gpgconf --launch gpg-agent
 

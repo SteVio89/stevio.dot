@@ -25,7 +25,6 @@ brew "cargo-binstall"
 brew "cargo-nextest"
 brew "ccache"
 brew "cdrtools"
-brew "chezmoi"
 brew "clusterctl"
 brew "cmake"
 brew "lima"
@@ -38,6 +37,7 @@ brew "dfu-util"
 brew "direnv"
 brew "docker"
 brew "dua-cli"
+brew "exercism"
 brew "eza"
 brew "fd"
 brew "ffmpegthumbnailer"
@@ -136,6 +136,7 @@ cask "vial"
 cask "vlc"
 cask "wezterm"
 cask "zed"
+mas "Transporter", id: 1450874784
 mas "WhatsApp", id: 310633997
 mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835
