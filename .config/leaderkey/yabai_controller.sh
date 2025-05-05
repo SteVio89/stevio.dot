@@ -3,7 +3,7 @@
 switch_workspace() {
     SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES["$1"] ]] && yabai -m space --focus $SPACES["$1"]
 
-    sleep 0.1
+    sleep 0.5
     local space_index=$SPACES["$1"]
     local first_window=$(yabai -m query --windows --space $space_index | jq '[.[] | select(.is-minimized == false)] | sort_by(.frame.x, .frame.y) | .[0].id')
 
