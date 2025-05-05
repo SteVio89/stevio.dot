@@ -6,13 +6,11 @@
           "actions" : [
             {
               "key" : "e",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Zed.app"
             },
             {
               "key" : "t",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Ghostty.app"
             },
@@ -24,19 +22,16 @@
             },
             {
               "key" : "i",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/IntelliJ IDEA.app"
             },
             {
               "key" : "n",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Notepadnext.app"
             },
             {
               "key" : "v",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Neovide.app"
             }
@@ -55,7 +50,6 @@
             },
             {
               "key" : "d",
-              "label" : "",
               "type" : "folder",
               "value" : "/Users/stefan/Documents"
             }
@@ -68,45 +62,43 @@
           "actions" : [
             {
               "key" : "s",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/Utilities/Screenshot.app"
             },
             {
               "key" : "f",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Firefox.app"
             },
             {
               "key" : "k",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/KezboardSwitcher.app"
             },
             {
               "key" : "c",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/System Settings.app"
             },
             {
               "key" : "p",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/Utilities/Print Center.app"
             },
             {
               "key" : "l",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/Launchpad.app"
             },
             {
               "key" : "m",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/Mission Control.app"
+            },
+            {
+              "key" : "a",
+              "type" : "application",
+              "value" : "/Applications/Antares.app"
             }
           ],
           "key" : "u",
@@ -117,19 +109,16 @@
           "actions" : [
             {
               "key" : "s",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Slack.app"
             },
             {
               "key" : "a",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Asana.app"
             },
             {
               "key" : "l",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/Logseq.app"
             }
@@ -142,13 +131,11 @@
           "actions" : [
             {
               "key" : "b",
-              "label" : "",
               "type" : "application",
               "value" : "/System/Applications/Messages.app"
             },
             {
               "key" : "w",
-              "label" : "",
               "type" : "application",
               "value" : "/Applications/WhatsApp.app"
             }

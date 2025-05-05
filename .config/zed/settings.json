@@ -2,13 +2,16 @@
 {
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
-  "ui_font_size": 15,
-  "buffer_font_size": 17,
+  "ui_font_size": 17,
+  "buffer_font_size": 19,
   "use_system_path_prompts": false,
   "use_system_prompts": false,
   "show_completions_on_input": true,
   "auto_signature_help": true,
   "show_signature_help_after_edits": true,
+  "vim_mode": true,
+  "confirm_quit": true,
+  "show_whitespaces": "selection",
   "file_finder": {
     "modal_max_width": "large"
   },
@@ -18,7 +21,8 @@
     "use_system_clipboard": "on_yank"
   },
   "active_pane_modifiers": {
-    "inactive_opacity": 0.5
+    "inactive_opacity": 0.95,
+    "border_size": 3
   },
   "scrollbar": {
     "show": "always"
@@ -36,15 +40,6 @@
   "centered_layout": {
     "left_padding": 0.1,
     "right_padding": 0.1
-  },
-  "assistant": {
-    "default_profile": "write",
-    "always_allow_tool_actions": false,
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gemini-2.5-pro"
-    },
-    "version": "2"
   },
   "inlay_hints": {
     "enabled": false,
@@ -66,9 +61,6 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "vim_mode": true,
-  "confirm_quit": true,
-  "show_whitespaces": "selection",
   "calls": {
     "mute_on_join": true,
     "share_on_join": false
