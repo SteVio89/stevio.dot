@@ -5,7 +5,7 @@ switch_workspace() {
 
     sleep 0.1
     local space_index=$SPACES["$1"]
-    local first_window=$(yabai -m query --windows --space $space_index | jq '[.[] | select(.minimized == 0)] | sort_by(.frame.x, .frame.y) | .[0].id')
+    local first_window=$(yabai -m query --windows --space $space_index | jq '[.[] | select(.is-minimized == false)] | sort_by(.frame.x, .frame.y) | .[0].id')
 
     if [[ "$first_window" != "null" && -n "$first_window" ]]; then
         yabai -m window --focus $first_window
