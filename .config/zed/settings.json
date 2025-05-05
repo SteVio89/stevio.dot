@@ -1,5 +1,13 @@
 // Zed settings
 {
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-thinking-latest"
+    },
+    "default_profile": "ask",
+    "version": "2"
+  },
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
   "ui_font_size": 17,
