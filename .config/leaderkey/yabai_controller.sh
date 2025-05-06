@@ -62,25 +62,31 @@ reset_desktop() {
     TERMINAL="Ghostty"
     BROWSER="Firefox"
     EDITOR="Zed"
+    local space_helper=0
 
     chat_windows=($(yabai -m query --windows | jq --arg app "$CHAT" '.[] | select(.app == $app) | .id'))
-    for window in $chat_windows; do
-        yabai -m window $window --space 4
-    done
-
     terminal_windows=($(yabai -m query --windows | jq --arg app "$TERMINAL" '.[] | select(.app == $app) | .id'))
-    for window in $terminal_windows; do
-        yabai -m window $window --space 2
-    done
-
     browser_windows=($(yabai -m query --windows | jq --arg app "$BROWSER" '.[] | select(.app == $app) | .id'))
-    for window in $browser_windows; do
-        yabai -m window $window --space 3
+    editor_windows=($(yabai -m query --windows | jq --arg app "$EDITOR" '.[] | select(.app == $app) | .id'))
+
+    if [[ ${#DISPLAYS[@]} -gt 1 ]]; then
+        space_helper=4
+    fi
+
+    for window in $chat_windows; do
+        yabai -m window $window --space $((1+space_helper))
     done
 
-    editor_windows=($(yabai -m query --windows | jq --arg app "$EDITOR" '.[] | select(.app == $app) | .id'))
+    for window in $terminal_windows; do
+        yabai -m window $window --space $((2+space_helper))
+    done
+
+    for window in $browser_windows; do
+        yabai -m window $window --space $((3+space_helper))
+    done
+
     for window in $editor_windows; do
-        yabai -m window $window --space 4
+        yabai -m window $window --space $((4+space_helper))
     done
 
     yabai --restart-service

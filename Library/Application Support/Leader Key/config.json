@@ -1,282 +1,282 @@
 {
-  "actions": [
+  "actions" : [
     {
-      "actions": [
+      "actions" : [
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "e",
-              "type": "application",
-              "value": "/Applications/Zed.app"
+              "key" : "e",
+              "type" : "application",
+              "value" : "/Applications/Zed.app"
             },
             {
-              "key": "t",
-              "type": "application",
-              "value": "/Applications/Ghostty.app"
+              "key" : "t",
+              "type" : "application",
+              "value" : "/Applications/Ghostty.app"
             },
             {
-              "key": "l",
-              "label": "Linux",
-              "type": "application",
-              "value": "/Applications/VMware Fusion.app"
+              "key" : "l",
+              "label" : "Linux",
+              "type" : "application",
+              "value" : "/Applications/VMware Fusion.app"
             },
             {
-              "key": "i",
-              "type": "application",
-              "value": "/Applications/IntelliJ IDEA.app"
+              "key" : "i",
+              "type" : "application",
+              "value" : "/Applications/IntelliJ IDEA.app"
             },
             {
-              "key": "n",
-              "type": "application",
-              "value": "/Applications/Notepadnext.app"
+              "key" : "n",
+              "type" : "application",
+              "value" : "/Applications/Notepadnext.app"
             },
             {
-              "key": "v",
-              "type": "application",
-              "value": "/Applications/Neovide.app"
+              "key" : "v",
+              "type" : "application",
+              "value" : "/Applications/Neovide.app"
             }
           ],
-          "key": "c",
-          "label": "Code",
-          "type": "group"
+          "key" : "c",
+          "label" : "Code",
+          "type" : "group"
         },
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "f",
-              "label": "Home",
-              "type": "folder",
-              "value": "/Users/stefan"
+              "key" : "f",
+              "label" : "Home",
+              "type" : "folder",
+              "value" : "/Users/stefan"
             },
             {
-              "key": "d",
-              "type": "folder",
-              "value": "/Users/stefan/Documents"
+              "key" : "d",
+              "type" : "folder",
+              "value" : "/Users/stefan/Documents"
             }
           ],
-          "key": "f",
-          "label": "Folders",
-          "type": "group"
+          "key" : "f",
+          "label" : "Folders",
+          "type" : "group"
         },
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "s",
-              "type": "application",
-              "value": "/System/Applications/Utilities/Screenshot.app"
+              "key" : "s",
+              "type" : "application",
+              "value" : "/System/Applications/Utilities/Screenshot.app"
             },
             {
-              "key": "f",
-              "type": "application",
-              "value": "/Applications/Firefox.app"
+              "key" : "f",
+              "type" : "application",
+              "value" : "/Applications/Firefox.app"
             },
             {
-              "key": "k",
-              "type": "application",
-              "value": "/Applications/KezboardSwitcher.app"
+              "key" : "k",
+              "type" : "application",
+              "value" : "/Applications/KezboardSwitcher.app"
             },
             {
-              "key": "c",
-              "type": "application",
-              "value": "/System/Applications/System Settings.app"
+              "key" : "c",
+              "type" : "application",
+              "value" : "/System/Applications/System Settings.app"
             },
             {
-              "key": "p",
-              "type": "application",
-              "value": "/System/Applications/Utilities/Print Center.app"
+              "key" : "p",
+              "type" : "application",
+              "value" : "/System/Applications/Utilities/Print Center.app"
             },
             {
-              "key": "l",
-              "type": "application",
-              "value": "/System/Applications/Launchpad.app"
+              "key" : "l",
+              "type" : "application",
+              "value" : "/System/Applications/Launchpad.app"
             },
             {
-              "key": "m",
-              "type": "application",
-              "value": "/System/Applications/Mission Control.app"
+              "key" : "m",
+              "type" : "application",
+              "value" : "/System/Applications/Mission Control.app"
             },
             {
-              "key": "a",
-              "type": "application",
-              "value": "/Applications/Antares.app"
+              "key" : "a",
+              "type" : "application",
+              "value" : "/Applications/Antares.app"
             }
           ],
-          "key": "u",
-          "label": "Utils",
-          "type": "group"
+          "key" : "u",
+          "label" : "Utils",
+          "type" : "group"
         },
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "s",
-              "type": "application",
-              "value": "/Applications/Slack.app"
+              "key" : "s",
+              "type" : "application",
+              "value" : "/Applications/Slack.app"
             },
             {
-              "key": "a",
-              "type": "application",
-              "value": "/Applications/Asana.app"
+              "key" : "a",
+              "type" : "application",
+              "value" : "/Applications/Asana.app"
             },
             {
-              "key": "l",
-              "type": "application",
-              "value": "/Applications/Logseq.app"
+              "key" : "l",
+              "type" : "application",
+              "value" : "/Applications/Logseq.app"
             }
           ],
-          "key": "w",
-          "label": "Work",
-          "type": "group"
+          "key" : "w",
+          "label" : "Work",
+          "type" : "group"
         },
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "b",
-              "type": "application",
-              "value": "/System/Applications/Messages.app"
+              "key" : "b",
+              "type" : "application",
+              "value" : "/System/Applications/Messages.app"
             },
             {
-              "key": "w",
-              "type": "application",
-              "value": "/Applications/WhatsApp.app"
+              "key" : "w",
+              "type" : "application",
+              "value" : "/Applications/WhatsApp.app"
             }
           ],
-          "key": "m",
-          "label": "Messager",
-          "type": "group"
+          "key" : "m",
+          "label" : "Messager",
+          "type" : "group"
         }
       ],
-      "key": "o",
-      "label": "Open App",
-      "type": "group"
+      "key" : "o",
+      "label" : "Open App",
+      "type" : "group"
     },
     {
-      "actions": [
+      "actions" : [
         {
-          "key": "1",
-          "label": "WS 1",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 1"
+          "key" : "1",
+          "label" : "WS 1",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 1"
         },
         {
-          "key": "2",
-          "label": "WS 2",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 2"
+          "key" : "2",
+          "label" : "WS 2",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 2"
         },
         {
-          "key": "3",
-          "label": "WS 3",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 3"
+          "key" : "3",
+          "label" : "WS 3",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 3"
         },
         {
-          "key": "4",
-          "label": "WS 4",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 4"
+          "key" : "4",
+          "label" : "WS 4",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_workspace 4"
         },
         {
-          "key": "h",
-          "label": "Select Left",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window west"
+          "key" : "h",
+          "label" : "Select Left",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window west"
         },
         {
-          "key": "j",
-          "label": "Select Down",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window south"
+          "key" : "j",
+          "label" : "Select Down",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window south"
         },
         {
-          "key": "k",
-          "label": "Select Up",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window north"
+          "key" : "k",
+          "label" : "Select Up",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window north"
         },
         {
-          "key": "l",
-          "label": "Select Right",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window east"
+          "key" : "l",
+          "label" : "Select Right",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh select_Window east"
         },
         {
-          "key": "t",
-          "label": "Toggle",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh toggle"
+          "key" : "t",
+          "label" : "Toggle",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh toggle"
         },
         {
-          "key": "z",
-          "label": "Zen",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh zen"
+          "key" : "z",
+          "label" : "Zen",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh zen"
         },
         {
-          "key": "r",
-          "label": "Rebuild",
-          "type": "command",
-          "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh rebuild"
+          "key" : "r",
+          "label" : "Rebuild",
+          "type" : "command",
+          "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh rebuild"
         },
         {
-          "actions": [
+          "actions" : [
             {
-              "key": "1",
-              "label": "Move to 1",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 1"
+              "key" : "1",
+              "label" : "Move to 1",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 1"
             },
             {
-              "key": "2",
-              "label": "Move to 2",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 2"
+              "key" : "2",
+              "label" : "Move to 2",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 2"
             },
             {
-              "key": "3",
-              "label": "Move to 3",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 3"
+              "key" : "3",
+              "label" : "Move to 3",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 3"
             },
             {
-              "key": "4",
-              "label": "Move to 4",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 4"
+              "key" : "4",
+              "label" : "Move to 4",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_to_workspace 4"
             },
             {
-              "key": "h",
-              "label": "Move left",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace west"
+              "key" : "h",
+              "label" : "Move left",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace west"
             },
             {
-              "key": "j",
-              "label": "Move down",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace south"
+              "key" : "j",
+              "label" : "Move down",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace south"
             },
             {
-              "key": "k",
-              "label": "Move up",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace north"
+              "key" : "k",
+              "label" : "Move up",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace north"
             },
             {
-              "key": "l",
-              "label": "Move right",
-              "type": "command",
-              "value": "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace east"
+              "key" : "l",
+              "label" : "Move right",
+              "type" : "command",
+              "value" : "/Users/stefan/.config/leaderkey/yabai_controller.sh move_in_workspace east"
             }
           ],
-          "key": "m",
-          "label": "Move",
-          "type": "group"
+          "key" : "m",
+          "label" : "Move",
+          "type" : "group"
         }
       ],
-      "key": "w",
-      "label": "Window",
-      "type": "group"
+      "key" : "w",
+      "label" : "Window",
+      "type" : "group"
     }
   ],
-  "type": "group"
+  "type" : "group"
 }
