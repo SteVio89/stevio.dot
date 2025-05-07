@@ -6,6 +6,7 @@
       "space f f": "file_finder::Toggle",
       "space f g": "workspace::NewSearch",
       "space f d": "diagnostics::Deploy",
+      "space f b": "tab_switcher::ToggleAll",
       "space g t": "git_panel::ToggleFocus",
       "space s a": "editor::SelectAllMatches",
       "space z f": "zed::ToggleFullScreen",
