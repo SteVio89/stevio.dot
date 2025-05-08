@@ -9,7 +9,6 @@ opt.smartindent = true
 opt.swapfile = false
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true
-opt.colorcolumn = "80"
 opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true

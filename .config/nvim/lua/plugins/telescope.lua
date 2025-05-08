@@ -9,6 +9,7 @@ return {
         local builtin = require("telescope.builtin")
         vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find file" })
         vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep files" })
+        vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
         vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Undo history" })
     end
 

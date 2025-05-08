@@ -5,8 +5,11 @@ return {
         preset = "modern",
         spec = {
             { "<leader>f", group = "file" },
+            { "<leader>g", group = "goto" },
+            { "<leader>c", group = "code" },
+            { "<leader>o", group = "other" },
             -- { "<leader>t", group = "trouble" },
-            -- { "<leader>z", group = "zen" },
+            { "<leader>z", group = "zen" },
             -- { "<leader>w", group = "sessions" },
             -- { "<leader>o", group = "other" },
         }

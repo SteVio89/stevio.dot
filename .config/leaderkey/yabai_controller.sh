@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 switch_workspace() {
-    SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES["$1"] ]] && yabai -m space --focus $SPACES["$1"]
+    spaces=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $spaces["$1"] ]] && yabai -m space --focus $spaces["$1"]
 
     sleep 0.5
-    local space_index=$SPACES["$1"]
+    local space_index=$spaces["$1"]
     local first_window=$(yabai -m query --windows --space $space_index | jq '[.[] | select(.is-minimized == false)] | sort_by(.frame.x, .frame.y) | .[0].id')
 
     if [[ "$first_window" != "null" && -n "$first_window" ]]; then
@@ -18,7 +18,7 @@ focus_window() {
 }
 
 move_to_workspace() {
-    SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES["$1"] ]] && yabai -m window --space $SPACES["$1"]
+    spaces=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $spaces["$1"] ]] && yabai -m window --space $spaces["$1"]
 }
 
 move_in_workspace() {
@@ -45,52 +45,66 @@ toggle_layout() {
 }
 
 reset_desktop() {
-    DISPLAYS=($(yabai -m query --displays | jq '.[].index'))
-    SPACES=($(yabai -m query --spaces | jq '.[] | select(.index > 1) | .index' | sort -nr))
-    for space in $SPACES; do
+    local displays=($(yabai -m query --displays | jq '.[].index'))
+    local spaces=($(yabai -m query --spaces | jq '.[] | select(.index > 1) | .index' | sort -nr))
+    for space in $spaces; do
         yabai -m space $space --destroy
     done
 
-    for display in $DISPLAYS; do
+    for display in $displays; do
         yabai -m display --focus $display
         for ((i=1; i<=3; i++)); do
             yabai -m space --create
         done
     done
 
-    CHAT="Slack"
-    TERMINAL="Ghostty"
-    BROWSER="Firefox"
-    EDITOR="Zed"
-    local space_helper=0
+    local app_list=(
+        "Slack:1:5"
+        "Asana:1:1"
+        "Logseq:1:2"
+        "Ghostty:2:6"
+        "Firefox:3:7"
+        "Zed:4:8"
+    )
 
-    chat_windows=($(yabai -m query --windows | jq --arg app "$CHAT" '.[] | select(.app == $app) | .id'))
-    terminal_windows=($(yabai -m query --windows | jq --arg app "$TERMINAL" '.[] | select(.app == $app) | .id'))
-    browser_windows=($(yabai -m query --windows | jq --arg app "$BROWSER" '.[] | select(.app == $app) | .id'))
-    editor_windows=($(yabai -m query --windows | jq --arg app "$EDITOR" '.[] | select(.app == $app) | .id'))
-
-    if [[ ${#DISPLAYS[@]} -gt 1 ]]; then
-        space_helper=4
+    local is_multi_display=0
+    if [[ ${#displays[@]} -gt 1 ]]; then
+        is_multi_display=1
     fi
 
-    for window in $chat_windows; do
-        yabai -m window $window --space $((1+space_helper))
-    done
+    for app_config in $app_list; do
+        local app_name=$(echo $app_config | cut -d: -f1)
+        local single_space=$(echo $app_config | cut -d: -f2)
+        local multi_space=$(echo $app_config | cut -d: -f3)
 
-    for window in $terminal_windows; do
-        yabai -m window $window --space $((2+space_helper))
-    done
+        local target_space=$single_space
+        if [[ $is_multi_display -eq 1 && -n "$multi_space" ]]; then
+            target_space=$multi_space
+        fi
 
-    for window in $browser_windows; do
-        yabai -m window $window --space $((3+space_helper))
-    done
+        local window_ids=($(yabai -m query --windows | jq --arg app "$app_name" '.[] | select(.app == $app) | .id'))
 
-    for window in $editor_windows; do
-        yabai -m window $window --space $((4+space_helper))
+        for window_id in $window_ids; do
+            if [[ -n "$window_id" ]]; then
+                yabai -m window $window_id --space $target_space
+            fi
+        done
     done
 
     yabai --restart-service
     brew services restart sketchybar
+}
+
+get_all_windows_per_app() {
+    yabai -m query --windows | jq --arg app "$1" '.[] | select(.app == $app) | .id'
+}
+
+move_windows() {
+    for window in $1; do
+        if [[ -n "$window" ]]; then
+            yabai -m window $window --space $2
+        fi
+    done
 }
 
 command="$1"
