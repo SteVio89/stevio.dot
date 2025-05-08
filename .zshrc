@@ -1,5 +1,6 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(mcfly init zsh)"
+
 # My autocomplete scripts
 fpath=(${ZDOTDIR:-$HOME}/.zsh/completion $fpath)
 autoload -Uz compinit
@@ -9,6 +10,7 @@ compinit
 
 
 # My aliases
+alias cat="bat"
 alias nano="nvim"
 alias vim="nvim"
 alias ll="eza -l -g --icons --git"
@@ -54,7 +56,8 @@ export PATH="/Users/stefan/Programs/ijhttp:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 #export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
-
+export MCFLY_FUZZY=2
+export MCFLY_KEY_SCHEME=vim
 export EDITOR="$(which nvim)"
 export VISUAL="$(which Neovide)"
 export XDG_CONFIG_HOME="$HOME/.config"
