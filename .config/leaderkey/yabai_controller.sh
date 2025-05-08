@@ -53,24 +53,30 @@ reset_desktop() {
 
     for display in $displays; do
         yabai -m display --focus $display
-        for ((i=1; i<=3; i++)); do
+        for ((i=1; i<=4; i++)); do
             yabai -m space --create
         done
     done
 
     local app_list=(
-        "Slack:1:5"
+        "Slack:1:6"
         "Asana:1:1"
         "Logseq:1:2"
-        "Ghostty:2:6"
-        "Firefox:3:7"
-        "Zed:4:8"
+        "Ghostty:2:7"
+        "Firefox:3:8"
+        "Zed:4:9"
+        "IntelliJ IDEA:4:9"
+        "ELSE:5:10"
     )
 
     local is_multi_display=0
     if [[ ${#displays[@]} -gt 1 ]]; then
         is_multi_display=1
     fi
+
+    local known_apps=()
+    local else_single_space=""
+    local else_multi_space=""
 
     for app_config in $app_list; do
         local app_name=$(echo $app_config | cut -d: -f1)
@@ -82,6 +88,13 @@ reset_desktop() {
             target_space=$multi_space
         fi
 
+        if [[ "$app_name" == "ELSE" ]]; then
+            else_single_space=$single_space
+            else_multi_space=$multi_space
+            continue
+        fi
+        known_apps+=("$app_name")
+
         local window_ids=($(yabai -m query --windows | jq --arg app "$app_name" '.[] | select(.app == $app) | .id'))
 
         for window_id in $window_ids; do
@@ -89,6 +102,27 @@ reset_desktop() {
                 yabai -m window $window_id --space $target_space
             fi
         done
+    done
+
+    local else_target_space=$else_single_space
+    if [[ $is_multi_display -eq 1 && -n "$else_multi_space" ]]; then
+        else_target_space=$else_multi_space
+    fi
+
+    local exclude_jq_filter=""
+    for app in ${known_apps[@]}; do
+        if [[ -n "$exclude_jq_filter" ]]; then
+            exclude_jq_filter+=" and "
+        fi
+        exclude_jq_filter+=".app != \"$app\""
+    done
+
+    local other_windows_ids=($(yabai -m query --windows | jq ".[] | select($exclude_jq_filter) | .id"))
+
+    for window_id in $other_windows_ids; do
+        if [[ -n "$window_id" ]]; then
+            yabai -m window $window_id --space $else_target_space
+        fi
     done
 
     yabai --restart-service
