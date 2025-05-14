@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 switch_workspace() {
-    spaces=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $spaces["$1"] ]] && yabai -m space --focus $spaces["$1"]
+    SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES["$1"] ]] && yabai -m space --focus $SPACES["$1"]
 
     sleep 0.5
-    local space_index=$spaces["$1"]
+    local space_index=$SPACES["$1"]
     local first_window=$(yabai -m query --windows --space $space_index | jq '[.[] | select(.is-minimized == false)] | sort_by(.frame.x, .frame.y) | .[0].id')
 
     if [[ "$first_window" != "null" && -n "$first_window" ]]; then
@@ -18,7 +18,7 @@ focus_window() {
 }
 
 move_to_workspace() {
-    spaces=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $spaces["$1"] ]] && yabai -m window --space $spaces["$1"]
+    SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES["$1"] ]] && yabai -m window --space $SPACES["$1"]
 }
 
 move_in_workspace() {
@@ -45,13 +45,13 @@ toggle_layout() {
 }
 
 reset_desktop() {
-    local displays=($(yabai -m query --displays | jq '.[].index'))
-    local spaces=($(yabai -m query --spaces | jq '.[] | select(.index > 1) | .index' | sort -nr))
-    for space in $spaces; do
+    DISPLAYS=($(yabai -m query --displays | jq '.[].index'))
+    SPACES=($(yabai -m query --spaces | jq '.[] | select(.index > 1) | .index' | sort -nr))
+    for space in $SPACES; do
         yabai -m space $space --destroy
     done
 
-    for display in $displays; do
+    for display in $DISPLAYS; do
         yabai -m display --focus $display
         for ((i=1; i<=4; i++)); do
             yabai -m space --create
@@ -70,7 +70,7 @@ reset_desktop() {
     )
 
     local is_multi_display=0
-    if [[ ${#displays[@]} -gt 1 ]]; then
+    if [[ ${#DISPLAYS[@]} -gt 1 ]]; then
         is_multi_display=1
     fi
 

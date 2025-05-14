@@ -59,7 +59,7 @@ export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 export MCFLY_FUZZY=2
 export MCFLY_KEY_SCHEME=vim
 export EDITOR="$(which nvim)"
-export VISUAL="$(which Neovide)"
+export VISUAL="$(which nvim)"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
