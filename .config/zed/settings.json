@@ -1,9 +1,13 @@
 // Zed settings
 {
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-thinking-latest"
+    },
+    "editor_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
     },
     "default_profile": "ask",
     "version": "2"
@@ -58,7 +62,7 @@
   },
   "edit_predictions": {
     "mode": "subtle",
-    "enabled_in_assistant": true
+    "enabled_in_text_threads": true
   },
   "icon_theme": "Colored Zed Icons Theme Dark",
   "theme": {

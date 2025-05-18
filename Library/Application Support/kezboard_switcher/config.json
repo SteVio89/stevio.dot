@@ -33,15 +33,7 @@
    }
   },
   {
-   "Name": "NuPhy Kick75 IO",
-   "Status": 1,
-   "LayoutInfo": {
-    "LayoutId": "com.apple.keylayout.US",
-    "LayoutName": "U.S."
-   }
-  },
-  {
-   "Name": "Nuphy Kick75 IO-1",
+   "Name": "NuPhy Kick75 IO-1",
    "Status": 1,
    "LayoutInfo": {
     "LayoutId": "com.apple.keylayout.US",

@@ -24,5 +24,6 @@ yabai -m config                          \
 # https://github.com/koekeishiya/yabai/issues/1819
 # yabai -m rule --add app="JetBrains Toolbox" manage=off
 yabai -m rule --add app="Kezboard Switcher" manage=off
+yabai -m rule --add app="samurai_tomato" manage=off
 
 borders active_color=0xffff5733 inactive_color=0xffffe400 width=5.0 style=square hidpi=true&

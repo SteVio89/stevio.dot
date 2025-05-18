@@ -62,6 +62,7 @@ export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
+export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
 
 # Tools
 gpgconf --launch gpg-agent
