@@ -5,3 +5,4 @@ command=zellij
 term=xterm-256color
 quit-after-last-window-closed=true
 theme=catppuccin-mocha.conf
+copy-on-select=false

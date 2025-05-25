@@ -1,12 +1,21 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(mcfly init zsh)"
-
+export XDG_CONFIG_HOME="$HOME/.config"
 # My autocomplete scripts
 fpath=(${ZDOTDIR:-$HOME}/.zsh/completion $fpath)
 autoload -Uz compinit
 compinit
-#source <(fzf --zsh)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source <(fzf --zsh)
+
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix " 
+export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
+export FZF_CTRL_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+
 #eval "$(navi widget zsh)"
+eval "$(mcfly init zsh)"
 
 
 # My aliases
@@ -59,12 +68,12 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/Users/stefan/Programs/ijhttp:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 #export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 export MCFLY_FUZZY=2
 export MCFLY_KEY_SCHEME=vim
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
-export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
 export ANDROID_HOME="/Users/stefan/Library/Android/sdk"
