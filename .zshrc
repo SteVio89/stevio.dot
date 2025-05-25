@@ -25,13 +25,17 @@ alias ktx="kubie ctx"
 alias snippets="pet search"
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias get_esprs=". $HOME/export-esp.sh"
+alias replace="rgr"
+alias db="rainfrog"
+alias log="serie"
+alias http="atac"
 #alias get_espidf=". $HOME/code/esp/esp-idf/export.sh"
 #alias find="fd"
 #alias mvn="mvnd"
 
 # git aliases
-alias pull="git pull"
-alias log="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+# alias pull="git pull"
+# alias log="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 eval "$(starship init zsh)"
 
@@ -63,6 +67,8 @@ export VISUAL="$(which nvim)"
 export XDG_CONFIG_HOME="$HOME/.config"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
+export ANDROID_HOME="/Users/stefan/Library/Android/sdk"
+export NDK_HOME="$ANDROID_HOME/ndk/29.0.13113456"
 
 # Tools
 gpgconf --launch gpg-agent
