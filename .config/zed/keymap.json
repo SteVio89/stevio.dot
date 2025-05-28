@@ -11,7 +11,7 @@
     }
   },
   {
-    "context": "(Editor && vim_mode == insert) || MessageEditor",
+    "context": "(Editor && vim_mode == insert) || MessageEditor || Terminal",
     "bindings": {
       "space f e": null,
       "space f f": null,

@@ -60,8 +60,8 @@ reset_desktop() {
 
     local app_list=(
         "Slack:1:6"
-        "Asana:1:1"
-        "Logseq:1:2"
+        "Asana:1:6"
+        "Logseq:1:1"
         "Ghostty:2:7"
         "Firefox:3:8"
         "Zed:4:9"

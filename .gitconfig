@@ -13,4 +13,4 @@
 	required = true
 [core]
   autocrlf = input
-  excludesfile = /Users/stefan/.gitignore_global
+	excludesfile = /Users/stefan/.gitignore
