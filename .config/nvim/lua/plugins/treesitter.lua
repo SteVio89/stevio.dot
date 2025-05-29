@@ -8,7 +8,7 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
-                "lua", "vim", "bash", "go", "rust"
+                "lua", "vim", "bash", "go", "rust", "zig"
             },
             highlight = {
                 enable = true

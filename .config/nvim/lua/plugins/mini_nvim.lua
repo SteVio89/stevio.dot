@@ -38,10 +38,70 @@ return {
 		end,
 	},
 	{
+		"echasnovski/mini.sessions",
+		version = false,
+		lazy = false,
+		priority = 1000,
+		keys = {
+			{
+				"<leader>sw",
+				function()
+					local cwd = vim.fn.getcwd()
+					local last_folder = cwd:match("([^/]+)$")
+					require("mini.sessions").write(last_folder)
+				end,
+				desc = "Save",
+				mode = "n",
+			},
+			{
+				"<leader>ss",
+				function()
+					vim.cmd("wa")
+					require("mini.sessions").write()
+					require("mini.sessions").select()
+				end,
+				desc = "Switch",
+				mode = "n",
+			},
+			{
+				"<leader>sf",
+				function()
+					vim.cmd("wa")
+					require("mini.sessions").select()
+				end,
+				desc = "Find",
+				mode = "n",
+			},
+		},
+		opts = {},
+		config = function(_, opts)
+			require("mini.sessions").setup()
+		end,
+	},
+	{
 		"echasnovski/mini.starter",
 		version = false,
+		priority = 900,
 		config = function()
-			require("mini.starter").setup()
+			require("mini.starter").setup({
+				items = {
+					require("mini.starter").sections.sessions(5, true),
+				},
+				header = [[
+ _____  _          _   _  _         _
+/  ___|| |        | | | |(_)       ( )
+\ `--. | |_   ___ | | | | _   ___  |/  ___
+ `--. \| __| / _ \| | | || | / _ \    / __|
+/\__/ /| |_ |  __/\ \_/ /| || (_) |   \__ \
+\____/  \__| \___| \___/ |_| \___/    |___/
+ _   _               _   _  _
+| \ | |             | | | |(_)
+|  \| |  ___   ___  | | | | _  _ __ ___
+| . ` | / _ \ / _ \ | | | || || '_ ` _ \
+| |\  ||  __/| (_) |\ \_/ /| || | | | | |
+\_| \_/ \___| \___/  \___/ |_||_| |_| |_|
+]],
+			})
 		end,
 	},
 	{
@@ -89,9 +149,29 @@ return {
 	{
 		"echasnovski/mini.indentscope",
 		version = false,
-		opts = {},
-		config = function(_, opts)
-			require("mini.indentscope").setup(opts)
+		config = function()
+			require("mini.indentscope").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.jump",
+		version = false,
+		config = function()
+			require("mini.jump").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.jump2d",
+		version = false,
+		config = function()
+			require("mini.jump2d").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.notify",
+		version = false,
+		config = function()
+			require("mini.notify").setup()
 		end,
 	},
 }

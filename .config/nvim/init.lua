@@ -25,6 +25,14 @@ vim.g.coq_settings = {
 		ghost_text = {
 			enabled = true,
 		},
+    preview = {
+      positions = {
+        north = 2,
+        south = null,
+        west = null,
+        east = 1,
+      },
+    },
 	},
 }
 
