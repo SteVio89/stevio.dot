@@ -1,5 +1,5 @@
 macos-titlebar-style=tabs
-font-size=16
+font-size=19
 font-family = "JetBrainsMono Nerd Font"
 command=zellij
 term=xterm-256color

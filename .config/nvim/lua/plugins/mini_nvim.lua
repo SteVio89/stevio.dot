@@ -44,7 +44,7 @@ return {
 		priority = 1000,
 		keys = {
 			{
-				"<leader>sw",
+				"<leader>sS",
 				function()
 					local cwd = vim.fn.getcwd()
 					local last_folder = cwd:match("([^/]+)$")
