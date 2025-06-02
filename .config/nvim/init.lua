@@ -1,8 +1,3 @@
--- require("config.set")
--- require("config.remap")
--- require("lazy_init")
-
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local out = vim.fn.system({
@@ -18,23 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("options")
 require("mappings")
-
-vim.g.coq_settings = {
-	auto_start = "shut-up",
-	display = {
-		ghost_text = {
-			enabled = true,
-		},
-    preview = {
-      positions = {
-        north = 2,
-        south = null,
-        west = null,
-        east = 1,
-      },
-    },
-	},
-}
 
 require("lazy").setup("plugins")
 

@@ -26,13 +26,12 @@ return {
 		priority = 900,
 		event = "BufReadPre",
 		config = function()
-			local coq = require("coq")
 			-- configure lsp server here
-			vim.lsp.config("lua_ls", coq.lsp_ensure_capabilities({}))
-			vim.lsp.config("rust_analzer", coq.lsp_ensure_capabilities({}))
-			vim.lsp.config("gopls", coq.lsp_ensure_capabilities({}))
-			vim.lsp.config("bashls", coq.lsp_ensure_capabilities({}))
-			vim.lsp.config("zls", coq.lsp_ensure_capabilities({}))
+			vim.lsp.config("lua_ls", {})
+			vim.lsp.config("rust_analzer", {})
+			vim.lsp.config("gopls", {})
+			vim.lsp.config("bashls", {})
+			vim.lsp.config("zls", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("rust_analyzer")
