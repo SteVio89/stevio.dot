@@ -9,9 +9,10 @@
       "provider": "zed.dev",
       "model": "claude-sonnet-4-latest"
     },
-    "default_profile": "write",
+    "default_profile": "ask",
     "version": "2"
   },
+  "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
   "ui_font_size": 17,
