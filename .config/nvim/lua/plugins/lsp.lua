@@ -28,13 +28,11 @@ return {
 		config = function()
 			-- configure lsp server here
 			vim.lsp.config("lua_ls", {})
-			vim.lsp.config("rust_analzer", {})
 			vim.lsp.config("gopls", {})
 			vim.lsp.config("bashls", {})
 			vim.lsp.config("zls", {})
 
 			vim.lsp.enable("lua_ls")
-			vim.lsp.enable("rust_analyzer")
 			vim.lsp.enable("gopls")
 			vim.lsp.enable("bashls")
 			vim.lsp.enable("zls")
@@ -71,6 +69,59 @@ return {
 					null_ls.builtins.formatting.stylua,
 				},
 			})
+		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^6", -- Recommended
+		lazy = false, -- This plugin is already lazy
+	},
+	{
+		"MysticalDevil/inlay-hints.nvim",
+		event = "LspAttach",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("inlay-hints").setup()
+			vim.g.rustaceanvim = {
+				server = {
+					settings = {
+						["rust-analyzer"] = {
+							inlayHints = {
+								bindingModeHints = {
+									enable = false,
+								},
+								chainingHints = {
+									enable = true,
+								},
+								closingBraceHints = {
+									enable = true,
+									minLines = 25,
+								},
+								closureReturnTypeHints = {
+									enable = "never",
+								},
+								lifetimeElisionHints = {
+									enable = "never",
+									useParameterNames = false,
+								},
+								maxLength = 25,
+								parameterHints = {
+									enable = true,
+								},
+								reborrowHints = {
+									enable = "never",
+								},
+								renderColons = true,
+								typeHints = {
+									enable = true,
+									hideClosureInitialization = false,
+									hideNamedConstructor = false,
+								},
+							},
+						},
+					},
+				},
+			}
 		end,
 	},
 }
