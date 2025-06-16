@@ -1,29 +1,5 @@
 [
   {
-    "bindings": {
-      "space f e": "workspace::ToggleLeftDock",
-      "space f f": "file_finder::Toggle",
-      "space f g": "workspace::NewSearch",
-      "space f d": "diagnostics::Deploy",
-      "space f b": "tab_switcher::ToggleAll",
-      "space t f": "zed::ToggleFullScreen",
-      "space t z": "workspace::ToggleCenteredLayout"
-    }
-  },
-  {
-    "context": "(Editor && vim_mode == insert) || MessageEditor || Terminal",
-    "bindings": {
-      "space f e": null,
-      "space f f": null,
-      "space f g": null,
-      "space f d": null,
-      "space f b": null,
-      "space t f": null,
-      "space t z": null,
-      "space": null
-    }
-  },
-  {
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "tab": "editor::ContextMenuNext",
@@ -47,6 +23,13 @@
       "g t": "editor::GoToTypeDefinition",
       "g T": "editor::GoToTypeDefinitionSplit",
       "g r": "editor::FindAllReferences",
+      "space f e": "workspace::ToggleLeftDock",
+      "space f f": "file_finder::Toggle",
+      "space f g": "workspace::NewSearch",
+      "space f d": "diagnostics::Deploy",
+      "space f b": "tab_switcher::ToggleAll",
+      "space t f": "zed::ToggleFullScreen",
+      "space t z": "workspace::ToggleCenteredLayout",
       "space s a": "editor::SelectAllMatches",
       "space c a": "editor::ToggleCodeActions",
       "space c r": "editor::Rename",

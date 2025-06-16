@@ -2,20 +2,24 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export XDG_CONFIG_HOME="$HOME/.config"
 # My autocomplete scripts
 fpath=(${ZDOTDIR:-$HOME}/.zsh/completion $fpath)
+
 autoload -Uz compinit
 compinit
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(fzf --zsh)
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix " 
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix" 
 export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
 export FZF_CTRL_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
 
 #eval "$(navi widget zsh)"
-eval "$(mcfly init zsh)"
+# eval "$(mcfly init zsh)"
+# eval "$(atuin init zsh)"
+zvm_after_init_commands+=(eval "$(atuin init zsh)")
 
 
 # My aliases

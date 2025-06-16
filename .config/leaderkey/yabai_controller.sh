@@ -62,6 +62,7 @@ reset_desktop() {
         "Slack:1:6"
         "Asana:1:6"
         "Logseq:1:1"
+        "Obsidian:1:6"
         "Ghostty:2:7"
         "Firefox:3:8"
         "Zed:4:9"

@@ -1,5 +1,12 @@
 // Zed settings
 {
+  "context_servers": {
+    "mcp-server-context7": {
+      "settings": {
+        "default_minimum_tokens": "10000"
+      }
+    }
+  },
   "agent": {
     "default_model": {
       "provider": "zed.dev",
