@@ -1,13 +1,7 @@
 // Zed settings
 {
-  "context_servers": {
-    "mcp-server-context7": {
-      "settings": {
-        "default_minimum_tokens": "10000"
-      }
-    }
-  },
   "agent": {
+    "always_allow_tool_actions": false,
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
@@ -16,7 +10,7 @@
       "provider": "zed.dev",
       "model": "claude-sonnet-4-latest"
     },
-    "default_profile": "ask",
+    "default_profile": "write",
     "version": "2"
   },
   "tab_size": 2,
@@ -104,6 +98,8 @@
         "command": [
           "golangci-lint",
           "run",
+          "--disable",
+          "lll",
           "--output.json.path=stdout",
           "--issues-exit-code=1",
           "--show-stats=false"

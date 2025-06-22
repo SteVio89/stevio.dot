@@ -39,6 +39,14 @@
     "LayoutId": "com.apple.keylayout.US",
     "LayoutName": "U.S."
    }
+  },
+  {
+   "Name": "Corne v4",
+   "Status": 1,
+   "LayoutInfo": {
+    "LayoutId": "com.apple.keylayout.US",
+    "LayoutName": "U.S."
+   }
   }
  ]
 }
