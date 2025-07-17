@@ -7,12 +7,7 @@
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
     },
-    "editor_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-latest"
-    },
-    "default_profile": "write",
-    "version": "2"
+    "default_profile": "write"
   },
   "tab_size": 2,
   "auto_update": false, //managed with brew

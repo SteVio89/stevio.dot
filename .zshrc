@@ -80,7 +80,7 @@ export MCFLY_KEY_SCHEME=vim
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
-export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
+# export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
 export ANDROID_HOME="/Users/stefan/Library/Android/sdk"
 export NDK_HOME="$ANDROID_HOME/ndk/29.0.13113456"
 
