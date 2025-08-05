@@ -154,13 +154,6 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.jump",
-		version = false,
-		config = function()
-			require("mini.jump").setup()
-		end,
-	},
-	{
 		"echasnovski/mini.jump2d",
 		version = false,
 		config = function()
