@@ -18,6 +18,7 @@ return {
 				"bashls",
 				"zls",
 				"ols",
+				"qmlls",
 			},
 		},
 	},
@@ -33,12 +34,15 @@ return {
 			vim.lsp.config("bashls", {})
 			vim.lsp.config("zls", {})
 			vim.lsp.config("ols", {})
+			vim.lsp.config("qmlls", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("gopls")
 			vim.lsp.enable("bashls")
 			vim.lsp.enable("zls")
 			vim.lsp.enable("ols")
+			vim.lsp.enable("qmlls")
+
 			--TODO: init missing lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
 			vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Goto definition" })
