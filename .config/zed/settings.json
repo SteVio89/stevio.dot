@@ -8,7 +8,7 @@
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
     },
-    "default_profile": "ask"
+    "default_profile": "write"
   },
   "disable_ai": false, //nice option :)
   "tab_size": 2,

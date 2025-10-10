@@ -3,7 +3,11 @@ return {
 		"williamboman/mason.nvim",
 		lazy = false,
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				ensure_installed = {
+					"gdtoolkit",
+				},
+			})
 		end,
 	},
 	{
@@ -35,6 +39,7 @@ return {
 			vim.lsp.config("zls", {})
 			vim.lsp.config("ols", {})
 			vim.lsp.config("qmlls", {})
+			vim.lsp.config("gdscript", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("gopls")
@@ -42,6 +47,7 @@ return {
 			vim.lsp.enable("zls")
 			vim.lsp.enable("ols")
 			vim.lsp.enable("qmlls")
+			vim.lsp.enable("gdscript")
 
 			--TODO: init missing lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
@@ -131,4 +137,14 @@ return {
 			}
 		end,
 	},
+	{
+		"S1M0N38/love2d.nvim",
+		event = "VeryLazy",
+		version = "2.*",
+		opts = {},
+		keys = {
+		  { "<leader>vv", "<cmd>LoveRun<cr>", desc = "Run LÖVE" },
+	    { "<leader>vs", "<cmd>LoveStop<cr>", desc = "Stop LÖVE" },
+    },
+  },
 }

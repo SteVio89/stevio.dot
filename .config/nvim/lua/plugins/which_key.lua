@@ -14,6 +14,7 @@ return {
 			{ "<leader>z", group = "zen" },
 			{ "<leader>s", group = "sessions" },
 			{ "<leader>o", group = "other" },
+      { "<leader>v", group = "löve2d"}
 		},
 	},
 }
