@@ -1,0 +1,3 @@
+[submodule ".hammerspoon/Spoons/PaperWM.spoon"]
+	path = .hammerspoon/Spoons/PaperWM.spoon
+	url = https://github.com/mogenson/PaperWM.spoon
