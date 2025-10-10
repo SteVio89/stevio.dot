@@ -14,15 +14,6 @@ PaperWM.swipe_gain = 1.0
 
 PaperWM:start()
 
-Seal = hs.loadSpoon("Seal")
-Seal:bindHotkeys({
-  toggle = { {}, "F13"}
-})
-Seal:loadPlugins({
-  "apps",
-})
-Seal:start()
-
 hs.hotkey.bind({"alt", "cmd"}, "t", "Ghostty", function()
 	hs.application.launchOrFocus("Ghostty")
 end)
@@ -35,18 +26,12 @@ hs.hotkey.bind({"alt", "cmd"}, "z", "Zed", function()
   hs.application.launchOrFocus("Zed")
 end)
 
-hs.hotkey.bind({"alt", "cmd"}, "return", "Launchpad", function()
-  hs.application.launchOrFocus("Launchpad")
+hs.hotkey.bind({}, "F13", "Apps", function()
+  hs.application.launchOrFocus("Apps")
 end)
 
 hs.hotkey.bind({"alt"}, "r", "Reload", function()
 	hs.reload()
 end)
-
--- hs.hotkey.bind({"alt", "cmd"}, "p", function()
---
--- end)
-
--- hs.hotkey.showHotkeys({},"F13")
 
 hs.alert.show("Config loaded")
