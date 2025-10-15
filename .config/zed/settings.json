@@ -6,7 +6,7 @@
     "always_allow_tool_actions": false,
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "model": "claude-opus-4-1"
     },
     "default_profile": "write"
   },
@@ -16,7 +16,8 @@
   "base_keymap": "VSCode",
   "ui_font_size": 17,
   "buffer_font_size": 19,
-  "soft_wrap": "editor_width",
+  "soft_wrap": "preferred_line_length",
+  "preferred_line_length": 160,
   "use_system_path_prompts": false,
   "use_system_prompts": false,
   "show_completions_on_input": true,
