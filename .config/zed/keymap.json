@@ -23,6 +23,7 @@
       "g t": "editor::GoToTypeDefinition",
       "g T": "editor::GoToTypeDefinitionSplit",
       "g r": "editor::FindAllReferences",
+      "space f": null,
       "space f e": "workspace::ToggleLeftDock",
       "space f f": "file_finder::Toggle",
       "space f g": "workspace::NewSearch",
