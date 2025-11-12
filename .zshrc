@@ -56,7 +56,7 @@ gpgconf --launch gpg-agent
 if [ -x /usr/libexec/path_helper ]; then
   eval `/usr/libexec/path_helper -s`
 fi
-
+export VCPKG_ROOT="$HOME/code/cpp/vcpkg"
 export PATH="$PATH:/Users/stefan/.local/bin/"
 export PATH="$PATH:/Users/stefan/go/bin/"
 export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
@@ -68,6 +68,7 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/Users/stefan/Programs/ijhttp:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
+export PATH="$VCPKG_ROOOT:$PATH"
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 export EDITOR="$(which nvim)"
@@ -99,5 +100,3 @@ complete -o nospace -C /opt/homebrew/bin/tofu tofu
 eval "$(direnv hook zsh)"
 [ -f "/Users/stefan/.ghcup/env" ] && . "/Users/stefan/.ghcup/env" # ghcup-env
 eval "$(zoxide init zsh)"
-
-# eval "$(zellij setup --generate-auto-start zsh)"

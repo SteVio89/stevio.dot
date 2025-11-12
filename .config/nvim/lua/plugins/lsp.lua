@@ -23,6 +23,7 @@ return {
 				"zls",
 				"ols",
 				"qmlls",
+				"clangd",
 			},
 		},
 	},
@@ -40,6 +41,7 @@ return {
 			vim.lsp.config("ols", {})
 			vim.lsp.config("qmlls", {})
 			vim.lsp.config("gdscript", {})
+			vim.lsp.config("clangd", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("gopls")
@@ -48,6 +50,7 @@ return {
 			vim.lsp.enable("ols")
 			vim.lsp.enable("qmlls")
 			vim.lsp.enable("gdscript")
+			vim.lsp.enable("clangd")
 
 			--TODO: init missing lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
@@ -143,8 +146,8 @@ return {
 		version = "2.*",
 		opts = {},
 		keys = {
-		  { "<leader>vv", "<cmd>LoveRun<cr>", desc = "Run LÖVE" },
-	    { "<leader>vs", "<cmd>LoveStop<cr>", desc = "Stop LÖVE" },
-    },
-  },
+			{ "<leader>vv", "<cmd>LoveRun<cr>", desc = "Run LÖVE" },
+			{ "<leader>vs", "<cmd>LoveStop<cr>", desc = "Stop LÖVE" },
+		},
+	},
 }
