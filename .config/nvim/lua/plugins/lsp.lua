@@ -24,6 +24,7 @@ return {
 				"ols",
 				"qmlls",
 				"clangd",
+				"cmake",
 			},
 		},
 	},
@@ -42,6 +43,7 @@ return {
 			vim.lsp.config("qmlls", {})
 			vim.lsp.config("gdscript", {})
 			vim.lsp.config("clangd", {})
+			vim.lsp.config("cmake", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("gopls")
@@ -51,6 +53,7 @@ return {
 			vim.lsp.enable("qmlls")
 			vim.lsp.enable("gdscript")
 			vim.lsp.enable("clangd")
+			vim.lsp.enable("cmake")
 
 			--TODO: init missing lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
@@ -139,15 +142,5 @@ return {
 				},
 			}
 		end,
-	},
-	{
-		"S1M0N38/love2d.nvim",
-		event = "VeryLazy",
-		version = "2.*",
-		opts = {},
-		keys = {
-			{ "<leader>vv", "<cmd>LoveRun<cr>", desc = "Run LÖVE" },
-			{ "<leader>vs", "<cmd>LoveStop<cr>", desc = "Stop LÖVE" },
-		},
 	},
 }

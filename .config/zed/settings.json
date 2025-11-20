@@ -9,14 +9,14 @@
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
     },
-    "default_profile": "write"
+    "default_profile": "ask"
   },
   "disable_ai": false, //nice option :)
   "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
-  "ui_font_size": 17,
-  "buffer_font_size": 19,
+  "ui_font_size": 16,
+  "buffer_font_size": 14,
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 110,
   "use_system_path_prompts": false,

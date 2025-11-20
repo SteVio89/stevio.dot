@@ -154,10 +154,10 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.jump2d",
+		"echasnovski/mini.jump",
 		version = false,
 		config = function()
-			require("mini.jump2d").setup()
+			require("mini.jump").setup()
 		end,
 	},
 	{
@@ -167,4 +167,11 @@ return {
 			require("mini.notify").setup()
 		end,
 	},
+  {
+    "nvim-mini/mini.surround",
+    version = false,
+    config = function()
+      require("mini.surround").setup()
+    end,
+  }
 }

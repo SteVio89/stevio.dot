@@ -8,13 +8,14 @@ compinit
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source <(fzf --zsh)
+# source <(fzf --zsh)
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix" 
-export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
-export FZF_CTRL_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+# export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix"
+# export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
+# export FZF_CTRL_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+# export FZF_CTRL_T_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+# export VCPKG_ROOT="$HOME/code/cpp/vcpkg"
 
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
 
@@ -41,6 +42,7 @@ alias db="rainfrog"
 alias log="serie"
 alias http="atac"
 alias train="gittype"
+alias ssh="TERM=xterm-256color ssh"
 
 # git aliases
 # alias pull="git pull"
@@ -56,9 +58,9 @@ gpgconf --launch gpg-agent
 if [ -x /usr/libexec/path_helper ]; then
   eval `/usr/libexec/path_helper -s`
 fi
-export VCPKG_ROOT="$HOME/code/cpp/vcpkg"
 export PATH="$PATH:/Users/stefan/.local/bin/"
 export PATH="$PATH:/Users/stefan/go/bin/"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -68,7 +70,7 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/Users/stefan/Programs/ijhttp:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
-export PATH="$VCPKG_ROOOT:$PATH"
+export PATH="$VCPKG_ROOT:$PATH"
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 export EDITOR="$(which nvim)"
@@ -99,4 +101,4 @@ complete -o nospace -C /opt/homebrew/bin/tofu tofu
 
 eval "$(direnv hook zsh)"
 [ -f "/Users/stefan/.ghcup/env" ] && . "/Users/stefan/.ghcup/env" # ghcup-env
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"

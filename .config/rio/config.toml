@@ -1,0 +1,12 @@
+[cursor]
+shape = "beam"
+[editor]
+program = "nvim"
+[window]
+mode = "Maximized"
+opacity = 0.75
+blur = true
+decorations = "Buttonless"
+[navigation]
+use-split = false
+mode = "Plain"

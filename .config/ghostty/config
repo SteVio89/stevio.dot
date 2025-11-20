@@ -1,7 +1,6 @@
 macos-titlebar-style=tabs
-font-size=19
+font-size=14
 font-family = "JetBrainsMono Nerd Font"
-#command=zellij
 shell-integration=zsh
 term=xterm-256color
 quit-after-last-window-closed=true
