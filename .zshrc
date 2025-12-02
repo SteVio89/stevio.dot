@@ -43,6 +43,7 @@ alias log="serie"
 alias http="atac"
 alias train="gittype"
 alias ssh="TERM=xterm-256color ssh"
+alias gfld=$HOME/.cargo/bin/gfold
 
 # git aliases
 # alias pull="git pull"

@@ -6,6 +6,7 @@ return {
 			require("mason").setup({
 				ensure_installed = {
 					"gdtoolkit",
+					"kotlin-lsp",
 				},
 			})
 		end,
@@ -44,6 +45,7 @@ return {
 			vim.lsp.config("gdscript", {})
 			vim.lsp.config("clangd", {})
 			vim.lsp.config("cmake", {})
+			vim.lsp.config("kotlin-lsp", {})
 
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("gopls")
@@ -54,6 +56,7 @@ return {
 			vim.lsp.enable("gdscript")
 			vim.lsp.enable("clangd")
 			vim.lsp.enable("cmake")
+			vim.lsp.enable("kotlin-lsp")
 
 			--TODO: init missing lsp
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
