@@ -1,5 +1,17 @@
 // Zed settings
 {
+  "git_panel": {
+    "tree_view": true
+  },
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-thinking",
+    },
+    "default_profile": "ask",
+    "model_parameters": [],
+  },
+  "colorize_brackets": true,
   "helix_mode": false,
   "disable_ai": false, //nice option :)
   "tab_size": 2,
@@ -18,70 +30,69 @@
   "confirm_quit": true,
   "show_whitespaces": "selection",
   "file_finder": {
-    "modal_max_width": "large"
+    "modal_max_width": "large",
   },
   "vim": {
     "toggle_relative_line_numbers": true,
     "default_mode": "normal",
-    "use_system_clipboard": "on_yank"
+    "use_system_clipboard": "on_yank",
   },
   "active_pane_modifiers": {
     "inactive_opacity": 0.95,
-    "border_size": 3
+    "border_size": 3,
   },
   "scrollbar": {
-    "show": "always"
+    "show": "always",
   },
   "tabs": {
     "git_status": true,
     "file_icons": true,
-    "show_diagnostics": "all"
+    "show_diagnostics": "all",
   },
   "indent_guides": {
     "enabled": true,
     "coloring": "indent_aware",
-    "background_coloring": "indent_aware"
   },
   "centered_layout": {
     "left_padding": 0.1,
-    "right_padding": 0.1
+    "right_padding": 0.1,
   },
   "inlay_hints": {
-    "enabled": false,
+    "enabled": true,
     "show_background": true,
     "toggle_on_modifiers_press": {
-      "alt": true
-    }
+      "alt": true,
+    },
   },
   "edit_predictions": {
     "mode": "subtle",
-    "enabled_in_text_threads": true
+    "enabled_in_text_threads": true,
   },
   "icon_theme": "Colored Zed Icons Theme Dark",
   "theme": {
     "mode": "dark",
     "dark": "Catppuccin Mocha",
-    "light": "Catppuccin Mocha - No Italics"
+    "light": "Catppuccin Mocha",
   },
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "zed",
   },
   "calls": {
     "mute_on_join": true,
-    "share_on_join": false
+    "share_on_join": false,
   },
   "preview_tabs": {
-    "enabled": true
+    "enabled": true,
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "diagnostics": {
     "include_warnings": true,
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "lsp": {
     "golangci-lint": {
@@ -93,14 +104,14 @@
           "lll",
           "--output.json.path=stdout",
           "--issues-exit-code=1",
-          "--show-stats=false"
-        ]
-      }
-    }
+          "--show-stats=false",
+        ],
+      },
+    },
   },
   "languages": {
     "Go": {
-      "language_servers": ["gopls", "golangci-lint"]
-    }
-  }
+      "language_servers": ["gopls", "golangci-lint"],
+    },
+  },
 }

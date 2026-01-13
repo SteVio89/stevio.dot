@@ -11,7 +11,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source <(fzf --zsh)
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-# export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix"
+export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --strip-cwd-prefix'
 # export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
 # export FZF_CTRL_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 # export FZF_CTRL_T_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
@@ -25,6 +25,7 @@ alias cat="bat"
 alias nano="nvim"
 alias vim="nvim"
 alias vi="nvim"
+alias nvim-test="NVIM_APPNAME=nvim-test nvim"
 alias ll="eza -l -g --icons --git"
 alias llt="eza -1 --icons --tree --git-ignore"
 alias terraform="tofu"
@@ -44,6 +45,7 @@ alias http="atac"
 alias train="gittype"
 alias ssh="TERM=xterm-256color ssh"
 alias gfld=$HOME/.cargo/bin/gfold
+alias ff="cdi"
 
 # git aliases
 # alias pull="git pull"
@@ -77,9 +79,8 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighti
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
-# export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
-export ANDROID_HOME="/Users/stefan/Library/Android/sdk"
-export NDK_HOME="$ANDROID_HOME/ndk/29.0.13113456"
+# export ANDROID_HOME="/Users/stefan/Library/Android/sdk"
+# export NDK_HOME="$ANDROID_HOME/ndk/29.0.13113456"
 
 # Tools
 gpgconf --launch gpg-agent
@@ -102,4 +103,6 @@ complete -o nospace -C /opt/homebrew/bin/tofu tofu
 
 eval "$(direnv hook zsh)"
 [ -f "/Users/stefan/.ghcup/env" ] && . "/Users/stefan/.ghcup/env" # ghcup-env
-# eval "$(zoxide init zsh)"
+
+eval "$(zoxide init zsh --cmd cd)"
+
