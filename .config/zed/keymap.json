@@ -3,15 +3,21 @@
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "tab": "editor::ContextMenuNext",
-      "shift-tab": "editor::ContextMenuPrevious"
-    }
+      "shift-tab": "editor::ContextMenuPrevious",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space": null, // Disable the default action vim::WrappingRight
+    },
   },
   {
     "context": "Editor && showing_completions",
     "use_key_equivalents": true,
     "bindings": {
-      "enter": "editor::ConfirmCompletion"
-    }
+      "enter": "editor::ConfirmCompletion",
+    },
   },
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
@@ -39,8 +45,8 @@
       "ctrl-w k": "workspace::ActivatePaneUp",
       "ctrl-w l": "workspace::ActivatePaneRight",
       "ctrl-w /": "pane::SplitRight",
-      "ctrl-w -": "pane::SplitDown"
-    }
+      "ctrl-w -": "pane::SplitDown",
+    },
   },
   {
     "context": "VimControl && !menu && vim_mode != operator",
@@ -48,7 +54,7 @@
       "w": "vim::NextSubwordStart",
       "b": "vim::PreviousSubwordStart",
       "e": "vim::NextSubwordEnd",
-      "g e": "vim::PreviousSubwordEnd"
-    }
-  }
+      "g e": "vim::PreviousSubwordEnd",
+    },
+  },
 ]

@@ -1,19 +1,23 @@
 // Zed settings
 {
   "git_panel": {
-    "tree_view": true
+    "tree_view": true,
   },
   "agent": {
+    "play_sound_when_agent_done": true,
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4-thinking",
+      "model": "claude-opus-4-6",
     },
-    "default_profile": "ask",
+    "default_profile": "write",
     "model_parameters": [],
+  },
+  "which_key": {
+    "enabled": true,
   },
   "colorize_brackets": true,
   "helix_mode": false,
-  "disable_ai": false, //nice option :)
+  "disable_ai": true, //nice option :)
   "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
@@ -65,6 +69,7 @@
     },
   },
   "edit_predictions": {
+    "provider": "zed",
     "mode": "subtle",
     "enabled_in_text_threads": true,
   },
@@ -73,9 +78,6 @@
     "mode": "dark",
     "dark": "Catppuccin Mocha",
     "light": "Catppuccin Mocha",
-  },
-  "features": {
-    "edit_prediction_provider": "zed",
   },
   "calls": {
     "mute_on_join": true,
