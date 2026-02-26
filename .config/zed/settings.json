@@ -1,5 +1,8 @@
 // Zed settings
 {
+  "collaboration_panel": {
+    "button": false
+  },
   "git_panel": {
     "tree_view": true,
   },
