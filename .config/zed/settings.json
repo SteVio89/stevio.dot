@@ -1,5 +1,13 @@
 // Zed settings
 {
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "collaboration_panel": {
     "button": false
   },
@@ -20,7 +28,7 @@
   },
   "colorize_brackets": true,
   "helix_mode": false,
-  "disable_ai": true, //nice option :)
+  "disable_ai": false, //nice option :)
   "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",

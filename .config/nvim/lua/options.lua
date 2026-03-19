@@ -19,3 +19,4 @@ opt.backspace = "indent,eol,start"
 opt.splitright = true
 opt.splitbelow = true
 opt.scrolloff = 8
+opt.autoread = true

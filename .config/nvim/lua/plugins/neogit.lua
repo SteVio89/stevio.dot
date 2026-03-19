@@ -1,12 +1,11 @@
 return {
-	"NeogitOrg/neogit",
-	version = false,
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"sindrets/diffview.nvim",
-
-		"nvim-telescope/telescope.nvim",
-	},
+  "NeogitOrg/neogit",
+  version = false,
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "esmuellert/codediff.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
   keys = {
     {
       "<leader>gg",
@@ -15,9 +14,9 @@ return {
       mode = "n"
     }
   },
-	opts = {},
-	cmd = "Neogit",
-	config = function(_, opts)
-		require("neogit").setup(opts)
-	end,
+  opts = {},
+  cmd = "Neogit",
+  config = function(_, opts)
+    require("neogit").setup(opts)
+  end,
 }
