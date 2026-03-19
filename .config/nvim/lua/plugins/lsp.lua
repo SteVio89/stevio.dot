@@ -62,6 +62,8 @@ return {
       vim.lsp.enable("cmake")
       vim.lsp.enable("kotlin-lsp")
 
+      vim.lsp.inlay_hint.enable()
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
       vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Goto definition" })
@@ -80,48 +82,22 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^6",
     lazy = false,
-  },
-  {
-    "MysticalDevil/inlay-hints.nvim",
-    event = "LspAttach",
-    dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("inlay-hints").setup()
+    init = function()
       vim.g.rustaceanvim = {
         server = {
           settings = {
             ["rust-analyzer"] = {
               inlayHints = {
-                bindingModeHints = {
-                  enable = false,
-                },
-                chainingHints = {
-                  enable = true,
-                },
-                closingBraceHints = {
-                  enable = true,
-                  minLines = 25,
-                },
-                closureReturnTypeHints = {
-                  enable = "never",
-                },
-                lifetimeElisionHints = {
-                  enable = "never",
-                  useParameterNames = false,
-                },
+                bindingModeHints = { enable = false },
+                chainingHints = { enable = true },
+                closingBraceHints = { enable = true, minLines = 25 },
+                closureReturnTypeHints = { enable = "never" },
+                lifetimeElisionHints = { enable = "never", useParameterNames = false },
                 maxLength = 25,
-                parameterHints = {
-                  enable = true,
-                },
-                reborrowHints = {
-                  enable = "never",
-                },
+                parameterHints = { enable = true },
+                reborrowHints = { enable = "never" },
                 renderColons = true,
-                typeHints = {
-                  enable = true,
-                  hideClosureInitialization = false,
-                  hideNamedConstructor = false,
-                },
+                typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
               },
             },
           },

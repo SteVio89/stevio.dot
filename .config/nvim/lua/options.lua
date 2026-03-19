@@ -20,3 +20,18 @@ opt.splitright = true
 opt.splitbelow = true
 opt.scrolloff = 8
 opt.autoread = true
+opt.smoothscroll = true
+opt.inccommand = "split"
+opt.breakindent = true
+opt.updatetime = 250
+opt.fillchars = { eob = " " }
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200 })
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  command = "checktime",
+})

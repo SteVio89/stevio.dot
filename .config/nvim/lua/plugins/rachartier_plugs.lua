@@ -17,10 +17,4 @@ return {
     event = "LspAttach",
     opts = {},
   },
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = "VeryLazy",
-    priority = 10,
-    opts = {},
-  },
 }

@@ -10,9 +10,7 @@ return {
       { "<leader>g", group = "git" },
       { "<leader>c", group = "code" },
       { "<leader>o", group = "other" },
-      { "<leader>z", group = "zen" },
       { "<leader>s", group = "sessions" },
-      { "<leader>n", group = "Neovim Tips" },
     },
   },
 }
