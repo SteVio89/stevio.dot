@@ -1,6 +1,9 @@
 // Zed settings
 {
   "agent_servers": {
+    "cursor": {
+      "type": "registry"
+    },
     "codex-acp": {
       "type": "registry"
     },
