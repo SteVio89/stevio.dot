@@ -1,7 +1,6 @@
-# List available commands
 default:
     just -l
-# Open disk analyzer
+
 space:
     dua i
 
@@ -10,13 +9,6 @@ restart-gpg:
 
 fix-app *app:
   xattr -rd com.apple.quarantine /Applications/{{app}}.app
-
-# update-yabai:
-#   echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
-#
-# restart-desktop:
-#   yabai --restart-service
-#   brew services restart sketchybar
 
 update-brewfile:
   rm /Users/stefan/Brewfile
@@ -27,3 +19,6 @@ clean-brew:
   brew cleanup --prune=all
   brew bundle cleanup
   echo "Run 'brew bundle cleanup --force' to actually cleanup"
+
+export-gpg:
+  gpg --output public_stefan_viol.pgp --armor --export stefan@stevio.de
