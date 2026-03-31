@@ -22,3 +22,15 @@ clean-brew:
 
 export-gpg:
   gpg --output public_stefan_viol.pgp --armor --export stefan@stevio.de
+
+init-nix:
+  sudo -i nix run nix-darwin -- switch --flake /Users/stefan/.config/nix-darwin
+
+update-nix:
+  nix flake update --flake ~/.config/nix-darwin
+  darwin-rebuild build --flake ~/.config/nix-darwin
+  sudo ./result/activate
+
+init-nix:
+  darwin-rebuild build --flake ~/.config/nix-darwin
+  sudo ./result/activate

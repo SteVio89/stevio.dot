@@ -14,7 +14,7 @@ return {
 			function()
 				require("agentic").open({ auto_add_to_context = false })
 			end,
-			mode = { "n" },
+			mode = { "n", "v" },
 			desc = "Open Agentic chat",
 		},
 		{
@@ -22,7 +22,7 @@ return {
 			function()
 				require("agentic").open()
 			end,
-			mode = { "n" },
+			mode = { "n", "v" },
 			desc = "Open Agentic chat with context",
 		},
 		{
@@ -30,7 +30,7 @@ return {
 			function()
 				require("agentic").new_session_with_provider({ auto_add_to_context = false })
 			end,
-			mode = { "n" },
+			mode = { "n", "v" },
 			desc = "New Agentic session",
 		},
 		{
@@ -38,7 +38,7 @@ return {
 			function()
 				require("agentic").new_session_with_provider()
 			end,
-			mode = { "n" },
+			mode = { "n", "v" },
 			desc = "New Agentic session with context",
 		},
 	},

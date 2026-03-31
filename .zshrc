@@ -1,15 +1,11 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export XDG_CONFIG_HOME="$HOME/.config"
-# My autocomplete scripts
-fpath=(${ZDOTDIR:-$HOME}/.zsh/completion $fpath)
-
-autoload -Uz compinit
-compinit
+# fpath=(${ZDOTDIR:-$HOME}/.zsh/completion $fpath)
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source <(fzf --zsh)
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --strip-cwd-prefix'
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
@@ -50,12 +46,10 @@ export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 export PATH="$VCPKG_ROOT:$PATH"
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
-export EDITOR="$(which nvim)"
-export VISUAL="$(which nvim)"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
-# Tools
-gpgconf --launch gpg-agent
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -65,8 +59,7 @@ if [ -f '/Users/stefan/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/U
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/stefan/Applications/google-cloud-sdk/completion.zsh.inc'; fi
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/tofu tofu
+# bashcompinit runs in /etc/zshrc via nix-darwin
 
 eval "$(direnv hook zsh)"
 [ -f "/Users/stefan/.ghcup/env" ] && . "/Users/stefan/.ghcup/env" # ghcup-env
