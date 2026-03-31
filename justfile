@@ -30,7 +30,3 @@ update-nix:
   nix flake update --flake ~/.config/nix-darwin
   darwin-rebuild build --flake ~/.config/nix-darwin
   sudo ./result/activate
-
-init-nix:
-  darwin-rebuild build --flake ~/.config/nix-darwin
-  sudo ./result/activate

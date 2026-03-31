@@ -2,17 +2,17 @@
 {
   "agent_servers": {
     "cursor": {
-      "type": "registry"
+      "type": "registry",
     },
     "codex-acp": {
-      "type": "registry"
+      "type": "registry",
     },
     "claude-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "git_panel": {
     "tree_view": true,
@@ -108,26 +108,6 @@
     "include_warnings": true,
     "inline": {
       "enabled": true,
-    },
-  },
-  "lsp": {
-    "golangci-lint": {
-      "initialization_options": {
-        "command": [
-          "golangci-lint",
-          "run",
-          "--disable",
-          "lll",
-          "--output.json.path=stdout",
-          "--issues-exit-code=1",
-          "--show-stats=false",
-        ],
-      },
-    },
-  },
-  "languages": {
-    "Go": {
-      "language_servers": ["gopls", "golangci-lint"],
     },
   },
 }

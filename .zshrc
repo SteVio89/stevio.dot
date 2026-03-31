@@ -26,6 +26,7 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias replace="rgr"
 alias ssh="TERM=xterm-256color ssh"
 alias ff="cdi"
+alias setup_dev="devbox init && devbox generate direnv && direnv allow"
 
 eval "$(starship init zsh)"
 
@@ -34,9 +35,6 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-if [ -x /usr/libexec/path_helper ]; then
-  eval `/usr/libexec/path_helper -s`
-fi
 export PATH="$PATH:/Users/stefan/.local/bin/"
 export PATH="$PATH:/Users/stefan/go/bin/"
 export PATH="/opt/homebrew/bin:$PATH"
@@ -51,9 +49,6 @@ export VISUAL="nvim"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/stefan/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/stefan/Applications/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
@@ -66,7 +61,6 @@ eval "$(direnv hook zsh)"
 
 eval "$(zoxide init zsh --cmd cd)"
 
-
 # pnpm
 export PNPM_HOME="/Users/stefan/Library/pnpm"
 case ":$PATH:" in
@@ -74,3 +68,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH="$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
+
