@@ -33,6 +33,7 @@ eval "$(starship init zsh)"
 # SSH and GPG config
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(launchctl asuser $(id -u) launchctl getenv SSH_AUTH_SOCK)
+export SSH_SK_PROVIDER=/usr/lib/ssh-keychain.dylib
 
 export PATH="$PATH:/Users/stefan/.local/bin/"
 export PATH="$PATH:/Users/stefan/go/bin/"

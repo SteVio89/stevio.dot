@@ -38,5 +38,20 @@ update-nix-full:
 
 fix-gpg-agent:
   gpgconf --kill gpg-agent
-  gpgconf --launch gpg-agent 
+  gpgconf --launch gpg-agent
   echo "Agent restarted"
+
+setup-secure-enclave-ssh:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  echo "Creating Secure Enclave-backed SSH key (Touch ID required)..."
+  sc_auth create-ctk-identity -l ssh -k p-256-ne -t bio
+  echo ""
+  echo "Extracting SSH key handle to ~/.ssh/..."
+  cd ~/.ssh
+  ssh-keygen -K -w /usr/lib/ssh-keychain.dylib -N ""
+  echo ""
+  echo "Your public key:"
+  cat ~/.ssh/id_ecdsa_sk_rk.pub
+  echo ""
+  echo "Add this key to GitHub (Settings → SSH keys) and your servers."
