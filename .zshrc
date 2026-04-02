@@ -32,8 +32,7 @@ eval "$(starship init zsh)"
 
 # SSH and GPG config
 export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+export SSH_AUTH_SOCK=$(launchctl asuser $(id -u) launchctl getenv SSH_AUTH_SOCK)
 
 export PATH="$PATH:/Users/stefan/.local/bin/"
 export PATH="$PATH:/Users/stefan/go/bin/"
