@@ -22,6 +22,8 @@
     bashInteractive
     just
     jq
+    git
+    nodejs
   ];
 
   # ── User ────────────────────────────────────

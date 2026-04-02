@@ -13,15 +13,22 @@
     };
   };
 
-  outputs = { nixpkgs, nix-darwin, home-manager, ... }: {
-    darwinConfigurations."stevio-dev" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
+  outputs = { nixpkgs, nix-darwin, home-manager, ... }:
+    let
+      baseModules = [
         home-manager.darwinModules.home-manager
         ./system.nix
-        ./macos.nix
         ./home.nix
       ];
+    in {
+      darwinConfigurations."stevio-dev" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = baseModules;
+      };
+
+      darwinConfigurations."stevio-dev-full" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = baseModules ++ [ ./macos.nix ];
+      };
     };
-  };
 }
