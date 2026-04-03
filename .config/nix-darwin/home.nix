@@ -24,7 +24,6 @@
     # ── zsh ────────────────────────────────────
     programs.zsh = {
       enable = true;
-      defaultKeymap = "viins";
 
       autosuggestion = {
         enable = true;
@@ -86,6 +85,12 @@
       ];
 
       initContent = lib.mkMerge [
+        # zsh-vi-mode config (must be set before plugin loads)
+        (lib.mkOrder 500 ''
+          ZVM_KEYTIMEOUT=0.1
+          ZVM_ESCAPE_KEYTIMEOUT=0.01
+        '')
+
         # Early: brew shellenv (must come before most things)
         (lib.mkOrder 550 ''
           eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -187,6 +192,7 @@
       mouse = true;
       focusEvents = true;
       prefix = "S-F3";
+      escapeTime = 10;
       customPaneNavigationAndResize = true;
 
       plugins = with pkgs.tmuxPlugins; [
