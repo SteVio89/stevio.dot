@@ -16,6 +16,10 @@
   system.stateVersion = 6;
   system.primaryUser = "stefan";
 
+  # ── Zsh (system-level) ────────────────────────
+  # Disable compinit in /etc/zshrc — home-manager handles it with caching
+  programs.zsh.enableGlobalCompInit = false;
+
   # ── System packages ───────────────────────────
   # Everything you'd `brew install`. Add freely.
   environment.systemPackages = with pkgs; [
