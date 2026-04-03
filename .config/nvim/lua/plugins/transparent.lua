@@ -1,6 +1,3 @@
-return {
-  "xiyaowong/transparent.nvim",
-  lazy = false,
-  name = "transparent",
-  priority = 1000,
-}
+vim.pack.add({
+  { src = 'https://github.com/xiyaowong/transparent.nvim', name = 'transparent' },
+})

@@ -5,6 +5,9 @@
   home-manager.backupFileExtension = "backup";
 
   home-manager.users."stefan" = { pkgs, lib, ... }: {
+    imports = [
+      ./applications/neovim.nix
+    ];
     home.stateVersion = "24.11";
     home.homeDirectory = "/Users/stefan";
 
@@ -71,8 +74,6 @@
         XDG_CONFIG_HOME = "$HOME/.config";
         FZF_DEFAULT_COMMAND = "fd --hidden --exclude .git --strip-cwd-prefix";
         SSH_SK_PROVIDER = "/usr/lib/ssh-keychain.dylib";
-        EDITOR = "nvim";
-        VISUAL = "nvim";
         RIPGREP_CONFIG_PATH = "$HOME/.config/rg/ripgreprc";
       };
 

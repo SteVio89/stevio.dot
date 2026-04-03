@@ -1,6 +1,3 @@
-return {
-  "Aasim-A/scrollEOF.nvim",
-  version = false,
-  event = { "CursorMoved", "WinScrolled" },
-  opts = {},
-}
+vim.pack.add({
+  { src = 'https://github.com/Aasim-A/scrollEOF.nvim', name = 'scrollEOF' },
+})

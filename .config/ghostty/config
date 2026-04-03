@@ -1,9 +1,0 @@
-macos-titlebar-style=tabs
-font-size=14
-font-family = "JetBrainsMono Nerd Font"
-shell-integration=zsh
-term=xterm-256color
-quit-after-last-window-closed=true
-theme=catppuccin-mocha.conf
-copy-on-select=false
-maximize=true
