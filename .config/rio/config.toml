@@ -1,5 +1,5 @@
 [cursor]
-shape = "beam"
+blinking = false
 [editor]
 program = "nvim"
 [window]
@@ -10,3 +10,5 @@ decorations = "Buttonless"
 [navigation]
 use-split = false
 mode = "Plain"
+[effects]
+trail-cursor = true

@@ -1,23 +1,24 @@
--- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- if not (vim.uv or vim.loop).fs_stat(lazypath) then
--- 	local out = vim.fn.system({
--- 		"git",
--- 		"clone",
--- 		"--filter=blob:none",
--- 		"https://github.com/folke/lazy.nvim.git",
--- 		"--branch=stable",
--- 		lazypath,
--- 	})
--- end
--- vim.opt.rtp:prepend(lazypath)
-
 require("options")
 require("mappings")
 
+vim.cmd("packadd nvim.undotree")
+vim.cmd("packadd nvim.difftool")
+
+
+require("plugins.shared")
 require("plugins.catppuccin")
 require("plugins.transparent")
 require("plugins.scrollEOF")
--- require("lazy").setup("plugins")
+require("plugins.mini_nvim")
+require("plugins.agentic")
+require("plugins.conform")
+require("plugins.neogit")
+require("plugins.rachartier_plugs")
+require("plugins.render_markdown")
+require("plugins.fzf")
+require("plugins.completion")
+require("plugins.lsp")
+require("plugins.treesitter")
 
 if vim.g.neovide then
   -- to be done

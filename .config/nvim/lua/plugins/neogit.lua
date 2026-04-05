@@ -1,22 +1,7 @@
-return {
-  "NeogitOrg/neogit",
-  version = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "esmuellert/codediff.nvim",
-    "nvim-telescope/telescope.nvim",
-  },
-  keys = {
-    {
-      "<leader>gg",
-      "<cmd>Neogit<cr>",
-      desc = "Open neogit",
-      mode = "n"
-    }
-  },
-  opts = {},
-  cmd = "Neogit",
-  config = function(_, opts)
-    require("neogit").setup(opts)
-  end,
-}
+vim.pack.add({
+  { src = 'https://github.com/NeogitOrg/neogit', name = 'neogit' },
+})
+
+require("neogit").setup({})
+
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })

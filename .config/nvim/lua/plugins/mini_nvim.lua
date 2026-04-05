@@ -1,170 +1,131 @@
-return {
-  {
-    "echasnovski/mini.icons",
-    version = false,
-  },
-  {
-    "echasnovski/mini.files",
-    version = false,
-    opts = {
-      windows = {
-        preview = true,
-      },
-      options = {
-        use_as_default_explorer = true,
-      },
+vim.pack.add({
+  { src = 'https://github.com/echasnovski/mini.nvim', name = "mini" },
+})
+
+require("mini.icons").setup()
+require("mini.misc").setup_auto_root()
+require("mini.trailspace").setup()
+require("mini.cursorword").setup()
+require("mini.indentscope").setup()
+require("mini.notify").setup()
+require("mini.surround").setup()
+
+require("mini.files").setup({
+  windows = { preview = true },
+  options = { use_as_default_explorer = true }
+})
+
+
+vim.keymap.set("n", "<leader>fe", function()
+  local buffer_name = vim.api.nvim_buf_get_name(0)
+  if buffer_name == "" or vim.fn.filereadable(buffer_name) == 0 then
+    require("mini.files").open(vim.uv.cwd())
+  else
+    require("mini.files").open(buffer_name)
+  end
+end, { desc = "Open file explorer" })
+
+
+
+require("mini.pairs").setup({
+  modes = { insert = true, command = true, terminal = false },
+})
+
+require("mini.sessions").setup()
+vim.keymap.set("n", "<leader>sS", function()
+  local cwd = vim.fn.getcwd()
+  local last_folder = cwd:match("([^/]+)$")
+  require("mini.sessions").write(last_folder)
+end, { desc = "Save session" })
+
+vim.keymap.set("n", "<leader>ss", function()
+  vim.cmd("wa")
+  require("mini.sessions").write()
+  require("mini.sessions").select()
+end, { desc = "Switch session" })
+
+
+vim.keymap.set("n", "<leader>sf", function()
+  local sessions = require("mini.sessions").detected
+  local names = vim.tbl_keys(sessions)
+  table.sort(names)
+  require("fzf-lua").fzf_exec(names, {
+    prompt = "Sessions> ",
+    actions = {
+      ["default"] = function(selected)
+        require("mini.sessions").read(selected[1])
+      end,
     },
-    keys = {
-      {
-        "<leader>fe",
-        function()
-          local buffer_name = vim.api.nvim_buf_get_name(0)
-          if buffer_name == "" or string.match(buffer_name, "Starter") then
-            require("mini.files").open(vim.uv.cwd())
-          else
-            require("mini.files").open(vim.api.nvim_buf_get_name(0))
-          end
-        end,
-        desc = "Open file explorer",
-        mode = "n",
-      },
+  })
+end, { desc = "Find session" })
+
+
+local miniclue = require("mini.clue")
+miniclue.setup({
+  window = {
+    config = {
+      width = 'auto',
+      border = 'double',
     },
-    config = function(_, opts)
-      require("mini.files").setup(opts)
-    end,
-    init = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-    end,
+    delay = 250,
   },
-  {
-    "echasnovski/mini.sessions",
-    version = false,
-    lazy = false,
-    priority = 1000,
-    keys = {
-      {
-        "<leader>sS",
-        function()
-          local cwd = vim.fn.getcwd()
-          local last_folder = cwd:match("([^/]+)$")
-          require("mini.sessions").write(last_folder)
-        end,
-        desc = "Save",
-        mode = "n",
-      },
-      {
-        "<leader>ss",
-        function()
-          vim.cmd("wa")
-          require("mini.sessions").write()
-          require("mini.sessions").select()
-        end,
-        desc = "Switch",
-        mode = "n",
-      },
-      {
-        "<leader>sf",
-        function()
-          vim.cmd("wa")
-          require("mini.sessions").select()
-        end,
-        desc = "Find",
-        mode = "n",
-      },
-    },
-    opts = {},
-    config = function(_, opts)
-      require("mini.sessions").setup()
-    end,
+  triggers = {
+    { mode = "n", keys = "<Leader>" },
+    { mode = "x", keys = "<Leader>" },
+    -- Built-in completions
+    { mode = "i", keys = "<C-x>" },
+    -- `g` key
+    { mode = "n", keys = "g" },
+    { mode = "x", keys = "g" },
+    -- Marks
+    { mode = "n", keys = "'" },
+    { mode = "x", keys = "'" },
+    -- Registers
+    { mode = "n", keys = '"' },
+    { mode = "x", keys = '"' },
+    -- Window commands
+    { mode = "n", keys = "<C-w>" },
+    -- `z` key
+    { mode = "n", keys = "z" },
+    { mode = "x", keys = "z" },
+    -- Brackets
+    { mode = "n", keys = "[" },
+    { mode = "n", keys = "]" },
   },
-  {
-    "echasnovski/mini.starter",
-    version = false,
-    priority = 900,
-    config = function()
-      require("mini.starter").setup({
-        items = {
-          require("mini.starter").sections.sessions(5, true),
-        },
-        header = [[
- _____  _          _   _  _         _
-/  ___|| |        | | | |(_)       ( )
-\ `--. | |_   ___ | | | | _   ___  |/  ___
- `--. \| __| / _ \| | | || | / _ \    / __|
-/\__/ /| |_ |  __/\ \_/ /| || (_) |   \__ \
-\____/  \__| \___| \___/ |_| \___/    |___/
- _   _               _   _  _
-| \ | |             | | | |(_)
-|  \| |  ___   ___  | | | | _  _ __ ___
-| . ` | / _ \ / _ \ | | | || || '_ ` _ \
-| |\  ||  __/| (_) |\ \_/ /| || | | | | |
-\_| \_/ \___| \___/  \___/ |_||_| |_| |_|
-]],
-      })
-    end,
+  clues = {
+    -- Your leader groups
+    { mode = "n", keys = "<Leader>a", desc = "+AI" },
+    { mode = "n", keys = "<Leader>f", desc = "+file" },
+    { mode = "n", keys = "<Leader>b", desc = "+buffer" },
+    { mode = "n", keys = "<Leader>g", desc = "+git" },
+    { mode = "n", keys = "<Leader>c", desc = "+code" },
+    { mode = "n", keys = "<Leader>o", desc = "+other" },
+    { mode = "n", keys = "<Leader>s", desc = "+sessions" },
+    -- Built-in clue enhancers
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
   },
-  {
-    "echasnovski/mini.pairs",
-    version = false,
-    opts = {
-      modes = { insert = true, command = true, terminal = false },
-      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-      skip_ts = { "string" },
-      skip_unbalanced = true,
-      markdown = true,
-    },
-    config = function(_, opts)
-      require("mini.pairs").setup(opts)
-    end,
+})
+
+local hipatterns = require("mini.hipatterns")
+hipatterns.setup({
+  highlighters = {
+    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+    hack  = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+    todo  = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+    note  = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
   },
-  {
-    "echasnovski/mini.statusline",
-    version = false,
-    config = function()
-      require("mini.statusline").setup()
-    end,
+})
+
+local ai = require("mini.ai")
+ai.setup({
+  custom_textobjects = {
+    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+    a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
   },
-  {
-    "echasnovski/mini.misc",
-    version = false,
-    config = function()
-      require("mini.misc").setup_auto_root()
-    end,
-  },
-  {
-    "echasnovski/mini.trailspace",
-    version = false,
-    config = function()
-      require("mini.trailspace").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.cursorword",
-    version = false,
-    config = function()
-      require("mini.cursorword").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.indentscope",
-    version = false,
-    config = function()
-      require("mini.indentscope").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.notify",
-    version = false,
-    config = function()
-      require("mini.notify").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.surround",
-    version = false,
-    config = function()
-      require("mini.surround").setup()
-    end,
-  },
-}
+})

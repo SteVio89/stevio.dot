@@ -16,6 +16,7 @@
       devbox
       fd
       ripgrep
+      pngpaste
     ];
 
     # ── direnv ──────────────────────────────────

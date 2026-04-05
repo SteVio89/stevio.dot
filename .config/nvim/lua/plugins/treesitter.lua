@@ -1,52 +1,15 @@
-return {
-  "nvim-treesitter/nvim-treesitter",
-  version = false,
-  build = ":TSUpdate",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+vim.pack.add({
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = 'treesitter' },
+})
+
+require("nvim-treesitter.config").setup({
+  ensure_installed = {
+    "lua", "vim", "vimdoc", "query",
+    "bash", "go", "rust", "zig",
+    "c", "cpp", "kotlin",
+    "yaml", "json", "toml", "nix",
+    "markdown", "markdown_inline",
   },
-  opts = {
-    ensure_installed = {
-      "lua",
-      "vim",
-      "vimdoc",
-      "query",
-      "bash",
-      "go",
-      "rust",
-      "zig",
-      "c",
-      "cpp",
-      "odin",
-      "kotlin",
-      "gdscript",
-      "cmake",
-      "yaml",
-      "json",
-      "toml",
-      "markdown",
-      "markdown_inline",
-    },
-    highlight = {
-      enable = true,
-    },
-    indent = { enable = true },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-          ["aa"] = "@parameter.outer",
-          ["ia"] = "@parameter.inner",
-        },
-      },
-    },
-  },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-  end,
-}
+  highlight = { enable = true },
+  indent = { enable = true },
+})
