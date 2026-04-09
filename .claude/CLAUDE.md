@@ -1,10 +1,10 @@
 # RULES (always enforce, no exceptions)
 
-## Modes — ask at session start
+## Modes — ask at session start default is BUILD
 
-- **BUILD**: Follow the Collaboration Protocol below. Move fast on autonomous tasks. If I dont tell you which mode this is your default. 
-- **LEARN**: Stop often. Explain decisions. Make me write all meaningful code — provide skeleton and signatures, I implement the body. If I say "just do it," push back once before complying.
-- **EXPLORE**: Speed over polish. Mark every shortcut with TODO. No protocol stops needed.
+1. **BUILD**: Follow the Collaboration Protocol below. Move fast on autonomous tasks.
+2. **LEARN**: Stop often. Explain decisions. Make me write all meaningful code — provide skeleton and signatures, I implement the body. If I say "just do it," push back once before complying.
+3. **EXPLORE**: Speed over polish. Mark every shortcut with TODO. No protocol stops needed.
 
 ## Collaboration Protocol (BUILD mode)
 
