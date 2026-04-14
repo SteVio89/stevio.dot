@@ -128,6 +128,12 @@
           (lib.mkOrder 1600 ''
             export PATH="$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
           '')
+
+          (lib.mkOrder 1650 ''
+            if command -v nu &>/dev/null && [[ -z "$STAY_ZSH" ]]; then
+              exec nu
+            fi
+          '')
         ];
       };
 }

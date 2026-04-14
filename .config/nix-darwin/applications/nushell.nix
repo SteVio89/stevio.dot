@@ -79,7 +79,7 @@
     extraConfig = ''
       # ── Custom commands (migrated from zsh aliases) ──
 
-      def dotfiles [...args: string] {
+      def --wrapped dotfiles [...args: string] {
         ^git --git-dir $"($env.HOME)/.dotfiles" --work-tree $env.HOME ...$args
       }
 
@@ -104,6 +104,10 @@
         ^devbox init
         ^devbox generate direnv
         ^direnv allow
+      }
+
+      def zsh [] {
+        with-env { STAY_ZSH: "1" } {^zsh}
       }
     '';
   };
