@@ -1,5 +1,54 @@
 // Zed settings
 {
+  "notification_panel": {
+    "show_count_badge": true
+  },
+  "use_system_window_tabs": false,
+  "bottom_dock_layout": "contained",
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true,
+    "show_tab_bar_buttons": true,
+    "show_nav_history_buttons": false,
+    "show": true
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": true,
+    "show_sign_in": true,
+    "show_onboarding_banner": true,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": false
+  },
+  "search": {
+    "button": false
+  },
+  "terminal": {
+    "show_count_badge": false,
+    "button": true
+  },
+  "project_panel": {
+    "hide_root": true,
+    "git_status_indicator": true,
+    "diagnostic_badges": false,
+    "starts_open": false,
+    "hide_gitignore": false,
+    "button": true
+  },
+  "status_bar": {
+    "show_active_file": true,
+    "cursor_position_button": true,
+    "active_language_button": true
+  },
+  "prettier": {
+    "allowed": true
+  },
+  "semantic_tokens": "combined",
+  "unnecessary_code_fade": 0.5,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "ui_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_line_height": "comfortable",
+  "restore_on_startup": "launchpad",
   "agent_servers": {
     "cursor": {
       "type": "registry",
@@ -15,9 +64,15 @@
     "button": false,
   },
   "git_panel": {
+    "show_count_badge": false,
+    "file_icons": true,
+    "collapse_untracked_diff": false,
+    "sort_by_path": true,
     "tree_view": true,
   },
   "agent": {
+    "enable_feedback": false,
+    "single_file_review": true,
     "play_sound_when_agent_done": true,
     "default_model": {
       "provider": "zed.dev",
@@ -35,8 +90,8 @@
   "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",
-  "ui_font_size": 16,
-  "buffer_font_size": 14,
+  "ui_font_size": 16.0,
+  "buffer_font_size": 15.0,
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 110,
   "use_system_path_prompts": false,
@@ -63,6 +118,7 @@
     "show": "always",
   },
   "tabs": {
+    "show_close_button": "always",
     "git_status": true,
     "file_icons": true,
     "show_diagnostics": "all",
@@ -98,6 +154,8 @@
     "share_on_join": false,
   },
   "preview_tabs": {
+    "enable_preview_from_multibuffer": false,
+    "enable_preview_file_from_code_navigation": false,
     "enabled": true,
   },
   "telemetry": {

@@ -1,12 +1,10 @@
 # RULES (always enforce, no exceptions)
 
-## Modes — ask at session start default is BUILD
+## Mode
 
-1. **BUILD**: Follow the Collaboration Protocol below. Move fast on autonomous tasks.
-2. **LEARN**: Stop often. Explain decisions. Make me write all meaningful code — provide skeleton and signatures, I implement the body. If I say "just do it," push back once before complying.
-3. **EXPLORE**: Speed over polish. Mark every shortcut with TODO. No protocol stops needed.
+**BUILD**: Follow the Collaboration Protocol below. Move fast on autonomous tasks.
 
-## Collaboration Protocol (BUILD mode)
+## Collaboration Protocol
 
 ### Decision Points — STOP and WAIT
 
@@ -25,7 +23,7 @@ WAITING FOR YOUR INPUT.
 
 Boilerplate, config, standard CRUD following established patterns, test scaffolding, import/export wiring.
 
-## Code Quality (all modes)
+## Code Quality
 
 - No dead code — every function must be called somewhere
 - No orphaned files or unused imports

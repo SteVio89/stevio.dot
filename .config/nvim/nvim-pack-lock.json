@@ -1,15 +1,15 @@
 {
   "plugins": {
     "agentic": {
-      "rev": "9c40fc5228d22fbde370b723b5a738cbcb68b084",
+      "rev": "5234e93013b86de0af54d9691b1781d9f2820e22",
       "src": "https://github.com/carlos-algms/agentic.nvim"
     },
     "catppuccin": {
-      "rev": "df2a1f9f3392d688397e945544a30aec8fc9b4c7",
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim"
     },
     "code-action": {
-      "rev": "8e72efa075ba3154bbc4c7d1db532b03b4e68373",
+      "rev": "32090efd5d883dbbef0486312d6af464cb142a80",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
     },
     "conform": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf": {
-      "rev": "9f0432fdd7825ab163520045831a40b6df82ea28",
+      "rev": "eee072d89ccdc0a4627bf67d0757d2e4981c7292",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "img-clip": {
@@ -29,11 +29,11 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "mini": {
-      "rev": "402ee6c6ec8ea44b22330446c8fb4e615fd3953e",
+      "rev": "69b7433355664cf76898eb86a12a019f39bd86d1",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "5a7fca171e3ad07380745d573d791e95268b8f3f",
+      "rev": "e06745228600a585b88726fc9fba44a373c15a47",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-treesitter": {
@@ -41,11 +41,11 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "plenary": {
-      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render": {
-      "rev": "687de727de91a63b0bff9cff4e71d73f9d40fa77",
+      "rev": "54d4b5431e9634ee3d8d30784e017239b5b89d41",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "scrollEOF": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "tiny-code-action.nvim": {
-      "rev": "8e72efa075ba3154bbc4c7d1db532b03b4e68373",
+      "rev": "32090efd5d883dbbef0486312d6af464cb142a80",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
     },
     "tiny-inline-diagnostic.nvim": {

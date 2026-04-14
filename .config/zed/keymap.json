@@ -1,15 +1,10 @@
 [
+  // ── Completion / code-action menus ──────────────────────────────
   {
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "tab": "editor::ContextMenuNext",
       "shift-tab": "editor::ContextMenuPrevious",
-    },
-  },
-  {
-    "context": "(VimControl && !menu)",
-    "bindings": {
-      "space": null, // Disable the default action vim::WrappingRight
     },
   },
   {
@@ -19,27 +14,30 @@
       "enter": "editor::ConfirmCompletion",
     },
   },
+
+  // ── Free up <leader> (space) for chord bindings ─────────────────
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "context": "(VimControl && !menu)",
     "bindings": {
-      "g d": "editor::GoToDefinition",
-      "g D": "editor::GoToDefinitionSplit",
-      "g i": "editor::GoToImplementation",
-      "g I": "editor::GoToImplementationSplit",
-      "g t": "editor::GoToTypeDefinition",
-      "g T": "editor::GoToTypeDefinitionSplit",
-      "g r": "editor::FindAllReferences",
-      "space f": null,
-      "space f e": "workspace::ToggleLeftDock",
-      "space f f": "file_finder::Toggle",
-      "space f g": "workspace::NewSearch",
-      "space f d": "diagnostics::Deploy",
-      "space f b": "tab_switcher::ToggleAll",
-      "space t f": "zed::ToggleFullScreen",
-      "space t z": "workspace::ToggleCenteredLayout",
-      "space s a": "editor::SelectAllMatches",
-      "space c a": "editor::ToggleCodeActions",
-      "space c r": "editor::Rename",
+      "space": null, // disable default vim::WrappingRight
+    },
+  },
+
+  // ── Subword motion (camel/snake navigation) ─────────────────────
+  {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
+      "w": "vim::NextSubwordStart",
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+      "g e": "vim::PreviousSubwordEnd",
+    },
+  },
+
+  // ── Workspace-level pane nav (works anywhere) ───────────────────
+  {
+    "context": "Workspace",
+    "bindings": {
       "ctrl-w h": "workspace::ActivatePaneLeft",
       "ctrl-w j": "workspace::ActivatePaneDown",
       "ctrl-w k": "workspace::ActivatePaneUp",
@@ -48,13 +46,105 @@
       "ctrl-w -": "pane::SplitDown",
     },
   },
+
+  // ── Ctrl+hjkl pane nav (skip insert mode to preserve backspace) ─
   {
-    "context": "VimControl && !menu && vim_mode != operator",
+    "context": "Editor && vim_mode != insert",
     "bindings": {
-      "w": "vim::NextSubwordStart",
-      "b": "vim::PreviousSubwordStart",
-      "e": "vim::NextSubwordEnd",
-      "g e": "vim::PreviousSubwordEnd",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+
+  // ── Leader bindings that must work with NO buffer open ──────────
+  // Fix for "<leader>ff only works with an open buffer": duplicate
+  // panel-opening bindings into EmptyPane.
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space f e": "project_panel::Toggle",
+      "space f g": "workspace::NewSearch",
+      "space f b": "tab_switcher::ToggleAll",
+      "space f d": "diagnostics::Deploy",
+      "space g g": "git_panel::ToggleFocus",
+      "space a o": "agent::ToggleFocus",
+      "space a n": "agent::NewThread",
+      "space s f": "projects::OpenRecent",
+      "space t f": "zed::ToggleFullScreen",
+      "space t z": "workspace::ToggleCenteredLayout",
+    },
+  },
+
+  // ── Normal + visual: leader map + go-to + brackets ──────────────
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // go-to
+      "g d": "editor::GoToDefinition",
+      "g D": "editor::GoToDefinitionSplit",
+      "g i": "editor::GoToImplementation",
+      "g I": "editor::GoToImplementationSplit",
+      "g t": "editor::GoToTypeDefinition",
+      "g T": "editor::GoToTypeDefinitionSplit",
+      "g r": "editor::FindAllReferences",
+
+      // bracket motions ([b ]b [d ]d [q ]q)
+      "[ b": "pane::ActivatePreviousItem",
+      "] b": "pane::ActivateNextItem",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      "] d": "editor::GoToDiagnostic",
+      "[ q": "editor::GoToPreviousHunk",
+      "] q": "editor::GoToHunk",
+
+      // leader f — file / search
+      "space f": null,
+      "space f f": "file_finder::Toggle",
+      "space f e": "project_panel::Toggle",
+      "space f g": "workspace::NewSearch",
+      "space f b": "tab_switcher::ToggleAll",
+      "space f d": "diagnostics::Deploy",
+      "space f D": "diagnostics::Deploy",
+      "space f r": "editor::FindAllReferences",
+
+      // leader b — buffer
+      "space b c": "pane::CloseActiveItem",
+      "space b C": "pane::CloseOtherItems",
+
+      // leader c — code / LSP
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space c d": "editor::GoToDefinition",
+      "space c f": "editor::Format",
+
+      // leader g — git
+      "space g g": "git_panel::ToggleFocus",
+
+      // leader s — sessions / select
+      "space s a": "editor::SelectAllMatches",
+      "space s f": "projects::OpenRecent",
+
+      // leader a — agent / AI
+      "space a o": "agent::ToggleFocus",
+      "space a N": "agent::NewThread",
+
+      // leader o — options
+      "space o w": "editor::ToggleSoftWrap",
+
+      // leader t — toggles
+      "space t f": "zed::ToggleFullScreen",
+      "space t z": "workspace::ToggleCenteredLayout",
+    },
+  },
+
+  // ── Visual mode: line moves (nvim J/K in visual) ────────────────
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      "J": "editor::MoveLineDown",
+      "K": "editor::MoveLineUp",
     },
   },
 ]

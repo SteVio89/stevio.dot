@@ -54,6 +54,7 @@
       };
 
       shellAliases = {
+        glow = "fd -e md | fzf --preview 'bat --color=always --style=plain {}' | xargs -r bat";
         cat = "bat";
         nano = "nvim";
         vim = "nvim";
