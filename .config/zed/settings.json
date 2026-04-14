@@ -143,7 +143,11 @@
     "mode": "subtle",
     "enabled_in_text_threads": true,
   },
-  "icon_theme": "Colored Zed Icons Theme Dark",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
+  },
   "theme": {
     "mode": "dark",
     "dark": "Catppuccin Mocha",

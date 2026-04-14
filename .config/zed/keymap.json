@@ -128,7 +128,7 @@
 
       // leader a — agent / AI
       "space a o": "agent::ToggleFocus",
-      "space a N": "agent::NewThread",
+      "space a n": "agent::NewThread",
 
       // leader o — options
       "space o w": "editor::ToggleSoftWrap",
