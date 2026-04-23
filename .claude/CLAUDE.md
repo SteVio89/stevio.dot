@@ -31,6 +31,16 @@ Boilerplate, config, standard CRUD following established patterns, test scaffold
 - If unsure whether a pattern exists, check first and ask
 - Never leave placeholder or stub implementations without a TODO marker
 
+## Sandbox limits
+
+If a command fails due to sandbox restrictions (operation not permitted, writes outside allow-list, blocked network host, etc.), stop. Do NOT:
+
+- Retry with tweaked paths or env vars (GOCACHE=..., TMPDIR=..., etc.)
+- Try another command that would fail for the same reason
+- Attempt to escape sandbox (sudo, chmod, cd tricks)
+
+Correct response: state the exact command the user should run themselves, mark related verification as blocked-on-user, move on.
+
 ## Violation Recovery
 
 If you skip a required stop, break a rule, or implement something you should have asked about:

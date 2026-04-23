@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   # ── Home Manager ──────────────────────────────
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
-  home-manager.users."stefan" = { pkgs, lib, ... }: {
+  home-manager.users."stefan" = { pkgs, inputs, lib, ... }: {
 
     home.stateVersion = "26.05";
     home.homeDirectory = "/Users/stefan";
@@ -15,6 +16,7 @@
       ./applications/tmux.nix
       ./applications/neovim.nix
       ./applications/nushell.nix
+      inputs.catppuccin.homeModules.catppuccin
     ];
 
     home.packages = with pkgs; [
@@ -22,6 +24,7 @@
       fd
       ripgrep
       pngpaste
+      ghostty-bin
     ];
 
     programs.direnv = {

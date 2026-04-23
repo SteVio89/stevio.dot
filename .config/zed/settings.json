@@ -1,7 +1,7 @@
 // Zed settings
 {
-  "notification_panel": {
-    "show_count_badge": true
+  "outline_panel": {
+    "dock": "left",
   },
   "use_system_window_tabs": false,
   "bottom_dock_layout": "contained",
@@ -9,7 +9,7 @@
     "show_pinned_tabs_in_separate_row": true,
     "show_tab_bar_buttons": true,
     "show_nav_history_buttons": false,
-    "show": true
+    "show": true,
   },
   "title_bar": {
     "show_menus": false,
@@ -18,30 +18,30 @@
     "show_onboarding_banner": true,
     "show_project_items": true,
     "show_branch_name": true,
-    "show_branch_icon": false
   },
   "search": {
-    "button": false
+    "button": false,
   },
   "terminal": {
     "show_count_badge": false,
-    "button": true
+    "button": true,
   },
   "project_panel": {
+    "dock": "left",
     "hide_root": true,
     "git_status_indicator": true,
     "diagnostic_badges": false,
     "starts_open": false,
     "hide_gitignore": false,
-    "button": true
+    "button": true,
   },
   "status_bar": {
     "show_active_file": true,
     "cursor_position_button": true,
-    "active_language_button": true
+    "active_language_button": true,
   },
   "prettier": {
-    "allowed": true
+    "allowed": true,
   },
   "semantic_tokens": "combined",
   "unnecessary_code_fade": 0.5,
@@ -61,9 +61,11 @@
     },
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": false,
   },
   "git_panel": {
+    "dock": "left",
     "show_count_badge": false,
     "file_icons": true,
     "collapse_untracked_diff": false,
@@ -71,9 +73,10 @@
     "tree_view": true,
   },
   "agent": {
+    "dock": "right",
     "enable_feedback": false,
     "single_file_review": true,
-    "play_sound_when_agent_done": true,
+    "play_sound_when_agent_done": "always",
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-opus-4-6",
@@ -146,7 +149,7 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Catppuccin Mocha",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "theme": {
     "mode": "dark",

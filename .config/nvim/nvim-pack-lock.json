@@ -1,7 +1,7 @@
 {
   "plugins": {
     "agentic": {
-      "rev": "5234e93013b86de0af54d9691b1781d9f2820e22",
+      "rev": "f36092681e438af4b4862fc0543c78b2a41586db",
       "src": "https://github.com/carlos-algms/agentic.nvim"
     },
     "catppuccin": {
@@ -9,7 +9,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "code-action": {
-      "rev": "32090efd5d883dbbef0486312d6af464cb142a80",
+      "rev": "9f4b05c2f93f76a7bd517d9587ad0dc73cca0d0d",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
     },
     "conform": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf": {
-      "rev": "eee072d89ccdc0a4627bf67d0757d2e4981c7292",
+      "rev": "beaa4e83e6be4174af291a464e4f49548c943963",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "img-clip": {
@@ -25,16 +25,20 @@
       "src": "https://github.com/hakonharnes/img-clip.nvim"
     },
     "inline-diagnostic": {
-      "rev": "57a0eb84b2008c76e77930639890d9874195b1e1",
+      "rev": "b3b91e086795c036ecfe70429b72b26bcb302c91",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "mini": {
-      "rev": "69b7433355664cf76898eb86a12a019f39bd86d1",
+      "rev": "5849ef04c32a6a8e55957b946c0a275801d87530",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "e06745228600a585b88726fc9fba44a373c15a47",
+      "rev": "d1cfc4986195239cac55700b675cea7a9578d430",
       "src": "https://github.com/NeogitOrg/neogit"
+    },
+    "nvim-lspconfig": {
+      "rev": "e146efacbafed3789ac568abcc5a981c5decaa58",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
@@ -45,7 +49,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render": {
-      "rev": "54d4b5431e9634ee3d8d30784e017239b5b89d41",
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "scrollEOF": {
@@ -53,11 +57,11 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "tiny-code-action.nvim": {
-      "rev": "32090efd5d883dbbef0486312d6af464cb142a80",
+      "rev": "9f4b05c2f93f76a7bd517d9587ad0dc73cca0d0d",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "57a0eb84b2008c76e77930639890d9874195b1e1",
+      "rev": "b3b91e086795c036ecfe70429b72b26bcb302c91",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "transparent": {

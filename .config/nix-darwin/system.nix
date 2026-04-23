@@ -30,9 +30,7 @@
     nodejs
   ];
 
-  # ── Nushell (ready to activate as default) ──
   environment.shells = with pkgs; [ nushell ];
-  # users.users.stefan.shell = pkgs.nushell;
 
   # ── User ────────────────────────────────────
   users.users.stefan.home = "/Users/stefan";
