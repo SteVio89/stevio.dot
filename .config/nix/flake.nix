@@ -69,7 +69,10 @@
           ./hosts/kids-laptop
           home-manager.nixosModules.home-manager
           hmSharedModule
-          { home-manager.users.kids = import ./home/kids; }
+          {
+            home-manager.users.kids = import ./home/kids;
+            home-manager.users.stefan = import ./home/stefan-linux;
+          }
         ];
       };
     };

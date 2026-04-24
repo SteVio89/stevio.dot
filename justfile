@@ -34,6 +34,9 @@ update-nix-full:
   nix flake update --flake ~/.config/nix-darwin
   sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev-full
 
+update-kids:
+  sudo nixos-rebuild switch --flake ~/.config/nix#kids-laptop
+
 fix-gpg-agent:
   gpgconf --kill gpg-agent
   gpgconf --launch gpg-agent

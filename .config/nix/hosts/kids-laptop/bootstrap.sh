@@ -13,7 +13,10 @@ fi
 
 REMOTE="$1"
 BARE_DIR="$HOME/.dotfiles"
-SPARSE_PATHS=(".config/nix/")
+SPARSE_PATHS=(
+  ".config/nix/"
+  "/justfile"
+)
 
 dotfiles() { git --git-dir="$BARE_DIR" --work-tree="$HOME" "$@"; }
 
