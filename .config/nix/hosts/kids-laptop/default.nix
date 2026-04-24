@@ -55,17 +55,25 @@
     xwayland.enable = true;
   };
 
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.hyprland = {
+      prettyName = "Hyprland";
+      comment    = "Hyprland managed by UWSM";
+      binPath    = "/run/current-system/sw/bin/Hyprland";
+    };
+  };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
-  # --cmd Hyprland skips the session chooser — single-session system.
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'uwsm start -S -F hyprland-uwsm.desktop'";
         user = "greeter";
       };
     };
