@@ -20,14 +20,14 @@
     xwayland.enable = true;
   };
 
-  programs.uwsm = {
-    enable = true;
-    waylandCompositors.hyprland = {
-      prettyName = "Hyprland";
-      comment    = "Hyprland managed by UWSM";
-      binPath    = "/run/current-system/sw/bin/start-hyprland";
-    };
-  };
+  # programs.uwsm = {
+  #   enable = true;
+  #   waylandCompositors.hyprland = {
+  #     prettyName = "Hyprland";
+  #     comment    = "Hyprland managed by UWSM";
+  #     binPath    = "/run/current-system/sw/bin/start-hyprland";
+  #   };
+  # };
 
   xdg.portal = {
     enable = true;
@@ -38,7 +38,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'uwsm start hyprland-uwsm.desktop'";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd 'start-hyprland'";
         user = "greeter";
       };
     };
