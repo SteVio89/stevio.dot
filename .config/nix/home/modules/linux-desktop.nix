@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 let
   firstLoginPasswd = pkgs.writeShellScriptBin "first-login-passwd" ''
@@ -23,11 +23,32 @@ let
   '';
 in
 {
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 1.0;
-      font.size = 12;
+      window = {
+        opacity = 0.75;
+        startup_mode = "Maximized";
+        padding = { x = 10; y = 10; };
+      };
+      font = {
+        size = 14;
+        normal.family      = "JetBrainsMono Nerd Font Mono";
+        bold.family        = "JetBrainsMono Nerd Font Mono";
+        italic.family      = "JetBrainsMono Nerd Font Mono";
+        bold_italic.family = "JetBrainsMono Nerd Font Mono";
+      };
+      keyboard.bindings = [
+        { key = "Return"; mods = "Shift"; chars = "\r"; }
+      ];
+      env.TERM = "xterm-256color";
     };
   };
 
@@ -66,6 +87,17 @@ in
     settings = {
       "$mod" = "SUPER";
 
+      monitor = [ ",preferred,auto,1" ];
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
+      env = [
+        "GDK_SCALE,1"
+        "XCURSOR_SIZE,24"
+      ];
+
       input = {
         kb_layout = "de";
       };
@@ -81,12 +113,12 @@ in
         "$mod, K, exit,"
       ];
 
-      windowrule = [
-        "workspace 3, match:class ^(steam)$"
-        "fullscreen, match:class ^(steam)$, match:title ^(Steam)$"
-        "float, match:title ^(First-login: set your password)$"
-        "pin, match:title ^(First-login: set your password)$"
-      ];
+      # windowrule = [
+      #   "workspace 3, match:class ^(steam)$"
+      #   "fullscreen, match:class ^(steam)$, match:title ^(Steam)$"
+      #   "float, match:title ^(First-login: set your password)$"
+      #   "pin, match:title ^(First-login: set your password)$"
+      # ];
     };
   };
 }
