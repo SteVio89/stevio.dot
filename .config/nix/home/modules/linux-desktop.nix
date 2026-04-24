@@ -82,10 +82,10 @@ in
       ];
 
       windowrule = [
-        "workspace 3, class:^(steam)$"
-        "fullscreen, class:^(steam)$, title:^(Steam)$"
-        "float, title:^(First-login: set your password)$"
-        "pin, title:^(First-login: set your password)$"
+        "workspace 3, match:class ^(steam)$"
+        "fullscreen, match:class ^(steam)$, match:title ^(Steam)$"
+        "float, match:title ^(First-login: set your password)$"
+        "pin, match:title ^(First-login: set your password)$"
       ];
     };
   };
