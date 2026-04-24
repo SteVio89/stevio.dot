@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }:
+
+lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
   programs.nushell = {
     enable = true;
 
@@ -11,18 +13,6 @@
         vi_insert = "line";
         vi_normal = "block";
       };
-    };
-
-    shellAliases = {
-      cat = "bat";
-      nano = "nvim";
-      vim = "nvim";
-      vi = "nvim";
-      wfi = "caffeinate -d";
-      ktx = "kubie ctx";
-      replace = "rgr";
-      ff = "cdi";
-      cb = "pbcopy";
     };
 
     extraEnv = ''
@@ -77,7 +67,8 @@
     '';
 
     extraConfig = ''
-      # ── Custom commands (migrated from zsh aliases) ──
+      # Custom commands not expressible as simple shellAliases.
+      # See apps/shell-aliases.nix for the simple ones (cat, vim, …).
 
       def --wrapped dotfiles [...args: string] {
         ^git --git-dir $"($env.HOME)/.dotfiles" --work-tree $env.HOME ...$args

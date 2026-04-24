@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  # ── macOS settings ────────────────────────────
-
   system.defaults.NSGlobalDomain = {
     AppleInterfaceStyle = "Dark";
     AppleShowAllExtensions = true;

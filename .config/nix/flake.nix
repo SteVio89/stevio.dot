@@ -1,5 +1,5 @@
 {
-  description = "Stefan's machines — Mac (nix-darwin) + linux notebook (NixOS)";
+  description = "Stefan's machines — macOS (nix-darwin) + NixOS (kids-laptop, future Linux VM)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -24,56 +24,58 @@
   outputs = inputs@{ nixpkgs, nix-darwin, home-manager, ... }:
     let
       # Shared home-manager wiring. Applied identically on Darwin and NixOS;
-      # the difference is which home-manager module flavour each host imports
-      # (darwinModules.home-manager vs. nixosModules.home-manager).
-      hmSharedModule = {
+      # only the home-manager module flavour differs (darwinModules vs nixosModules).
+      mkHmShared = isDarwin: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.backupFileExtension = "backup";
-        home-manager.extraSpecialArgs = { inherit inputs; };
-      };
-    in {
-      # ── Darwin: stevio-dev (daily-use profile, without macOS-Defaults) ──
-      darwinConfigurations."stevio-dev" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./overlays.nix
-          ./hosts/stevio-dev
-          home-manager.darwinModules.home-manager
-          hmSharedModule
-          { home-manager.users.stefan = import ./home/stevio; }
-        ];
+        home-manager.extraSpecialArgs = { inherit inputs isDarwin; };
       };
 
-      # ── Darwin: stevio-dev-full (same as stevio-dev + macOS-Defaults) ────
-      darwinConfigurations."stevio-dev-full" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./overlays.nix
-          ./hosts/stevio-dev-full
-          home-manager.darwinModules.home-manager
-          hmSharedModule
-          { home-manager.users.stefan = import ./home/stevio; }
-        ];
+      mkDarwin = { hostname, enableMacosDefaults ? false }:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs enableMacosDefaults; };
+          modules = [
+            ./overlays.nix
+            (./hosts + "/${hostname}")
+            home-manager.darwinModules.home-manager
+            (mkHmShared true)
+            { home-manager.users.stefan = import ./home/stefan; }
+          ];
+        };
+
+      # users :: list of usernames whose home-manager config to wire up.
+      # Each name must match a directory under ./home/.
+      mkNixos = { hostname, users }:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./overlays.nix
+            inputs.disko.nixosModules.disko
+            (./hosts + "/${hostname}")
+            home-manager.nixosModules.home-manager
+            (mkHmShared false)
+            {
+              home-manager.users = nixpkgs.lib.genAttrs users
+                (u: import (./home + "/${u}"));
+            }
+          ];
+        };
+    in
+    {
+      darwinConfigurations = {
+        # Daily-use macOS profile (no system defaults applied).
+        stevio-dev      = mkDarwin { hostname = "stevio-dev"; };
+        # Same host, with macOS UI defaults (dock, finder, trackpad, …).
+        stevio-dev-full = mkDarwin { hostname = "stevio-dev"; enableMacosDefaults = true; };
       };
 
-      # ── NixOS: linux-notebook ───────────────────────────────────────
-      nixosConfigurations."kids-laptop" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./overlays.nix
-          inputs.disko.nixosModules.disko
-          ./hosts/kids-laptop
-          home-manager.nixosModules.home-manager
-          hmSharedModule
-          {
-            home-manager.users.kids = import ./home/kids;
-            home-manager.users.stefan = import ./home/stefan-linux;
-          }
-        ];
+      nixosConfigurations = {
+        kids-laptop = mkNixos { hostname = "kids-laptop"; users = [ "stefan" "kids" ]; };
+        # Placeholder until the VM is installed and hardware-configuration.nix is regenerated.
+        stevio-vm   = mkNixos { hostname = "stevio-vm";   users = [ "stefan" ]; };
       };
     };
 }

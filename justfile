@@ -27,11 +27,11 @@ init-nix:
   sudo -i nix run nix-darwin -- switch --flake /Users/stefan/.config/nix-darwin
 
 update-nix:
-  nix flake update --flake ~/.config/nix-darwin
+  nix flake update --flake ~/.config/nix
   sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev
 
 update-nix-full:
-  nix flake update --flake ~/.config/nix-darwin
+  nix flake update --flake ~/.config/nix
   sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev-full
 
 update-kids:

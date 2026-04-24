@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, ... }:
 
 let
   firstLoginPasswd = pkgs.writeShellScriptBin "first-login-passwd" ''
@@ -23,46 +23,8 @@ let
   '';
 in
 {
-  imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        opacity = 0.75;
-        startup_mode = "Maximized";
-        padding = { x = 10; y = 10; };
-      };
-      font = {
-        size = 14;
-        normal.family      = "JetBrainsMono Nerd Font Mono";
-        bold.family        = "JetBrainsMono Nerd Font Mono";
-        italic.family      = "JetBrainsMono Nerd Font Mono";
-        bold_italic.family = "JetBrainsMono Nerd Font Mono";
-      };
-      keyboard.bindings = [
-        { key = "Return"; mods = "Shift"; chars = "\r"; }
-      ];
-      env.TERM = "xterm-256color";
-    };
-  };
-
+  programs.bash.enable = true;
   programs.fuzzel.enable = true;
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      dotfiles = "git --git-dir=$HOME/.dotfiles --work-tree=$HOME";
-      cma = "dotfiles add -u";
-      cmd = "dotfiles diff --staged | delta";
-    };
-  };
-
   programs.hyprlock.enable = true;
 
   home.packages = [ firstLoginPasswd pkgs.delta ];
@@ -113,12 +75,9 @@ in
         "$mod, K, exit,"
       ];
 
-      # windowrule = [
-      #   "workspace 3, match:class ^(steam)$"
-      #   "fullscreen, match:class ^(steam)$, match:title ^(Steam)$"
-      #   "float, match:title ^(First-login: set your password)$"
-      #   "pin, match:title ^(First-login: set your password)$"
-      # ];
+      exec-once = [
+        "first-login-passwd"
+      ];
     };
   };
 }
