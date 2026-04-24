@@ -33,11 +33,18 @@ in
 
   programs.fuzzel.enable = true;
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      dotfiles = "git --git-dir=$HOME/.dotfiles --work-tree=$HOME";
+      cma = "dotfiles add -u";
+      cmd = "dotfiles diff --staged | delta";
+    };
+  };
 
   programs.hyprlock.enable = true;
 
-  home.packages = [ firstLoginPasswd ];
+  home.packages = [ firstLoginPasswd pkgs.delta ];
 
   systemd.user.services.hyprpolkitagent = {
     Unit = {
