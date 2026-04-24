@@ -53,7 +53,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "greeter";
       };
     };
@@ -98,7 +98,9 @@
   environment.systemPackages = with pkgs; [
     git
     vim
-    greetd.tuigreet
+    just
+    tuigreet
+    networkmanagerapplet
   ];
 
   system.stateVersion = "25.11";
