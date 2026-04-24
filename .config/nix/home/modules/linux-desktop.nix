@@ -35,6 +35,8 @@ in
 
   programs.bash.enable = true;
 
+  programs.hyprlock.enable = true;
+
   home.packages = [ firstLoginPasswd ];
 
   systemd.user.services.hyprpolkitagent = {
@@ -68,6 +70,8 @@ in
         "$mod, Q, killactive,"
         "$mod, SPACE, exec, fuzzel"
         "$mod, RETURN, exec, alacritty"
+        "$mod, L, exec, hyprlock"
+        "$mod, K, exit,"
       ];
 
       windowrule = [
