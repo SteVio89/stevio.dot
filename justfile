@@ -28,11 +28,11 @@ init-nix:
 
 update-nix:
   nix flake update --flake ~/.config/nix-darwin
-  sudo darwin-rebuild switch --flake ~/.config/nix-darwin#stevio-dev
+  sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev
 
 update-nix-full:
   nix flake update --flake ~/.config/nix-darwin
-  sudo darwin-rebuild switch --flake ~/.config/nix-darwin#stevio-dev-full
+  sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev-full
 
 fix-gpg-agent:
   gpgconf --kill gpg-agent
