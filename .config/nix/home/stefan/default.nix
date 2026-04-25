@@ -35,10 +35,13 @@
   };
 
   home.packages = with pkgs; [
-    devbox
     fd
     ripgrep
   ];
+
+  # Static template consumed by the `dev` shell helpers (nushell + zsh).
+  xdg.configFile."dev-helpers/devshell-flake.nix".source =
+    ./templates/devshell-flake.nix;
 
   programs.direnv = {
     enable = true;

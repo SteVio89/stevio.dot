@@ -38,7 +38,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       nvim-test = "NVIM_APPNAME=nvim-test nvim";
       ".." = "cd ..";
       ssh = "TERM=xterm-256color ssh";
-      setup_dev = "devbox init && devbox generate direnv && direnv allow";
     };
 
     plugins = [
@@ -121,6 +120,80 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         if command -v nu &>/dev/null && [[ -z "$STAY_ZSH" ]]; then
           exec nu
         fi
+      '')
+
+      # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
+      # Only reached in zsh-only sessions (STAY_ZSH=1); nushell has its own copy.
+      (lib.mkOrder 1700 ''
+        _dev_template() {
+          echo "$XDG_CONFIG_HOME/dev-helpers/devshell-flake.nix"
+        }
+
+        _dev_init() {
+          if [[ -f flake.nix ]]; then
+            echo "flake.nix already exists — refusing to overwrite" >&2
+            return 1
+          fi
+          local project="''${1:-''${PWD:t}}"
+          sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template)" > flake.nix
+          [[ -f .envrc ]] || echo "use flake" > .envrc
+          if [[ -f .gitignore ]]; then
+            grep -q '\.direnv' .gitignore || printf '\n.direnv/\n' >> .gitignore
+          else
+            echo ".direnv/" > .gitignore
+          fi
+          direnv allow
+        }
+
+        _dev_add() {
+          if [[ ! -f flake.nix ]]; then
+            echo "no flake.nix — run \`dev init\` first" >&2
+            return 1
+          fi
+          local marker='# devhelper:packages'
+          local indent
+          indent=$(awk -v m="$marker" 'index($0, m) { match($0, /^[ \t]+/); print substr($0, 1, RLENGTH); exit }' flake.nix)
+          local tmp
+          tmp=$(mktemp)
+          awk -v m="$marker" -v ind="$indent" -v pkgs="$*" '
+            index($0, m) {
+              n = split(pkgs, arr, " ")
+              for (i = 1; i <= n; i++) print ind arr[i]
+            }
+            { print }
+          ' flake.nix > "$tmp" && mv "$tmp" flake.nix
+          direnv reload
+        }
+
+        _dev_rm() {
+          if [[ ! -f flake.nix ]]; then
+            echo "no flake.nix here" >&2
+            return 1
+          fi
+          local tmp
+          tmp=$(mktemp)
+          awk -v pkgs="$*" '
+            BEGIN { n = split(pkgs, arr, " ") }
+            {
+              keep = 1
+              for (i = 1; i <= n; i++) {
+                if ($0 ~ ("^[ \t]+" arr[i] "[ \t]*$")) { keep = 0; break }
+              }
+              if (keep) print
+            }
+          ' flake.nix > "$tmp" && mv "$tmp" flake.nix
+          direnv reload
+        }
+
+        dev() {
+          case "$1" in
+            init)   shift; _dev_init "$@" ;;
+            add)    shift; _dev_add "$@" ;;
+            rm)     shift; _dev_rm "$@" ;;
+            reload) direnv reload ;;
+            *)      echo "usage: dev {init|add|rm|reload} [args...]" >&2; return 2 ;;
+          esac
+        }
       '')
     ];
   };

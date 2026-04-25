@@ -91,11 +91,56 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         if ($file | is-not-empty) { ^bat $file }
       }
 
-      def setup_dev [] {
-        ^devbox init
-        ^devbox generate direnv
+      # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
+      # Subcommands: init, add, rm, reload.
+
+      def "dev init" [name?: string] {
+        if ("flake.nix" | path exists) {
+          print "flake.nix already exists — refusing to overwrite"
+          return
+        }
+        let project = ($name | default (pwd | path basename))
+        let template = ($env.XDG_CONFIG_HOME | path join "dev-helpers/devshell-flake.nix")
+        open $template --raw
+          | str replace --all "PROJECT_NAME" $project
+          | save flake.nix
+        if not (".envrc" | path exists) {
+          "use flake\n" | save .envrc
+        }
+        if not (".gitignore" | path exists) {
+          ".direnv/\n" | save .gitignore
+        } else if (not (open .gitignore | str contains ".direnv")) {
+          "\n.direnv/\n" | save -a .gitignore
+        }
         ^direnv allow
       }
+
+      def "dev add" [...pkgs: string] {
+        if not ("flake.nix" | path exists) {
+          print "no flake.nix — run `dev init` first"
+          return
+        }
+        let marker = "# devhelper:packages"
+        let body = (open flake.nix --raw)
+        let indent = ($body | lines | where {|l| $l =~ $marker } | get 0 | str replace --regex '#.*' ''')
+        let inserted = ($pkgs | each {|p| $"($indent)($p)" } | str join "\n")
+        $body | str replace $"($indent)($marker)" $"($inserted)\n($indent)($marker)" | save -f flake.nix
+        ^direnv reload
+      }
+
+      def "dev rm" [...pkgs: string] {
+        if not ("flake.nix" | path exists) {
+          print "no flake.nix here"
+          return
+        }
+        let kept = (open flake.nix | lines | where {|l|
+          not ($pkgs | any {|p| $l =~ $"^\\s+($p)\\s*$" })
+        })
+        $kept | str join "\n" | save -f flake.nix
+        ^direnv reload
+      }
+
+      def "dev reload" [] { ^direnv reload }
 
       def zsh [] {
         with-env { STAY_ZSH: "1" } {^zsh}
