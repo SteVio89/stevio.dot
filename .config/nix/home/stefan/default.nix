@@ -37,6 +37,7 @@
   home.packages = with pkgs; [
     fd
     ripgrep
+    nixfmt
   ];
 
   # Static template consumed by the `dev` shell helpers (nushell + zsh).
