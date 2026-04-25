@@ -55,9 +55,25 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         ZVM_ESCAPE_KEYTIMEOUT=0.01
       '')
 
-      # Early: brew shellenv (must come before most things)
+      # Early: brew shellenv (must come before most things).
+      # Cached to disk because `brew shellenv` forks ruby and can stall on
+      # Homebrew's global lock — that stall ignores SIGINT and was the root
+      # cause of the "frozen cursor on shell start" hang. TTL: 24 h.
+      # Cache freshness check uses zsh glob qualifier (N.m-1) instead of `find`
+      # so the common path (cache fresh) does zero forks.
       (lib.mkOrder 550 ''
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        export HOMEBREW_NO_AUTO_UPDATE=1
+        export HOMEBREW_NO_ANALYTICS=1
+
+        __brew_cache="$HOME/.cache/brew-shellenv.zsh"
+        # (N.m-1) → array has 1 element iff file exists, is regular, mtime < 1 day
+        __cached_fresh=("$__brew_cache"(N.m-1))
+        if (( ''${#__cached_fresh} == 0 )); then
+          [[ -d "''${__brew_cache:h}" ]] || mkdir -p "''${__brew_cache:h}"
+          /opt/homebrew/bin/brew shellenv > "$__brew_cache"
+        fi
+        source "$__brew_cache"
+        unset __brew_cache __cached_fresh
       '')
 
       # After plugins init: atuin with zvm integration
@@ -116,14 +132,18 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         export PATH="$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
       '')
 
+      # Auto-launch nu as a child of zsh. Nu's exit code is the contract:
+      #   0  → drop to zsh prompt (nu's `quit`)
+      #   99 → also exit zsh, closing the terminal/pane (nu's `exit`)
       (lib.mkOrder 1650 ''
-        if command -v nu &>/dev/null && [[ -z "$STAY_ZSH" ]]; then
-          exec nu
+        if command -v nu &>/dev/null; then
+          nu
+          [[ $? -eq 99 ]] && exit
         fi
       '')
 
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
-      # Only reached in zsh-only sessions (STAY_ZSH=1); nushell has its own copy.
+      # Reached in zsh-from-nu sessions; terminal-spawned zsh execs nu above.
       (lib.mkOrder 1700 ''
         _dev_template() {
           echo "$XDG_CONFIG_HOME/dev-helpers/devshell-flake.nix"

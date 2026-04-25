@@ -141,10 +141,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       }
 
       def "dev reload" [] { ^direnv reload }
-
-      def zsh [] {
-        with-env { STAY_ZSH: "1" } {^zsh}
-      }
     '';
   };
 }
