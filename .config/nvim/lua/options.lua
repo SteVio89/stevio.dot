@@ -41,3 +41,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
+
+-- Reset horizontal scroll (leftcol) when a new line is created in insert
+-- mode, so a short new line after a sidescrolled long line is shown from
+-- column 0 instead of inheriting the offset.
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    vim.b._line_count_on_enter = vim.api.nvim_buf_line_count(0)
+  end,
+})
+vim.api.nvim_create_autocmd("TextChangedI", {
+  callback = function()
+    local prev = vim.b._line_count_on_enter or 0
+    local cur = vim.api.nvim_buf_line_count(0)
+    if cur > prev then
+      local view = vim.fn.winsaveview()
+      if view.leftcol > 0 then
+        view.leftcol = 0
+        vim.fn.winrestview(view)
+      end
+    end
+    vim.b._line_count_on_enter = cur
+  end,
+})

@@ -17,9 +17,6 @@
         italic.family      = "JetBrainsMono Nerd Font Mono";
         bold_italic.family = "JetBrainsMono Nerd Font Mono";
       };
-      keyboard.bindings = [
-        { key = "Return"; mods = "Shift"; chars = "\r"; }
-      ];
       env.TERM = "xterm-256color";
     };
   };

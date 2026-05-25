@@ -1,15 +1,28 @@
 vim.pack.add({
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = 'treesitter' },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", name = "treesitter-textobjects" },
 })
 
 require("nvim-treesitter.config").setup({
-  ensure_installed = {
-    "lua", "vim", "vimdoc", "query",
-    "bash", "go", "rust", "zig",
-    "c", "cpp", "kotlin",
-    "yaml", "json", "toml", "nix",
-    "markdown", "markdown_inline",
-  },
-  highlight = { enable = true },
-  indent = { enable = true },
+	ensure_installed = {
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"bash",
+		"go",
+		"rust",
+		"zig",
+		"c",
+		"cpp",
+		"kotlin",
+		"yaml",
+		"json",
+		"toml",
+		"nix",
+		"markdown",
+		"markdown_inline",
+	},
+	highlight = { enable = true },
+	indent = { enable = true },
 })

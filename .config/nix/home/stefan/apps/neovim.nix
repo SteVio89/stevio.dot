@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -10,5 +11,8 @@
     stylua
     nil
     nixd
+    zls
+    copilot-language-server
+    simple-completion-language-server
   ];
 }

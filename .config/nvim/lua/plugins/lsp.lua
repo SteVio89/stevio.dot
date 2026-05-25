@@ -1,3 +1,12 @@
+vim.lsp.config("scls", {
+	cmd = { "simple-completion-language-server" },
+	root_markers = { ".git" },
+	filetypes = {
+		"lua", "go", "sh", "bash", "zsh", "zig", "c", "cpp", "nix",
+		"markdown", "text", "gitcommit", "json", "yaml", "toml",
+	},
+})
+
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("bashls")
@@ -5,7 +14,10 @@ vim.lsp.enable("zls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("nixd")
 vim.lsp.enable("nil_ls")
+vim.lsp.enable("copilot")
+vim.lsp.enable("scls")
 vim.lsp.inlay_hint.enable()
+vim.lsp.inline_completion.enable()
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })

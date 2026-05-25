@@ -24,6 +24,9 @@
     "button": false,
   },
   "terminal": {
+    "shell": {
+      "program": "zsh"
+    },
     "show_count_badge": false,
     "button": true,
   },
@@ -96,7 +99,7 @@
   "base_keymap": "VSCode",
   "ui_font_size": 16.0,
   "buffer_font_size": 15.0,
-  "soft_wrap": "preferred_line_length",
+  "soft_wrap": "editor_width",
   "preferred_line_length": 110,
   "use_system_path_prompts": false,
   "use_system_prompts": false,

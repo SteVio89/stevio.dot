@@ -54,6 +54,10 @@
     enable = true;
     enableZshIntegration = false;
     enableNushellIntegration = true;
+    settings = {
+      filter_mode = "workspace";
+      filter_mode_shell_up_key_binding = "workspace";
+    };
   };
 
   programs.zoxide = {
