@@ -1,4 +1,37 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  autotile = pkgs.writeShellApplication {
+    name = "tmux-autotile";
+    runtimeInputs = [ pkgs.gnugrep ];
+    text = ''
+      active=80   # percent for the focused top-row pane; neighbour gets 100-active
+
+      apply() {
+        [ "$(tmux show -gv @autotile 2>/dev/null)" = "on" ] || return 0
+        # only act when the focused pane is in the top row, never the terminal
+        [ "$(tmux display-message -p '#{pane_top}')" = "0" ] || return 0
+        # and only when there is actually a neighbour to give the space to
+        [ "$(tmux list-panes -F '#{pane_top}' | grep -c '^0$' || true)" -ge 2 ] || return 0
+        tmux resize-pane -x "''${active}%"
+      }
+
+      case "''${1:-apply}" in
+        toggle)
+          if [ "$(tmux show -gv @autotile 2>/dev/null)" = "on" ]; then
+            tmux set -g @autotile off
+            tmux display-message "auto-tile: OFF (sizes frozen)"
+          else
+            tmux set -g @autotile on
+            tmux display-message "auto-tile: ON"
+            apply   # take effect immediately on the currently focused pane
+          fi
+          ;;
+        *) apply ;;
+      esac
+    '';
+  };
+in
+{
   programs.tmux = {
     enable = true;
     keyMode = "vi";
@@ -36,6 +69,10 @@
       bind r source-file ~/.config/tmux/tmux.conf \; display-message "tmux config reloaded"
       bind % split-window -h -c '#{pane_current_path}'
       bind '"' split-window -v -c '#{pane_current_path}'
+
+      set -g @autotile off
+      set-hook -g pane-focus-in 'run-shell -b "${autotile}/bin/tmux-autotile apply"'
+      bind a run-shell "${autotile}/bin/tmux-autotile toggle"
     '';
   };
 }
