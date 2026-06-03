@@ -33,9 +33,10 @@
     wvous-br-corner = 1;
     persistent-apps = [
       "/System/Applications/Apps.app"
-      "/Applications/Firefox.app"
+      "/Applications/Helium.app"
       "/Applications/Zed.app"
-      "/Applications/rio.app"
+      "/Users/stefan/Applications/Home Manager Apps/Alacritty.app"
+      "/Users/stefan/Applications/Home Manager Apps/Neovide.app"
       "/Applications/Claude.app"
     ];
   };

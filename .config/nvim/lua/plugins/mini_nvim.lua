@@ -10,20 +10,6 @@ require("mini.indentscope").setup()
 require("mini.notify").setup()
 require("mini.surround").setup()
 
-require("mini.files").setup({
-	windows = { preview = true },
-	options = { use_as_default_explorer = true },
-})
-
-vim.keymap.set("n", "<leader>fe", function()
-	local buffer_name = vim.api.nvim_buf_get_name(0)
-	if buffer_name == "" or vim.fn.filereadable(buffer_name) == 0 then
-		require("mini.files").open(vim.uv.cwd())
-	else
-		require("mini.files").open(buffer_name)
-	end
-end, { desc = "Open file explorer" })
-
 require("mini.pairs").setup({
 	modes = { insert = true, command = true, terminal = false },
 })

@@ -11,8 +11,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
 
--- Sort scls (Simple Completion Language Server) items strictly below items
--- from "real" LSPs. Within each group, fall back to LSP sortText/label order.
 local function compare_completions(a, b)
 	local a_client = vim.lsp.get_client_by_id(a.user_data.nvim.lsp.client_id)
 	local b_client = vim.lsp.get_client_by_id(b.user_data.nvim.lsp.client_id)
@@ -35,7 +33,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.lsp.completion.enable(true, client.id, ev.buf, {
 			autotrigger = true,
-			-- show the originating server in the popup's menu column
 			convert = function(item)
 				return { menu = client.name }
 			end,
@@ -76,8 +73,6 @@ vim.keymap.set("i", "<C-Space>", function()
 	vim.lsp.completion.get()
 end)
 
--- Ctrl+L accepts the inline completion (Copilot ghost text) when shown,
--- no-op otherwise. Insert-mode only; normal-mode <C-l> stays as window-nav.
 vim.keymap.set("i", "<C-l>", function()
 	vim.lsp.inline_completion.get()
 end, { desc = "Accept inline completion" })

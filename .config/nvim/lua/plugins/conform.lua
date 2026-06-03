@@ -9,6 +9,14 @@ require("conform").setup({
     zig = { "zigfmt" },
     c = { "clang-format" },
     cpp = { "clang-format" },
+    javascript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    json = { "prettierd" },
+    jsonc = { "prettierd" },
+    css = { "prettierd" },
+    html = { "prettierd" },
   },
   format_on_save = function(bufnr)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
