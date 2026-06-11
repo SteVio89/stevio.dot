@@ -1,9 +1,13 @@
 vim.lsp.config("scls", {
 	cmd = { "simple-completion-language-server" },
-	root_markers = { ".git" },
 	filetypes = {
 		"lua", "go", "sh", "bash", "zsh", "zig", "c", "cpp", "nix",
 		"markdown", "text", "gitcommit", "json", "yaml", "toml",
+		"typescript", "javascript", "java", "rust", "kotlin",
+	},
+	settings = {
+		feature_words = true,
+		feature_paths = true,
 	},
 })
 
@@ -12,6 +16,8 @@ vim.lsp.enable("gopls")
 vim.lsp.enable("bashls")
 vim.lsp.enable("zls")
 vim.lsp.enable("clangd")
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("kotlin_lsp")
 vim.lsp.enable("nixd")
 vim.lsp.enable("nil_ls")
 vim.lsp.enable("vtsls")
@@ -32,3 +38,41 @@ end, { desc = "Code format" })
 vim.keymap.set("n", "<leader>cr", function()
 	vim.lsp.buf.rename()
 end, { desc = "Rename" })
+
+local doc_hl = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if not client or not client:supports_method("textDocument/documentHighlight") then
+			return
+		end
+
+		vim.api.nvim_clear_autocmds({ group = doc_hl, buffer = ev.buf })
+		vim.b[ev.buf].minicursorword_disable = true
+
+		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			group = doc_hl,
+			buffer = ev.buf,
+			callback = vim.lsp.buf.document_highlight,
+		})
+		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+			group = doc_hl,
+			buffer = ev.buf,
+			callback = vim.lsp.buf.clear_references,
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspDetach", {
+	callback = function(ev)
+		for _, c in ipairs(vim.lsp.get_clients({ bufnr = ev.buf })) do
+			if c.id ~= ev.data.client_id and c:supports_method("textDocument/documentHighlight") then
+				return
+			end
+		end
+		vim.lsp.buf.clear_references()
+		vim.api.nvim_clear_autocmds({ group = doc_hl, buffer = ev.buf })
+		vim.b[ev.buf].minicursorword_disable = false
+	end,
+})

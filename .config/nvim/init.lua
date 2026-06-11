@@ -1,5 +1,6 @@
 require("options")
 require("mappings")
+require("unsaved")
 
 vim.cmd("packadd nvim.undotree")
 vim.cmd("packadd nvim.difftool")
@@ -21,4 +22,8 @@ require("plugins.treesitter")
 if vim.g.neovide then
 	require("plugins.direnv")
 	require("neovide")
+	local function paste()
+		vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
+	end
+	vim.keymap.set({ "n", "i", "v", "c", "t" }, "<D-v>", paste, { silent = true, desc = "Paste" })
 end

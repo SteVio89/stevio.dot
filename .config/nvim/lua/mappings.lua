@@ -17,6 +17,10 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
+-- Type '@' without Option (Option+L is taken by Aerospace window focus).
+-- 'öö' never occurs in German or in code, so it never clobbers real input.
+vim.keymap.set("i", "öö", "@", { desc = "Insert @" })
+
 -- Buffer cycling
 vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })

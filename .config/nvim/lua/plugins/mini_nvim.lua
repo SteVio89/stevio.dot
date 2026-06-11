@@ -9,6 +9,19 @@ require("mini.cursorword").setup()
 require("mini.indentscope").setup()
 require("mini.notify").setup()
 require("mini.surround").setup()
+require("mini.statusline").setup({ use_icons = true })
+require("mini.diff").setup({ view = { style = "sign" } })
+
+vim.keymap.set("n", "<leader>go", function()
+	local MiniDiff = require("mini.diff")
+	if MiniDiff.get_buf_data(0) == nil then
+		vim.notify("Git diff overlay: not enabled in this buffer", vim.log.levels.WARN)
+		return
+	end
+	MiniDiff.toggle_overlay()
+	local on = MiniDiff.get_buf_data(0).overlay
+	vim.notify("Git diff overlay: " .. (on and "on" or "off"))
+end, { desc = "Toggle git diff overlay" })
 
 require("mini.pairs").setup({
 	modes = { insert = true, command = true, terminal = false },
@@ -75,7 +88,6 @@ miniclue.setup({
 	},
 	clues = {
 		-- Your leader groups
-		{ mode = "n", keys = "<Leader>a", desc = "+AI" },
 		{ mode = "n", keys = "<Leader>f", desc = "+file" },
 		{ mode = "n", keys = "<Leader>b", desc = "+buffer" },
 		{ mode = "n", keys = "<Leader>g", desc = "+git" },

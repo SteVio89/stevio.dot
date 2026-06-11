@@ -33,9 +33,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.lsp.completion.enable(true, client.id, ev.buf, {
 			autotrigger = true,
-			convert = function(item)
-				return { menu = client.name }
-			end,
 			cmp = compare_completions,
 		})
 	end,
@@ -63,11 +60,11 @@ end, { expr = true })
 
 vim.keymap.set("i", "<CR>", function()
 	if vim.fn.pumvisible() == 1 then
-		return "<C-y>"
+		return vim.keycode("<C-y>")
 	else
-		return "<CR>"
+		return require("mini.pairs").cr()
 	end
-end, { expr = true })
+end, { expr = true, replace_keycodes = false })
 
 vim.keymap.set("i", "<C-Space>", function()
 	vim.lsp.completion.get()

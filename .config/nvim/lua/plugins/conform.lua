@@ -6,6 +6,8 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     go = { "goimports", "gofmt" },
+    rust = { "rustfmt" },
+    kotlin = { "ktfmt" },
     zig = { "zigfmt" },
     c = { "clang-format" },
     cpp = { "clang-format" },
