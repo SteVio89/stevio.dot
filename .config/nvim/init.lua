@@ -17,11 +17,13 @@ require("plugins.neogit")
 require("plugins.rachartier_plugs")
 require("plugins.fzf")
 require("plugins.completion")
+require("plugins.lazydev")
 require("plugins.lsp")
 require("plugins.lint")
 require("plugins.treesitter")
 require("plugins.taka_time")
 require("plugins.hardtime")
+require("plugins.just-stevio")
 
 if vim.g.neovide then
 	require("plugins.direnv")
