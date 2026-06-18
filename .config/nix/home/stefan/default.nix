@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, isDarwin, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  isDarwin,
+  ...
+}:
 
 {
   imports = [
@@ -10,8 +16,9 @@
     ./apps/alacritty.nix
     ./apps/shell-aliases.nix
     inputs.catppuccin.homeModules.catppuccin
-  ] ++ lib.optional isDarwin ./darwin.nix
-    ++ lib.optional (!isDarwin) ./linux.nix;
+  ]
+  ++ lib.optional isDarwin ./darwin.nix
+  ++ lib.optional (!isDarwin) ./linux.nix;
 
   # Each host applied home-manager at a different time; preserve the original
   # state version per platform so existing hosts don't see migrations.
@@ -31,7 +38,8 @@
   home.sessionVariables = {
     FZF_DEFAULT_COMMAND = "fd --hidden --exclude .git --strip-cwd-prefix";
     RIPGREP_CONFIG_PATH = "$HOME/.config/rg/ripgreprc";
-  } // lib.optionalAttrs isDarwin {
+  }
+  // lib.optionalAttrs isDarwin {
     SSH_SK_PROVIDER = "/usr/lib/ssh-keychain.dylib";
   };
 
@@ -39,11 +47,19 @@
     fd
     ripgrep
     nixfmt
+    luajit
+    eza
+    delta
+    kubie
+    repgrep
   ];
 
-  # Static template consumed by the `dev` shell helpers (nushell + zsh).
-  xdg.configFile."dev-helpers/devshell-flake.nix".source =
-    ./templates/devshell-flake.nix;
+  # Static templates consumed by the `dev` shell helpers (nushell + zsh).
+  xdg.configFile."dev-helpers/devshell-flake.nix".source = ./templates/devshell-flake.nix;
+  # Per-language presets: each dir holds a `packages` list (injected into
+  # flake.nix) and a `justfile`. Drop in a new dir + a line here to add a language.
+  xdg.configFile."dev-helpers/go".source = ./templates/dev-helpers/go;
+  xdg.configFile."dev-helpers/zig".source = ./templates/dev-helpers/zig;
 
   programs.direnv = {
     enable = true;
@@ -53,7 +69,7 @@
 
   programs.atuin = {
     enable = true;
-    enableZshIntegration = false;
+    enableZshIntegration = true;
     enableNushellIntegration = true;
     settings = {
       filter_mode = "workspace";
@@ -65,7 +81,10 @@
     enable = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
-    options = [ "--cmd" "cd" ];
+    options = [
+      "--cmd"
+      "cd"
+    ];
   };
 
   programs.fzf = {

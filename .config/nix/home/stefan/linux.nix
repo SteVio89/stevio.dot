@@ -27,7 +27,7 @@ in
   programs.fuzzel.enable = true;
   programs.hyprlock.enable = true;
 
-  home.packages = [ firstLoginPasswd pkgs.delta ];
+  home.packages = [ firstLoginPasswd ];
 
   systemd.user.services.hyprpolkitagent = {
     Unit = {

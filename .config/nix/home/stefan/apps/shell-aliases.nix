@@ -14,6 +14,10 @@ let
     ktx = "kubie ctx";
     replace = "rgr";
     ff = "cdi";
+    ls = "eza --group-directories-first --icons --git --header --time-style=relative";
+    ll = "eza -lh --group-directories-first --icons --git --header --time-style=relative";
+    la = "eza -lah --group-directories-first --icons --git --header --time-style=relative";
+    lt = "eza --tree --level=2 --icons --group-directories-first";
     dotfiles = "git --git-dir=$HOME/.dotfiles --work-tree=$HOME";
     cma = "dotfiles add -u";
     cmd = "dotfiles diff --staged | delta";
@@ -30,11 +34,6 @@ let
     ktx = "kubie ctx";
     replace = "rgr";
     ff = "cdi";
-    # `exit` (and Ctrl-D) drop to the parent zsh prompt — nu's REPL
-    # special-cases the `exit` keyword and bypasses alias resolution, so we
-    # can't change it. `quit` (a non-keyword) is aliased to exit with code 99,
-    # which the parent zsh propagates as a real exit (closes the terminal/pane).
-    quit = "exit 99";
   } // lib.optionalAttrs isDarwin {
     wfi = "caffeinate -d";
     cb = "pbcopy";

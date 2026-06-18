@@ -1,0 +1,20 @@
+# Default recipes for Go projects (seeded by `dev init go`).
+
+default:
+    @just --list
+
+build:
+    go build ./...
+
+run:
+    go run .
+
+test:
+    go test ./...
+    go test -v -cover ./...
+    go test -bench=. ./...
+
+lint:
+    go fmt ./...
+    go vet ./...
+    golangci-lint run

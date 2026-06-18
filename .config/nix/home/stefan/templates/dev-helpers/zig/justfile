@@ -1,0 +1,24 @@
+# Default recipes for Zig projects (seeded by `dev init zig`).
+
+default:
+    @just --list
+
+build:
+    zig build
+
+release:
+    zig build -Doptimize=ReleaseFast
+
+run *args:
+    zig build run -- {{args}}
+
+test:
+    zig build test
+
+lint:
+    zig fmt --check src build.zig
+    zlint
+
+clean:
+    rm -rf zig-out .zig-cache
+

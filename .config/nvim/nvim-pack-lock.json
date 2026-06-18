@@ -1,7 +1,7 @@
 {
   "plugins": {
     "catppuccin": {
-      "rev": "0303a7208dba448c459767486a38a6ec05c4216b",
+      "rev": "49a926655a2f5579e9c276470fc300baaa49e524",
       "src": "https://github.com/catppuccin/nvim"
     },
     "code-action": {
@@ -20,6 +20,10 @@
       "rev": "988416cc782dfe28bff3f0da9b8c943b236cd86a",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "hardtime": {
+      "rev": "b4e431934af1fe224a3a801f632c008278cb7628",
+      "src": "https://github.com/m4xshen/hardtime.nvim"
+    },
     "img-clip": {
       "rev": "b6ddfb97b5600d99afe3452d707444afda658aca",
       "src": "https://github.com/hakonharnes/img-clip.nvim"
@@ -29,15 +33,23 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "mini": {
-      "rev": "ff8b3580935818ef2f21bdd651f057a2ae071eab",
+      "rev": "bf8169f3e518be8de3f88073ace37d91f576cb04",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "99326a1310fb2d616b455d2fd16d01bf00682f06",
+      "rev": "5d1b65d6215928e941e1a6a4e76e02fd45ada31f",
       "src": "https://github.com/NeogitOrg/neogit"
     },
+    "nui": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-lint": {
+      "rev": "4b7957daf4b81eb578114bd6fcf20b6f5a2b59e8",
+      "src": "https://github.com/mfussenegger/nvim-lint"
+    },
     "nvim-lspconfig": {
-      "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -56,6 +68,10 @@
       "rev": "e462b9a07b8166c3e8011f1dcbc6bf68b67cd8d7",
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
+    "taka-time": {
+      "rev": "5ed565157f5ac2cb329546e866cdd8227837f76b",
+      "src": "https://github.com/Rtarun3606k/TakaTime"
+    },
     "tiny-code-action.nvim": {
       "rev": "0d040ed81f7953118b81cd12681fcdfcac069803",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
@@ -65,7 +81,7 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "transparent": {
-      "rev": "8ac59883de84e9cd1850ea25cf087031c5ba7d54",
+      "rev": "e00ca1cf09caef575edf8da7e5a8b9193893b4c7",
       "src": "https://github.com/xiyaowong/transparent.nvim"
     },
     "treesitter": {
@@ -75,6 +91,10 @@
     "treesitter-textobjects": {
       "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+    },
+    "workspace-diagnostics": {
+      "rev": "a35321d8401878cc9558e357acfd0da58b582739",
+      "src": "https://github.com/artemave/workspace-diagnostics.nvim"
     }
   }
 }

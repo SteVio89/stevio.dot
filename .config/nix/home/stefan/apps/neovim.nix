@@ -11,10 +11,11 @@
     stylua
     nil
     nixd
-    zls
     vtsls
     prettierd
     copilot-language-server
     simple-completion-language-server
+    pgformatter
+    postgres-language-server
   ];
 }

@@ -46,6 +46,11 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         src = pkgs.zsh-vi-mode;
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
     ];
 
     initContent = lib.mkMerge [
@@ -53,6 +58,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       (lib.mkOrder 500 ''
         ZVM_KEYTIMEOUT=0.1
         ZVM_ESCAPE_KEYTIMEOUT=0.01
+        ZVM_INIT_MODE=sourcing
       '')
 
       # Early: brew shellenv (must come before most things).
@@ -76,11 +82,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         unset __brew_cache __cached_fresh
       '')
 
-      # After plugins init: atuin with zvm integration
-      (lib.mkOrder 1050 ''
-        zvm_after_init_commands+=(eval "$(atuin init zsh)")
-      '')
-
       # Dynamic exports that cannot be sessionVariables
       (lib.mkOrder 1100 ''
         export GPG_TTY="$(tty)"
@@ -91,11 +92,9 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       (lib.mkOrder 1200 ''
         export PATH="$PATH:/Users/stefan/.local/bin/"
         export PATH="$PATH:/Users/stefan/go/bin/"
-        export PATH="/opt/homebrew/bin:$PATH"
         export PATH="/Users/stefan/Programs/ijhttp:$PATH"
         export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
         export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
-        export PATH="$VCPKG_ROOT:$PATH"
       '')
 
       # Google Cloud SDK
@@ -132,18 +131,8 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         export PATH="$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
       '')
 
-      # Auto-launch nu as a child of zsh. Nu's exit code is the contract:
-      #   0  → drop to zsh prompt (nu's `quit`)
-      #   99 → also exit zsh, closing the terminal/pane (nu's `exit`)
-      (lib.mkOrder 1650 ''
-        if command -v nu &>/dev/null; then
-          nu
-          [[ $? -eq 99 ]] && exit
-        fi
-      '')
-
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
-      # Reached in zsh-from-nu sessions; terminal-spawned zsh execs nu above.
+      # `dev init [lang] [name]` — optional lang (go/zig/…) seeds packages + a justfile.
       (lib.mkOrder 1700 ''
         _dev_template() {
           echo "$XDG_CONFIG_HOME/dev-helpers/devshell-flake.nix"
@@ -154,8 +143,20 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
             echo "flake.nix already exists — refusing to overwrite" >&2
             return 1
           fi
-          local project="''${1:-''${PWD:t}}"
+          local helpers="$XDG_CONFIG_HOME/dev-helpers"
+          local lang="$1" name="$2"
+          if [[ -n "$lang" && ! -d "$helpers/$lang" ]]; then
+            local avail
+            avail=$(ls -d "$helpers"/*/ 2>/dev/null | xargs -n1 basename 2>/dev/null | paste -sd, -)
+            echo "unknown language: $lang — available: $avail" >&2
+            return 1
+          fi
+          local project="''${name:-''${PWD:t}}"
           sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template)" > flake.nix
+          if [[ -n "$lang" ]]; then
+            _dev_inject_pkgs $(grep -v '^[[:space:]]*$' "$helpers/$lang/packages")
+            [[ -f justfile ]] || cp "$helpers/$lang/justfile" justfile
+          fi
           [[ -f .envrc ]] || echo "use flake" > .envrc
           if [[ -f .gitignore ]]; then
             grep -q '\.direnv' .gitignore || printf '\n.direnv/\n' >> .gitignore
@@ -165,11 +166,8 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
           direnv allow
         }
 
-        _dev_add() {
-          if [[ ! -f flake.nix ]]; then
-            echo "no flake.nix — run \`dev init\` first" >&2
-            return 1
-          fi
+        # Inject package attrs (one per arg) at the `# devhelper:packages` marker.
+        _dev_inject_pkgs() {
           local marker='# devhelper:packages'
           local indent
           indent=$(awk -v m="$marker" 'index($0, m) { match($0, /^[ \t]+/); print substr($0, 1, RLENGTH); exit }' flake.nix)
@@ -182,6 +180,14 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
             }
             { print }
           ' flake.nix > "$tmp" && mv "$tmp" flake.nix
+        }
+
+        _dev_add() {
+          if [[ ! -f flake.nix ]]; then
+            echo "no flake.nix — run \`dev init\` first" >&2
+            return 1
+          fi
+          _dev_inject_pkgs "$@"
           direnv reload
         }
 
@@ -211,7 +217,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
             add)    shift; _dev_add "$@" ;;
             rm)     shift; _dev_rm "$@" ;;
             reload) direnv reload ;;
-            *)      echo "usage: dev {init|add|rm|reload} [args...]" >&2; return 2 ;;
+            *)      echo "usage: dev {init [lang] [name]|add|rm|reload} [args...]" >&2; return 2 ;;
           esac
         }
       '')

@@ -3,5 +3,9 @@
     pngpaste
     ghostty-bin
     neovide
+    gitui
+    dua
+    procs
+    bottom
   ];
 }

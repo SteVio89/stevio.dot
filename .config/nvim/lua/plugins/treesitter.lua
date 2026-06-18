@@ -24,6 +24,7 @@ require("nvim-treesitter").install({
 	"markdown_inline",
 	"typescript",
 	"tsx",
+	"sql",
 })
 
 vim.api.nvim_create_autocmd("FileType", {

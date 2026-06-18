@@ -93,17 +93,36 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
 
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
       # Subcommands: init, add, rm, reload.
+      # `dev init [lang] [name]` — optional lang (go/zig/…) seeds packages + a justfile.
 
-      def "dev init" [name?: string] {
+      def "dev init" [lang?: string, name?: string] {
         if ("flake.nix" | path exists) {
           print "flake.nix already exists — refusing to overwrite"
           return
         }
+        let helpers = ($env.XDG_CONFIG_HOME | path join "dev-helpers")
+        if ($lang != null) and (not (($helpers | path join $lang) | path exists)) {
+          let avail = (ls $helpers | where type == dir | get name | path basename | str join ", ")
+          print $"unknown language: ($lang) — available: ($avail)"
+          return
+        }
         let project = ($name | default (pwd | path basename))
-        let template = ($env.XDG_CONFIG_HOME | path join "dev-helpers/devshell-flake.nix")
+        let template = ($helpers | path join "devshell-flake.nix")
         open $template --raw
           | str replace --all "PROJECT_NAME" $project
           | save flake.nix
+        if ($lang != null) {
+          let langdir = ($helpers | path join $lang)
+          let marker = "# devhelper:packages"
+          let body = (open flake.nix --raw)
+          let indent = ($body | lines | where {|l| $l =~ $marker } | get 0 | str replace --regex '#.*' ''')
+          let pkgs = (open ($langdir | path join "packages") | lines | where {|l| ($l | str trim) != "" })
+          let inserted = ($pkgs | each {|p| $"($indent)($p)" } | str join "\n")
+          $body | str replace $"($indent)($marker)" $"($inserted)\n($indent)($marker)" | save -f flake.nix
+          if not ("justfile" | path exists) {
+            open ($langdir | path join "justfile") --raw | save justfile
+          }
+        }
         if not (".envrc" | path exists) {
           "use flake\n" | save .envrc
         }
