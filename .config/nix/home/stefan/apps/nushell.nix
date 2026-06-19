@@ -32,7 +32,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       # ── PATH additions not managed by nix ──
       $env.PATH = ($env.PATH | append ($env.HOME | path join ".local/bin"))
       $env.PATH = ($env.PATH | append ($env.HOME | path join "go/bin"))
-      $env.PATH = ($env.PATH | prepend "/Users/stefan/Programs/ijhttp")
       $env.PATH = ($env.PATH | prepend "/opt/homebrew/opt/ruby/bin")
       $env.PATH = ($env.PATH | prepend "/opt/homebrew/lib/ruby/gems/3.4.0/bin")
 

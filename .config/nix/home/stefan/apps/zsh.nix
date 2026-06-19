@@ -9,7 +9,10 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
 
     autosuggestion = {
       enable = true;
-      strategy = [ "history" "completion" ];
+      strategy = [
+        "history"
+        "completion"
+      ];
     };
 
     syntaxHighlighting.enable = true;
@@ -92,7 +95,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       (lib.mkOrder 1200 ''
         export PATH="$PATH:/Users/stefan/.local/bin/"
         export PATH="$PATH:/Users/stefan/go/bin/"
-        export PATH="/Users/stefan/Programs/ijhttp:$PATH"
         export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
         export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
       '')
