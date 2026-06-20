@@ -45,8 +45,7 @@ vim.keymap.set("n", "<leader>gS", function()
 		vim.notify("Stage file: buffer has no file on disk", vim.log.levels.WARN)
 		return
 	end
-	-- `git add` covers both tracked changes and brand-new files; mini.diff's
-	-- index watcher refreshes the signs automatically.
+
 	local out = vim.fn.system({ "git", "add", "--", path })
 	if vim.v.shell_error ~= 0 then
 		vim.notify("Stage file failed: " .. out, vim.log.levels.ERROR)
@@ -65,32 +64,34 @@ local function norm(path)
 	return vim.fs.normalize(vim.fn.fnamemodify(path, ":p"))
 end
 
--- Index-level undo for staging. Neither Git nor mini.diff can "unstage a hunk",
--- so before each stage we snapshot the file's Git index entry; undo restores that
--- entry, precisely reversing only that one action (hunk or whole file). Two stacks
--- keep the lowercase=hunk / uppercase=file split.
 local hunk_undo, file_undo = {}, {}
 
 local function snapshot_index(path)
-	local out = vim.fn.systemlist({ "git", "ls-files", "-s", "--", path })
-	if vim.v.shell_error ~= 0 or #out == 0 then
-		return { path = path, absent = true } -- not staged / untracked yet
+	local root = vim.fs.root(path, ".git")
+	if not root then
+		return { path = path, absent = true } -- not inside a git work tree
 	end
-	-- "<mode> <sha> <stage>\t<repo-relative-path>"
+	local out = vim.fn.systemlist({ "git", "-C", root, "ls-files", "-s", "--full-name", "--", path })
+	if vim.v.shell_error ~= 0 or #out == 0 then
+		return { path = path, root = root, absent = true } -- not staged / untracked yet
+	end
+
 	local mode, sha, rel = out[1]:match("^(%d+)%s+(%x+)%s+%d+%s+(.*)$")
-	return { path = path, mode = mode, sha = sha, rel = rel }
+	return { path = path, root = root, mode = mode, sha = sha, rel = rel }
 end
 
 local function restore_index(snap)
+	local root = snap.root or vim.fs.root(snap.path, ".git")
+	if not root then
+		return
+	end
 	if snap.absent then
-		vim.fn.system({ "git", "rm", "--cached", "--quiet", "--", snap.path })
+		vim.fn.system({ "git", "-C", root, "rm", "--cached", "--quiet", "--", snap.path })
 	else
-		vim.fn.system({ "git", "update-index", "--cacheinfo", snap.mode .. "," .. snap.sha .. "," .. snap.rel })
+		vim.fn.system({ "git", "-C", root, "update-index", "--cacheinfo", snap.mode, snap.sha, snap.rel })
 	end
 end
 
--- Permanent keybind hint, rendered in the winbar of each review window. Uses
--- statusline syntax: %#Group# sets a highlight, %* resets it.
 local REVIEW_WINBAR = table.concat({
 	" %#ModeMsg#REVIEW%*  ",
 	"%#Special#n/p%* hunk  ",
@@ -163,15 +164,12 @@ local function nav(forward)
 	end
 end
 
--- Rebuild the quickfix list in place from `review_items`, optionally placing the
--- cursor on entry `idx`. "r" replaces items without closing/reopening the window.
 local function refresh_qf(idx)
 	vim.fn.setqflist({}, "r", { title = "Git Review", items = review_items, idx = idx })
 end
 
-local end_review -- forward declaration (modal `R` needs it before it is defined)
+local end_review
 
--- The six modal keys, attached buffer-locally so they never leak outside review.
 local function setup_review_maps(buf)
 	if mapped_bufs[buf] then
 		return
@@ -230,8 +228,6 @@ local function setup_review_maps(buf)
 			return
 		end
 
-		-- Drop the staged file from the list, then advance to whatever slid into
-		-- its place (or end the review when nothing is left).
 		local cur = norm(path)
 		local old_idx = vim.fn.getqflist({ idx = 0 }).idx
 		local kept, removed = {}, nil

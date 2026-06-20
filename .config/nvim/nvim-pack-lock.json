@@ -33,7 +33,7 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "just-stevio": {
-      "rev": "16c06338ceb23960dead105e99230fe7363a898d",
+      "rev": "ed874b323d3706af7a7983b87410b827643f0cad",
       "src": "https://github.com/SteVio89/just-stevio.nvim"
     },
     "lazydev": {
@@ -41,11 +41,11 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini": {
-      "rev": "bf8169f3e518be8de3f88073ace37d91f576cb04",
+      "rev": "fe1aa97c8c7408f3def6336f7082237e8cf67833",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "5d1b65d6215928e941e1a6a4e76e02fd45ada31f",
+      "rev": "828dd073e6ad180fdb5c1603c7ad7f68a384c40b",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nui": {
@@ -53,11 +53,11 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lint": {
-      "rev": "4b7957daf4b81eb578114bd6fcf20b6f5a2b59e8",
+      "rev": "01c9842c089069ab497430159312b2c8868a4590",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "68b41349728f6d8ef68bbf75a589c148d4b0fcea",
+      "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -77,7 +77,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "a7a91e6e63f2a6a9daaae31b7a3a2c4b3903684b",
+      "rev": "ea720322c0afae843adc83d3402e212eb4fb9684",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "tiny-code-action.nvim": {
