@@ -40,6 +40,14 @@ vim.lsp.config("postgres_lsp", {
 	workspace_required = true,
 })
 
+vim.lsp.config("zls", {
+	settings = {
+		zls = {
+			enable_build_on_save = true,
+		},
+	},
+})
+
 vim.lsp.config("golangci_lint_ls", {
 	init_options = {
 		command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false", "--issues-exit-code=1" },

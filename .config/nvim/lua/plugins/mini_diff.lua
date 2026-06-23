@@ -1,4 +1,4 @@
-require("mini.diff").setup({ view = { style = "sign" } })
+require("mini.diff").setup({ view = { style = "number" } })
 
 vim.keymap.set("n", "<leader>go", function()
 	local MiniDiff = require("mini.diff")

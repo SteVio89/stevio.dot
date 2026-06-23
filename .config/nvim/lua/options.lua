@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	callback = function()
 		vim.b._line_count_on_enter = vim.api.nvim_buf_line_count(0)
 		local view = vim.fn.winsaveview()
-		if view.leftcol > 0 and vim.api.nvim_get_current_line() == "" then
+		if view.leftcol > 0 and vim.api.nvim_get_current_line():match("^%s*$") then
 			view.leftcol = 0
 			vim.fn.winrestview(view)
 		end
