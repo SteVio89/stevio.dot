@@ -1,7 +1,7 @@
 {
   "plugins": {
     "catppuccin": {
-      "rev": "49a926655a2f5579e9c276470fc300baaa49e524",
+      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim"
     },
     "code-action": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "just-stevio": {
-      "rev": "ed874b323d3706af7a7983b87410b827643f0cad",
+      "rev": "32d46e61016e799af3020f7bb909c209fff04e2c",
       "src": "https://github.com/SteVio89/just-stevio.nvim"
     },
     "lazydev": {
@@ -41,11 +41,11 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini": {
-      "rev": "fe1aa97c8c7408f3def6336f7082237e8cf67833",
+      "rev": "c594be5b095204e99473825ec2dee872e7409a4d",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "828dd073e6ad180fdb5c1603c7ad7f68a384c40b",
+      "rev": "43ea1a0854052e583f647e0b35879f0158a70a78",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nui": {
@@ -77,7 +77,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "ea720322c0afae843adc83d3402e212eb4fb9684",
+      "rev": "ca901b59c2c13d794884bb085ff4b4c1d639656a",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "tiny-code-action.nvim": {
