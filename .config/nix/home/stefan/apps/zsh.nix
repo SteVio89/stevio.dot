@@ -157,7 +157,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
           sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template)" > flake.nix
           if [[ -n "$lang" ]]; then
             _dev_inject_pkgs $(grep -v '^[[:space:]]*$' "$helpers/$lang/packages")
-            [[ -f justfile ]] || cp "$helpers/$lang/justfile" justfile
+            [[ -f justfile ]] || install -m 644 "$helpers/$lang/justfile" justfile
           fi
           [[ -f .envrc ]] || echo "use flake" > .envrc
           if [[ -f .gitignore ]]; then

@@ -253,6 +253,72 @@ let
       esac
     '';
   };
+
+  # Fuzzy session switcher: lists running sessions AND project dirs (zoxide
+  # frecency + a shallow fd scan of roots). Picking a session switches to it;
+  # picking a dir creates-or-attaches a session named after that dir.
+  sessionizer = pkgs.writeShellApplication {
+    name = "tmux-sessionizer";
+    runtimeInputs = [
+      pkgs.fzf
+      pkgs.fd
+      pkgs.zoxide
+      pkgs.coreutils
+      pkgs.gawk
+    ];
+    text = ''
+      roots=("$HOME/code" "$HOME/.config")
+
+      # Emit "<kind>\t<payload>\t<display>" lines. kind drives what we do on
+      # selection; payload is the session name or absolute dir path.
+      candidates() {
+        # Running sessions first, so the common "jump back" case is one keystroke.
+        tmux list-sessions -F '#{session_name}' 2>/dev/null \
+          | while IFS= read -r s; do
+              printf 'session\t%s\t● %s\n' "$s" "$s"
+            done
+
+        # Project dirs: zoxide's frecency list plus immediate subdirs of roots.
+        {
+          zoxide query -l 2>/dev/null || true
+          fd --type d --max-depth 1 --absolute-path . "''${roots[@]}" 2>/dev/null || true
+        } | awk '!seen[$0]++' \
+          | while IFS= read -r d; do
+              [ -d "$d" ] || continue
+              printf 'dir\t%s\t  %s\n' "$d" "''${d/#$HOME/~}"
+            done
+      }
+
+      selection=$(candidates | fzf \
+        --delimiter='\t' --with-nth=3 \
+        --prompt='switch ❯ ' \
+        --no-multi --reverse --height=100% \
+        --preview 'if [ {1} = dir ]; then ls -1A {2} 2>/dev/null; else tmux list-windows -t {2} -F "#{window_index}: #{window_name} (#{window_panes})" 2>/dev/null; fi') || exit 0
+      [ -n "$selection" ] || exit 0
+
+      kind=$(printf '%s' "$selection" | cut -f1)
+      payload=$(printf '%s' "$selection" | cut -f2)
+
+      goto() {
+        if [ -n "''${TMUX:-}" ]; then tmux switch-client -t "=$1"
+        else tmux attach -t "=$1"; fi
+      }
+
+      case "$kind" in
+        session)
+          goto "$payload"
+          ;;
+        dir)
+          # tmux target names treat . and : specially; flatten them.
+          name=$(basename "$payload" | tr ' .:' '___')
+          if ! tmux has-session -t "=$name" 2>/dev/null; then
+            tmux new-session -ds "$name" -c "$payload"
+          fi
+          goto "$name"
+          ;;
+      esac
+    '';
+  };
 in
 {
   programs.tmux = {
@@ -290,8 +356,16 @@ in
     extraConfig = ''
       bind-key S-F3 send-prefix
       bind r source-file ~/.config/tmux/tmux.conf \; display-message "tmux config reloaded"
+      bind c new-window -c '#{pane_current_path}'
       bind % split-window -h -c '#{pane_current_path}'
       bind '"' split-window -v -c '#{pane_current_path}'
+
+      bind N command-prompt -p "new session:" "new-session -s '%%'"
+      bind s display-popup -E -w 70% -h 70% -T " sessions " "${sessionizer}/bin/tmux-sessionizer"
+
+      set -g pane-border-indicators off
+      set -g pane-border-style 'fg=#45475a'
+      set -g pane-active-border-style 'fg=#cba6f7,bold'
 
       set -g @autotile off
       set-hook -g pane-focus-in 'run-shell -b "${autotile}/bin/tmux-autotile apply"'

@@ -17,7 +17,6 @@ test:
 
 lint:
     zig fmt --check src build.zig
-    zlint
 
 clean:
     rm -rf zig-out .zig-cache

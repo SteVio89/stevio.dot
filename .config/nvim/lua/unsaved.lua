@@ -72,11 +72,27 @@ local function open()
 		return state.entries[lnum]
 	end
 
+	local function close_panel()
+		if #vim.api.nvim_list_tabpages() > 1 then
+			if vim.api.nvim_win_is_valid(state.list_win) then
+				vim.api.nvim_set_current_win(state.list_win)
+			end
+			pcall(function()
+				vim.cmd.tabclose()
+			end)
+			return
+		end
+		if state.patch_win and vim.api.nvim_win_is_valid(state.patch_win) then
+			pcall(vim.api.nvim_win_close, state.patch_win, true)
+		end
+		vim.cmd("enew")
+	end
+
 	local function render_list()
 		local bufs = modified_buffers()
 		if vim.tbl_isempty(bufs) then
 			if vim.api.nvim_win_is_valid(state.list_win) then
-				vim.cmd.tabclose()
+				close_panel()
 			end
 			vim.notify("No unsaved buffers", vim.log.levels.INFO)
 			return false
@@ -202,9 +218,7 @@ local function open()
 	map("d", discard_cur)
 	map("S", save_all)
 	map("D", discard_all)
-	map("q", function()
-		vim.cmd.tabclose()
-	end)
+	map("q", close_panel)
 
 	vim.api.nvim_create_autocmd("CursorMoved", {
 		group = vim.api.nvim_create_augroup("unsaved_triage", { clear = true }),

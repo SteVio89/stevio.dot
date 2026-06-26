@@ -33,7 +33,7 @@
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "just-stevio": {
-      "rev": "32d46e61016e799af3020f7bb909c209fff04e2c",
+      "rev": "827f24e575bbedc326641bdad1d75c53cd35c39b",
       "src": "https://github.com/SteVio89/just-stevio.nvim"
     },
     "lazydev": {
@@ -43,6 +43,10 @@
     "mini": {
       "rev": "c594be5b095204e99473825ec2dee872e7409a4d",
       "src": "https://github.com/echasnovski/mini.nvim"
+    },
+    "minuet": {
+      "rev": "d29dec4c36be2b41aa10e70938b7b09a03f0bdba",
+      "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "neogit": {
       "rev": "43ea1a0854052e583f647e0b35879f0158a70a78",
@@ -77,7 +81,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "ca901b59c2c13d794884bb085ff4b4c1d639656a",
+      "rev": "53d63691d4758ec0c5aa8f48a59a24b4ebbc93ca",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "tiny-code-action.nvim": {
