@@ -13,7 +13,9 @@
     ./apps/starship.nix
     ./apps/tmux.nix
     ./apps/neovim.nix
+    ./apps/yazi.nix
     ./apps/alacritty.nix
+    ./apps/ghostty.nix
     ./apps/shell-aliases.nix
     inputs.catppuccin.homeModules.catppuccin
   ]

@@ -21,6 +21,9 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 -- 'öö' never occurs in German or in code, so it never clobbers real input.
 vim.keymap.set("i", "öö", "@", { desc = "Insert @" })
 
+vim.keymap.set({ "i", "c" }, "ö5", "[", { remap = true, desc = "Insert [" })
+vim.keymap.set({ "i", "c" }, "ö6", "]", { remap = true, desc = "Insert ]" })
+
 -- Buffer cycling
 vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })

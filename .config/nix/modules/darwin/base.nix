@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   nix.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "stefan" ];
@@ -11,6 +11,15 @@
     automatic = true;
     interval = { Weekday = 1; Hour = 14; Minute = 30; };
   };
+  system.activationScripts.preActivation.text = ''
+    if [ -e /run/current-system ] && [ "$(readlink -f /run/current-system)" != "$(readlink -f "$systemConfig")" ]; then
+      echo
+      echo ">>> Closure-Diff (aktuell -> neu):"
+      ${config.nix.package}/bin/nix store diff-closures /run/current-system "$systemConfig" || true
+      echo
+    fi
+  '';
+
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = 6;
   system.primaryUser = "stefan";

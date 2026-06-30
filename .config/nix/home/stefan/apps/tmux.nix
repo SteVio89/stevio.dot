@@ -254,35 +254,21 @@ let
     '';
   };
 
-  # Fuzzy session switcher: lists running sessions AND project dirs (zoxide
-  # frecency + a shallow fd scan of roots). Picking a session switches to it;
-  # picking a dir creates-or-attaches a session named after that dir.
   sessionizer = pkgs.writeShellApplication {
     name = "tmux-sessionizer";
     runtimeInputs = [
       pkgs.fzf
-      pkgs.fd
       pkgs.zoxide
       pkgs.coreutils
-      pkgs.gawk
     ];
     text = ''
-      roots=("$HOME/code" "$HOME/.config")
-
-      # Emit "<kind>\t<payload>\t<display>" lines. kind drives what we do on
-      # selection; payload is the session name or absolute dir path.
       candidates() {
-        # Running sessions first, so the common "jump back" case is one keystroke.
         tmux list-sessions -F '#{session_name}' 2>/dev/null \
           | while IFS= read -r s; do
               printf 'session\t%s\t● %s\n' "$s" "$s"
             done
 
-        # Project dirs: zoxide's frecency list plus immediate subdirs of roots.
-        {
-          zoxide query -l 2>/dev/null || true
-          fd --type d --max-depth 1 --absolute-path . "''${roots[@]}" 2>/dev/null || true
-        } | awk '!seen[$0]++' \
+        zoxide query -l 2>/dev/null \
           | while IFS= read -r d; do
               [ -d "$d" ] || continue
               printf 'dir\t%s\t  %s\n' "$d" "''${d/#$HOME/~}"
@@ -309,7 +295,6 @@ let
           goto "$payload"
           ;;
         dir)
-          # tmux target names treat . and : specially; flatten them.
           name=$(basename "$payload" | tr ' .:' '___')
           if ! tmux has-session -t "=$name" 2>/dev/null; then
             tmux new-session -ds "$name" -c "$payload"
@@ -319,6 +304,7 @@ let
       esac
     '';
   };
+
 in
 {
   programs.tmux = {
@@ -366,6 +352,12 @@ in
       set -g pane-border-indicators off
       set -g pane-border-style 'fg=#45475a'
       set -g pane-active-border-style 'fg=#cba6f7,bold'
+
+      set -g pane-border-status top
+      set -g pane-border-format '#{?pane_active,#[fg=#1e1e2e#,bg=#cba6f7#,bold] #P #[default],#[fg=#6c7086] #P }'
+
+      set -s extended-keys on
+      set -as terminal-features 'xterm*:extkeys'
 
       set -g @autotile off
       set-hook -g pane-focus-in 'run-shell -b "${autotile}/bin/tmux-autotile apply"'

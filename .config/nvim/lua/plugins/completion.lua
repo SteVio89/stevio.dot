@@ -69,7 +69,3 @@ end, { expr = true, replace_keycodes = false })
 vim.keymap.set("i", "<C-Space>", function()
 	vim.lsp.completion.get()
 end)
-
-vim.keymap.set("i", "<C-l>", function()
-	vim.lsp.inline_completion.get()
-end, { desc = "Accept inline completion" })

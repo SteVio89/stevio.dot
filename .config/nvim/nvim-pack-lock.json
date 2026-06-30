@@ -12,6 +12,10 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "cursortab": {
+      "rev": "3cf471f2b235ca50068a979831d2ff19452cad33",
+      "src": "https://github.com/cursortab/cursortab.nvim"
+    },
     "direnv": {
       "rev": "0d2edd378dbdf2c653869772d761ad914219ba9d",
       "src": "https://github.com/actionshrimp/direnv.nvim"
