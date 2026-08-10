@@ -1,16 +1,17 @@
 tap "ankitpokhrel/jira-cli", trusted: true
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "auto-explore/gitcomet", trusted: true
 tap "codecrafters-io/tap", trusted: true
 tap "dail8859/notepadnext", trusted: true
 tap "dart-lang/dart", trusted: true
 tap "derailed/k9s", trusted: true
-tap "felixkratz/formulae", trusted: true
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "hashicorp/tap", trusted: true
 tap "int128/kubelogin", trusted: true
+tap "jundot/omlx", "https://github.com/jundot/omlx", trusted: true
 tap "k0sproject/tap", trusted: true
-tap "k1low/tap", trusted: true
+tap "k1low/tap", "https://github.com/k1LoW/homebrew-tap", trusted: true
 tap "knqyf263/pet", trusted: true
-tap "koekeishiya/formulae", trusted: true
 tap "libsql/sqld", trusted: true
 tap "lusingander/tap", trusted: true
 tap "minio/stable", trusted: true
@@ -48,7 +49,7 @@ brew "colima", restart_service: :changed
 # USB programmer
 brew "dfu-util"
 # Pack, ship and run any application as a lightweight container
-brew "docker", link: false
+brew "docker"
 # Docker CLI plugin for extended build capabilities with BuildKit
 brew "docker-buildx"
 # Isolated development environments using Docker
@@ -183,8 +184,6 @@ cask "miaoyan"
 cask "dail8859/notepadnext/notepadnext"
 # Markdown-based note-taking app
 cask "octarine"
-# System-wide Vim mode for macOS
-cask "tonisives/tap/ovim", trusted: true
 # Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 # Instant messaging application focusing on security

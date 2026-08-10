@@ -34,8 +34,7 @@
     persistent-apps = [
       "/System/Applications/Apps.app"
       "/Applications/Helium.app"
-      "/Applications/Zed.app"
-      "/Users/stefan/Applications/Home Manager Apps/Alacritty.app"
+      "/Users/stefan/Applications/Home Manager Apps/Ghostty.app"
       "/Users/stefan/Applications/Home Manager Apps/Neovide.app"
       "/Applications/Claude.app"
     ];

@@ -12,7 +12,7 @@ let
       # recompute the entire tree and apply it atomically with select-layout.
       # See the awk below for the layout grammar and the algorithm.
       cascade() {
-        awk -v layout="$1" -v focusX="$2" -v focusY="$3" -v active="$4" '
+        awk -v layout="$1" -v focusPane="$2" -v active="$3" '
           # -------------------------------------------------------------------
           # Reads tmux window_layout and rewrites it so the focused pane gets
           # active% at EVERY split between the root and that pane. Prints
@@ -37,7 +37,7 @@ let
 
             rootNode = parseNode(0)
             if (focusedNode == 0)
-              exit 0                            # focused corner not found: leave layout alone
+              exit 0                            # focused pane not found: leave layout alone
 
             # mark every node from the focused leaf up to the root
             for (node = focusedNode; node != 0; node = parentOf[node])
@@ -91,7 +91,7 @@ let
               childCount[node] = 0
               consume(",")
               paneIndex[node] = readInt()
-              if (posX[node] == focusX && posY[node] == focusY) focusedNode = node
+              if (paneIndex[node] == focusPane) focusedNode = node
             }
             return node
           }
@@ -229,12 +229,13 @@ let
 
       apply() {
         [ "$(tmux show -gv @autotile 2>/dev/null)" = "on" ] || return 0
+        [ "$(tmux display -p '#{pane_floating_flag}')" != 1 ] || return 0
 
-        # window_layout has no spaces, so it splits off cleanly before the coords
-        read -r layout px py <<<"$(tmux display-message -p \
-          '#{window_layout} #{pane_left} #{pane_top}')"
+        # window_layout has no spaces, so it splits off cleanly before the pane id
+        read -r layout pane <<<"$(tmux display-message -p \
+          '#{window_layout} #{pane_id}')"
 
-        new=$(cascade "''${layout#*,}" "$px" "$py" "$active")   # strip checksum, rebuild
+        new=$(cascade "''${layout#*,}" "''${pane#%}" "$active")   # strip checksum; match by pane id
         if [ -n "$new" ]; then tmux select-layout "$new" 2>/dev/null || true; fi
       }
 
@@ -278,7 +279,7 @@ let
       selection=$(candidates | fzf \
         --delimiter='\t' --with-nth=3 \
         --prompt='switch ❯ ' \
-        --no-multi --reverse --height=100% \
+        --no-sort --no-multi --reverse --height=100% \
         --preview 'if [ {1} = dir ]; then ls -1A {2} 2>/dev/null; else tmux list-windows -t {2} -F "#{window_index}: #{window_name} (#{window_panes})" 2>/dev/null; fi') || exit 0
       [ -n "$selection" ] || exit 0
 
@@ -302,6 +303,24 @@ let
           goto "$name"
           ;;
       esac
+    '';
+  };
+
+  floatToggle = pkgs.writeShellApplication {
+    name = "tmux-float-toggle";
+    text = ''
+      fp=""
+      while IFS=' ' read -r flag id; do
+        if [ "$flag" = 1 ]; then fp=$id; break; fi
+      done < <(tmux list-panes -F '#{pane_floating_flag} #{pane_id}')
+
+      if [ -n "$fp" ]; then
+        tmux kill-pane -t "$fp"
+      elif [ -n "''${1:-}" ]; then
+        tmux new-pane -c "$1"
+      else
+        tmux new-pane
+      fi
     '';
   };
 
@@ -362,6 +381,8 @@ in
       set -g @autotile off
       set-hook -g pane-focus-in 'run-shell -b "${autotile}/bin/tmux-autotile apply"'
       bind a run-shell "${autotile}/bin/tmux-autotile toggle"
+
+      bind f run-shell "${floatToggle}/bin/tmux-float-toggle '#{pane_current_path}'"
     '';
   };
 }

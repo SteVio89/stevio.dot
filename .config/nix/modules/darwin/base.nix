@@ -35,7 +35,7 @@
     nodejs
   ];
 
-  environment.shells = with pkgs; [ nushell ];
+  environment.shells = with pkgs; [ zsh ];
 
   users.users.stefan.home = "/Users/stefan";
 }

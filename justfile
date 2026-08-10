@@ -8,7 +8,7 @@ restart-gpg:
   gpgconf --kill gpg-agent
 
 fix-app *app:
-  xattr -rd com.apple.quarantine /Applications/{{app}}.app
+  xattr -d com.apple.quarantine {{app}}
 
 update-brewfile:
   rm /Users/stefan/Brewfile
