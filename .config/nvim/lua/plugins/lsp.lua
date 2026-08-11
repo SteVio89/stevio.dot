@@ -54,6 +54,13 @@ vim.lsp.config("golangci_lint_ls", {
 	},
 })
 
+vim.lsp.config("kotlin_lsp", {
+	cmd = { "kotlin-lsp", "--stdio" },
+	single_file_support = false,
+	filetypes = { "kotlin" },
+	root_markers = { "build.gradle", "build.gradle.kts", "pom.xml", "module.yaml", "project.yaml" },
+})
+
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("bashls")

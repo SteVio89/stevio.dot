@@ -1,6 +1,7 @@
 tap "ankitpokhrel/jira-cli", trusted: true
 tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "auto-explore/gitcomet", trusted: true
+tap "basicmachines-co/basic-memory", trusted: true
 tap "codecrafters-io/tap", trusted: true
 tap "dail8859/notepadnext", trusted: true
 tap "dart-lang/dart", trusted: true
@@ -8,6 +9,7 @@ tap "derailed/k9s", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "hashicorp/tap", trusted: true
 tap "int128/kubelogin", trusted: true
+tap "jetbrains/utils", "https://github.com/JetBrains/homebrew-utils"
 tap "jundot/omlx", "https://github.com/jundot/omlx", trusted: true
 tap "k0sproject/tap", trusted: true
 tap "k1low/tap", "https://github.com/k1LoW/homebrew-tap", trusted: true
@@ -44,20 +46,14 @@ brew "ccache"
 brew "cdrtools"
 # Cross-platform make
 brew "cmake"
-# Container runtimes on MacOS (and Linux) with minimal setup
-brew "colima", restart_service: :changed
 # USB programmer
 brew "dfu-util"
-# Pack, ship and run any application as a lightweight container
-brew "docker"
-# Docker CLI plugin for extended build capabilities with BuildKit
-brew "docker-buildx"
-# Isolated development environments using Docker
-brew "docker-compose"
 # Git-powered personal task tracker
 brew "dstask"
 # Command-line tool to interact with exercism.io
 brew "exercism"
+# TIFF library and utilities
+brew "libtiff"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
 # GitHub command-line tool
@@ -122,6 +118,8 @@ brew "poppler"
 brew "protobuf"
 # Powerful, clean, object-oriented scripting language
 brew "ruby", link: false
+# Display and control your Android device
+brew "scrcpy"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -154,12 +152,16 @@ brew "codecrafters-io/tap/codecrafters"
 brew "derailed/k9s/k9s"
 # A kubectl plugin for Kubernetes OpenID Connect authentication
 brew "int128/kubelogin/kubelogin"
+# Official Language Server Protocol for the Kotlin language
+brew "jetbrains/utils/kotlin-lsp", trusted: true
 # mo is a Markdown viewer that opens .md files in a browser.
 brew "k1low/tap/mo", link: false
 # Stylesheet Preprocessor
 brew "sass/sass/sass"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
+# Android SDK component
+cask "android-platform-tools"
 # Redis desktop manager
 cask "another-redis-desktop-manager"
 # Voice and text chat software
@@ -174,8 +176,6 @@ cask "gstreamer-runtime"
 cask "hyperkey"
 # Vector graphics editor
 cask "inkscape"
-# Free cross-platform office suite, fresh version
-cask "libreoffice"
 # Full TeX Live distribution with GUI applications
 cask "mactex"
 # Markdown editor
@@ -194,8 +194,6 @@ cask "thaw"
 cask "thorium"
 # Google Chromium, sans integration with Google
 cask "ungoogled-chromium"
-# Virtual machines UI using QEMU
-cask "utm"
 # Multiplayer code editor
 cask "zed"
 mas "Baldur's Gate", id: 568196938
@@ -231,4 +229,4 @@ cargo "sea-orm-cli"
 cargo "sqlx-cli"
 cargo "tauri-cli"
 cargo "tree-sitter-cli"
-uv "asspisy[mac]"
+uv "asspisy[mac]", source: "file:///Users/stefan/code/stevio/asspisy"

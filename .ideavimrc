@@ -1,15 +1,119 @@
+" ~/.ideavimrc — mirrors ~/.config/nvim
+" Action IDs can be verified in-IDE with :actionlist <pattern>
+
 let mapleader=" "
 
-
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set scrolloff=8
-set surround
-set commentary
-set which-key
+"" ---------- Plugin emulations (mirror nvim equivalents) ----------
+set surround          " mini.surround
+set commentary        " built-in gc
+set highlightedyank   " TextYankPost vim.highlight.on_yank
+set which-key         " mini.clue
 set notimeout
+let g:WhichKey_DefaultDelay = 250
 
-" Highlight copied text
+"" ---------- Options (mirror lua/options.lua) ----------
+set number
+set relativenumber
+set scrolloff=8
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set idearefactormode=keep
+set ideajoin
+
+"" ---------- Let Vim own the chords IntelliJ would otherwise swallow ----------
+sethandler <C-D> a:vim
+sethandler <C-U> a:vim
+sethandler <C-H> a:vim
+sethandler <C-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-O> a:vim
+sethandler <C-I> a:vim
+sethandler <C-R> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+
+"" ---------- Clipboard ----------
+" Route yanks to the system clipboard but leave deletes alone. 'clipboard=unnamed'
+" would capture both; remapping the operator matches options.lua, which only
+" mirrors to '+' when the TextYankPost operator is 'y'.
+nnoremap y "+y
+nnoremap Y "+Y
+xnoremap y "+y
+
+"" ---------- Motion / editing ----------
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <Esc> :nohlsearch<CR>
+
+" Window navigation
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+" Editor tabs stand in for buffers
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+
+nmap [d <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+
+" Visual line moving
+xnoremap J :m '>+1<CR>gv=gv
+xnoremap K :m '<-2<CR>gv=gv
+
+" Type '@' without Option (Option+L is taken by Aerospace window focus).
+" 'öö' never occurs in German or in code, so it never clobbers real input.
+imap öö @
+imap ö5 [
+imap ö6 ]
+cmap ö5 [
+cmap ö6 ]
+
+"" ---------- <leader>c — code ----------
+nmap K <Action>(QuickJavaDoc)
+nmap gd <Action>(GotoDeclaration)
+nmap <leader>cd <Action>(GotoDeclaration)
+nmap <leader>ca <Action>(ShowIntentionActions)
+nmap <leader>cf <Action>(ReformatCode)
+nmap <leader>cr <Action>(RenameElement)
+
+"" ---------- <leader>f — file ----------
 nmap <leader>ff <Action>(GotoFile)
-nmap <leader>fg <Action>(SearchEverywhere)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>fb <Action>(RecentFiles)
+nmap <leader>fe <Action>(SelectInProjectView)
+nmap <leader>fs <Action>(FileStructurePopup)
+nmap <leader>fS <Action>(GotoSymbol)
+nmap <leader>fr <Action>(FindUsages)
+nmap <leader>fd <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>ft <Action>(ActivateTODOToolWindow)
+
+"" ---------- <leader>b — buffer ----------
+nmap <leader>bc <Action>(CloseContent)
+nmap <leader>bC <Action>(CloseAllEditorsButActive)
+
+"" ---------- which-key descriptions (mirror mini.clue groups) ----------
+let g:WhichKeyDesc_code = "<leader>c +code"
+let g:WhichKeyDesc_code_definition = "<leader>cd Goto definition"
+let g:WhichKeyDesc_code_action = "<leader>ca Code action"
+let g:WhichKeyDesc_code_format = "<leader>cf Code format"
+let g:WhichKeyDesc_code_rename = "<leader>cr Rename"
+
+let g:WhichKeyDesc_file = "<leader>f +file"
+let g:WhichKeyDesc_file_files = "<leader>ff Find file"
+let g:WhichKeyDesc_file_grep = "<leader>fg Grep files"
+let g:WhichKeyDesc_file_buffers = "<leader>fb Find buffer"
+let g:WhichKeyDesc_file_explorer = "<leader>fe Open file explorer"
+let g:WhichKeyDesc_file_symbols = "<leader>fs Symbols this buffer"
+let g:WhichKeyDesc_file_symbols_all = "<leader>fS Symbols all buffers"
+let g:WhichKeyDesc_file_refs = "<leader>fr Reference under the cursor"
+let g:WhichKeyDesc_file_diagnostics = "<leader>fd Diagnostics"
+let g:WhichKeyDesc_file_todos = "<leader>ft Project Todos"
+
+let g:WhichKeyDesc_buffer = "<leader>b +buffer"
+let g:WhichKeyDesc_buffer_close = "<leader>bc Close current buffer"
+let g:WhichKeyDesc_buffer_close_others = "<leader>bC Close all buffers but this"
