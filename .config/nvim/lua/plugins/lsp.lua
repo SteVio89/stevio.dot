@@ -4,38 +4,9 @@ vim.pack.add({
 
 require("workspace-diagnostics").setup()
 
-vim.lsp.config("scls", {
-	cmd = { "simple-completion-language-server" },
-	filetypes = {
-		"lua",
-		"go",
-		"sh",
-		"bash",
-		"zsh",
-		"zig",
-		"c",
-		"cpp",
-		"nix",
-		"markdown",
-		"text",
-		"gitcommit",
-		"json",
-		"yaml",
-		"toml",
-		"typescript",
-		"javascript",
-		"java",
-		"rust",
-		"kotlin",
-		"sql",
-	},
-	settings = {
-		feature_words = true,
-		feature_paths = true,
-	},
-})
-
 vim.lsp.config("postgres_lsp", {
+	-- lspconfig defaults to `postgres-language-server`; the installed binary is `postgrestools`
+	cmd = { "postgrestools", "lsp-proxy" },
 	root_markers = { "postgres-language-server.jsonc", "postgrestools.jsonc", ".git" },
 	workspace_required = true,
 })
@@ -69,13 +40,30 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("kotlin_lsp")
 vim.lsp.enable("nixd")
-vim.lsp.enable("nil_ls")
 vim.lsp.enable("vtsls")
 vim.lsp.enable("postgres_lsp")
 vim.lsp.enable("golangci_lint_ls")
-vim.lsp.enable("scls")
 vim.lsp.enable("yamlls")
 vim.lsp.inlay_hint.enable()
+
+-- TODO: drop once Neovim ships neovim/neovim#40569 (inlay hints moved onto the capability
+-- framework). Until then, hints computed against a buffer that has since been edited past
+-- place extmarks at stale columns and crash the decoration provider with "Invalid 'col'".
+local inlay_hint_group = vim.api.nvim_create_augroup("InlayHintInsertGuard", { clear = true })
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = inlay_hint_group,
+	callback = function(ev)
+		vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = inlay_hint_group,
+	callback = function(ev)
+		vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+	end,
+})
 
 vim.keymap.set("n", "<leader>fT", function()
 	local bufnr = vim.api.nvim_get_current_buf()

@@ -5,7 +5,3 @@ vim.pack.add({
 require("just-stevio").setup({
 	keymaps = { open = "<leader>j" },
 })
-
-vim.keymap.set("n", "<leader>j", function()
-	require("just-stevio").pick()
-end, { desc = "Just: pick and run a recipe" })

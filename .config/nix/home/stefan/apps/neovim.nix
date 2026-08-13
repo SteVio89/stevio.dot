@@ -9,7 +9,6 @@
     lua-language-server
     bash-language-server
     stylua
-    nil
     nixd
     vtsls
     prettierd

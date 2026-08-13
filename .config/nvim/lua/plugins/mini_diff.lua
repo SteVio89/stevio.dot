@@ -83,13 +83,22 @@ end
 local function restore_index(snap)
 	local root = snap.root or vim.fs.root(snap.path, ".git")
 	if not root then
-		return
+		vim.notify("Unstage failed: not inside a git work tree", vim.log.levels.ERROR)
+		return false
 	end
+
+	local out
 	if snap.absent then
-		vim.fn.system({ "git", "-C", root, "rm", "--cached", "--quiet", "--", snap.path })
+		out = vim.fn.system({ "git", "-C", root, "rm", "--cached", "--quiet", "--", snap.path })
 	else
-		vim.fn.system({ "git", "-C", root, "update-index", "--cacheinfo", snap.mode, snap.sha, snap.rel })
+		out = vim.fn.system({ "git", "-C", root, "update-index", "--cacheinfo", snap.mode, snap.sha, snap.rel })
 	end
+
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Unstage failed: " .. out, vim.log.levels.ERROR)
+		return false
+	end
+	return true
 end
 
 local REVIEW_WINBAR = table.concat({
@@ -144,12 +153,28 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
-local function git_lines(cmd)
+-- Returns absolute paths: git reports them relative to the repo root, but cwd may sit
+-- in a subproject, so resolving them against cwd would point at the wrong files.
+local function git_lines(args)
+	local root = vim.fs.root(vim.fn.getcwd(), ".git")
+	if not root then
+		return {}
+	end
+
+	local cmd = { "git", "-C", root }
+	vim.list_extend(cmd, args)
 	local out = vim.fn.systemlist(cmd)
 	if vim.v.shell_error ~= 0 then
 		return {}
 	end
-	return out
+
+	local paths = {}
+	for _, rel in ipairs(out) do
+		if rel ~= "" then
+			table.insert(paths, root .. "/" .. rel)
+		end
+	end
+	return paths
 end
 
 local function nav(forward)
@@ -209,7 +234,10 @@ local function setup_review_maps(buf)
 			return
 		end
 		local snap = table.remove(hunk_undo)
-		restore_index(snap)
+		if not restore_index(snap) then
+			table.insert(hunk_undo, snap) -- keep it undoable so the user can retry
+			return
+		end
 		vim.notify("Unstaged last hunk in " .. vim.fn.fnamemodify(snap.path, ":t"))
 	end, "Review: undo last hunk stage")
 	map("R", function()
@@ -257,7 +285,10 @@ local function setup_review_maps(buf)
 			return
 		end
 		local e = table.remove(file_undo)
-		restore_index(e.snap)
+		if not restore_index(e.snap) then
+			table.insert(file_undo, e) -- keep it undoable so the user can retry
+			return
+		end
 		local cur = norm(e.snap.path)
 		if not review_files[cur] then -- put it back into the review list
 			review_files[cur] = true
@@ -300,6 +331,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 end_review = function()
 	review_active = false
+	vim.g.git_review_active = false
 	clear_review_maps()
 	restore_all_winbars()
 	local MiniDiff = require("mini.diff")
@@ -327,8 +359,8 @@ vim.keymap.set("n", "<leader>gr", function()
 		end
 	end
 
-	add(git_lines("git diff --name-only --diff-filter=d"), "changed")
-	add(git_lines("git ls-files --others --exclude-standard"), "new")
+	add(git_lines({ "diff", "--name-only", "--diff-filter=d" }), "changed")
+	add(git_lines({ "ls-files", "--others", "--exclude-standard" }), "new")
 
 	if #items == 0 then
 		vim.notify("Git review: no changes to review", vim.log.levels.INFO)
@@ -336,6 +368,7 @@ vim.keymap.set("n", "<leader>gr", function()
 	end
 
 	review_active = true
+	vim.g.git_review_active = true
 	review_items, review_files = items, files
 	hunk_undo, file_undo = {}, {}
 	vim.fn.setqflist({}, " ", { title = "Git Review", items = items })

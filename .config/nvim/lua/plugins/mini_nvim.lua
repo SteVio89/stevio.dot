@@ -3,7 +3,20 @@ vim.pack.add({
 })
 
 require("mini.icons").setup()
-require("mini.misc").setup_auto_root()
+require("mini.icons").mock_nvim_web_devicons()
+require("mini.misc").setup_auto_root({
+	"Cargo.toml",
+	"go.mod",
+	"build.zig",
+	"module.yaml",
+	"project.yaml",
+	"build.gradle.kts",
+	"build.gradle",
+	"pom.xml",
+	"flake.nix",
+	".git",
+	"Makefile",
+})
 require("mini.trailspace").setup()
 require("mini.cursorword").setup()
 require("mini.indentscope").setup()
@@ -41,6 +54,60 @@ vim.keymap.set("n", "<leader>sf", function()
 		},
 	})
 end, { desc = "Find session" })
+
+require("mini.visits").setup()
+
+local PIN_LABEL = "core"
+
+local function visits_picker(prompt, filter)
+	local paths = require("mini.visits").list_paths(nil, filter and { filter = filter } or {})
+	if #paths == 0 then
+		vim.notify("No visited paths yet", vim.log.levels.INFO)
+		return
+	end
+	local by_display = {}
+	local display = {}
+	for _, p in ipairs(paths) do
+		local short = vim.fn.fnamemodify(p, ":.")
+		by_display[short] = p
+		table.insert(display, short)
+	end
+	require("fzf-lua").fzf_exec(display, {
+		prompt = prompt,
+		actions = {
+			["default"] = function(selected)
+				local target = selected and by_display[selected[1]]
+				if target then
+					vim.cmd.edit(vim.fn.fnameescape(target))
+				end
+			end,
+		},
+	})
+end
+
+vim.keymap.set("n", "<leader>fo", function()
+	visits_picker("Recent> ")
+end, { desc = "Recent files (this project)" })
+
+vim.keymap.set("n", "<leader>fv", function()
+	visits_picker("Pinned> ", PIN_LABEL)
+end, { desc = "Pinned files" })
+
+vim.keymap.set("n", "<leader>fV", function()
+	local MiniVisits = require("mini.visits")
+	local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":p")
+	if path == "" or vim.fn.filereadable(path) ~= 1 then
+		vim.notify("Not a file on disk", vim.log.levels.WARN)
+		return
+	end
+	if vim.tbl_contains(MiniVisits.list_paths(nil, { filter = PIN_LABEL }), path) then
+		MiniVisits.remove_label(PIN_LABEL, path)
+		vim.notify("Unpinned " .. vim.fn.fnamemodify(path, ":t"))
+	else
+		MiniVisits.add_label(PIN_LABEL, path)
+		vim.notify("Pinned " .. vim.fn.fnamemodify(path, ":t"))
+	end
+end, { desc = "Pin / unpin file" })
 
 local miniclue = require("mini.clue")
 miniclue.setup({
@@ -103,11 +170,11 @@ hipatterns.setup({
 	},
 })
 
--- local ai = require("mini.ai")
--- ai.setup({
---   custom_textobjects = {
---     f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
---     c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
---     a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
---   },
--- })
+local ai = require("mini.ai")
+ai.setup({
+	custom_textobjects = {
+		f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+		c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+		a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+	},
+})

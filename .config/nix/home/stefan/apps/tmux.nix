@@ -368,6 +368,8 @@ in
       bind N command-prompt -p "new session:" "new-session -s '%%'"
       bind s display-popup -E -w 70% -h 70% -T " sessions " "${sessionizer}/bin/tmux-sessionizer"
 
+      set -g detach-on-destroy off
+
       set -g pane-border-indicators off
       set -g pane-border-style 'fg=#45475a'
       set -g pane-active-border-style 'fg=#cba6f7,bold'

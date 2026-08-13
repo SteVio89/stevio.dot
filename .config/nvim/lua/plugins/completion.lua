@@ -11,19 +11,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
 
-local function compare_completions(a, b)
-	local a_client = vim.lsp.get_client_by_id(a.user_data.nvim.lsp.client_id)
-	local b_client = vim.lsp.get_client_by_id(b.user_data.nvim.lsp.client_id)
-	local a_is_scls = a_client and a_client.name == "scls"
-	local b_is_scls = b_client and b_client.name == "scls"
-	if a_is_scls ~= b_is_scls then
-		return not a_is_scls
-	end
-	local itema = a.user_data.nvim.lsp.completion_item
-	local itemb = b.user_data.nvim.lsp.completion_item
-	return (itema.sortText or itema.label) < (itemb.sortText or itemb.label)
-end
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -31,10 +18,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return
 		end
 
-		vim.lsp.completion.enable(true, client.id, ev.buf, {
-			autotrigger = true,
-			cmp = compare_completions,
-		})
+		vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+	end,
+})
+
+-- Buffer-local: a global 'autocomplete' would double up with vim.lsp.completion elsewhere.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "gitcommit", "markdown", "text", "zsh" },
+	callback = function(ev)
+		vim.bo[ev.buf].complete = ".,w,b,u,kspell"
+		vim.bo[ev.buf].autocomplete = true
 	end,
 })
 

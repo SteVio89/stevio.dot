@@ -160,9 +160,12 @@ local function open()
 			vim.notify("Buffer has no file name", vim.log.levels.WARN)
 			return
 		end
-		vim.api.nvim_buf_call(b, function()
+		local ok, err = pcall(vim.api.nvim_buf_call, b, function()
 			vim.cmd.write()
 		end)
+		if not ok then
+			vim.notify("Save failed: " .. tostring(err), vim.log.levels.ERROR)
+		end
 		refresh()
 	end
 
@@ -182,12 +185,19 @@ local function open()
 	end
 
 	local function save_all()
+		local failed = 0
 		for _, b in ipairs(modified_buffers()) do
 			if has_file(b) then
-				vim.api.nvim_buf_call(b, function()
+				local ok = pcall(vim.api.nvim_buf_call, b, function()
 					vim.cmd.write()
 				end)
+				if not ok then
+					failed = failed + 1
+				end
 			end
+		end
+		if failed > 0 then
+			vim.notify(failed .. " buffer(s) failed to save", vim.log.levels.ERROR)
 		end
 		refresh()
 	end
@@ -220,8 +230,10 @@ local function open()
 	map("D", discard_all)
 	map("q", close_panel)
 
+	-- Not cleared: these autocmds are buffer-scoped and die with the panel, so clearing
+	-- here would kill a triage panel already open in another tab.
 	vim.api.nvim_create_autocmd("CursorMoved", {
-		group = vim.api.nvim_create_augroup("unsaved_triage", { clear = true }),
+		group = vim.api.nvim_create_augroup("unsaved_triage", { clear = false }),
 		buffer = state.list_buf,
 		callback = function()
 			show_diff(false)

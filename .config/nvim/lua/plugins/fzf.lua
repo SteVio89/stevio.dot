@@ -4,6 +4,7 @@ vim.pack.add({
 
 local fzf = require("fzf-lua")
 fzf.setup({
+	formatter = "path.filename_first",
 	files = {
 		actions = {
 			["ctrl-g"] = { fn = fzf.actions.toggle_ignore, reuse = true },
@@ -12,6 +13,14 @@ fzf.setup({
 })
 
 vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find file" })
+vim.keymap.set("n", "<leader>fF", function()
+	if vim.fs.root(vim.fn.getcwd(), ".git") then
+		fzf.git_files()
+	else
+		fzf.files()
+	end
+end, { desc = "Find file (git index)" })
+vim.keymap.set("n", "<leader>f.", fzf.resume, { desc = "Resume last picker" })
 vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Grep files" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Find buffer" })
 vim.keymap.set("n", "<leader>fu", fzf.changes, { desc = "Undo history" })

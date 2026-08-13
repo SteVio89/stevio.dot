@@ -1,5 +1,6 @@
 vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", name = "treesitter-textobjects" },
 })
 
 require("nvim-treesitter").setup()
@@ -54,5 +55,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 		vim.treesitter.start(ev.buf, lang)
 		vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		if vim.api.nvim_get_current_buf() == ev.buf then
+			vim.wo[0][0].foldmethod = "expr"
+			vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		end
 	end,
 })

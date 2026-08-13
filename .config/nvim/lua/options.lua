@@ -27,10 +27,11 @@ opt.inccommand = "split"
 opt.breakindent = true
 opt.updatetime = 250
 opt.fillchars = { eob = " " }
+opt.foldlevel = 99
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		vim.highlight.on_yank({ timeout = 200 })
+		vim.hl.on_yank({ timeout = 200 })
 		if vim.v.event.operator == "y" then
 			vim.fn.setreg("+", vim.fn.getreg('"'))
 		end
