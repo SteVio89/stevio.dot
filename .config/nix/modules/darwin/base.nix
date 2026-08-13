@@ -33,9 +33,16 @@
     jq
     git
     nodejs
+    pnpm
   ];
 
   environment.shells = with pkgs; [ zsh ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.symbols-only
+  ];
 
   users.users.stefan.home = "/Users/stefan";
 }

@@ -52,8 +52,6 @@ brew "dfu-util"
 brew "dstask"
 # Command-line tool to interact with exercism.io
 brew "exercism"
-# TIFF library and utilities
-brew "libtiff"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
 # GitHub command-line tool
@@ -64,6 +62,8 @@ brew "glab"
 brew "gnupg"
 # Kubernetes package manager
 brew "helm"
+# TIFF library and utilities
+brew "libtiff"
 # Generic library support script
 brew "libtool"
 # Tools and libraries to manipulate images in select formats
@@ -146,8 +146,6 @@ brew "ykman"
 brew "ykpers"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
-# CodeCrafters CLI
-brew "codecrafters-io/tap/codecrafters"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "derailed/k9s/k9s"
 # A kubectl plugin for Kubernetes OpenID Connect authentication
@@ -174,10 +172,6 @@ cask "gimp"
 cask "gstreamer-runtime"
 # Convert your caps lock key or any of your modifier keys to the hyper key
 cask "hyperkey"
-# Vector graphics editor
-cask "inkscape"
-# Full TeX Live distribution with GUI applications
-cask "mactex"
 # Markdown editor
 cask "miaoyan"
 # A cross-platform, reimplementation of Notepad++.
@@ -190,10 +184,6 @@ cask "sf-symbols"
 cask "signal"
 # Menu bar manager
 cask "thaw"
-# Epub reader
-cask "thorium"
-# Google Chromium, sans integration with Google
-cask "ungoogled-chromium"
 # Multiplayer code editor
 cask "zed"
 mas "Baldur's Gate", id: 568196938

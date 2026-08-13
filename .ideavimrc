@@ -3,11 +3,10 @@
 
 let mapleader=" "
 
-"" ---------- Plugin emulations (mirror nvim equivalents) ----------
-set surround          " mini.surround
-set commentary        " built-in gc
-set highlightedyank   " TextYankPost vim.highlight.on_yank
-set which-key         " mini.clue
+set surround
+set commentary
+set highlightedyank
+set which-key
 set notimeout
 let g:WhichKey_DefaultDelay = 250
 
@@ -64,6 +63,8 @@ nmap ]d <Action>(GotoNextError)
 " Visual line moving
 xnoremap J :m '>+1<CR>gv=gv
 xnoremap K :m '<-2<CR>gv=gv
+
+xmap gc <Action>(CommentByLineComment)
 
 " Type '@' without Option (Option+L is taken by Aerospace window focus).
 " 'öö' never occurs in German or in code, so it never clobbers real input.

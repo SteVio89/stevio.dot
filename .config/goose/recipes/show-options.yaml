@@ -1,0 +1,25 @@
+version: "1.0.0"
+title: "Options"
+description: "Approach orientation, no code"
+
+settings:
+  goose_provider: "anthropic"
+  goose_model: "claude-sonnet-5"
+  temperature: 0.3
+
+instructions: |
+  I am asking which approaches exist for a problem, not for an implementation.
+
+  Name 2-4 distinct approaches.
+  For each: one line on what it optimizes for, one line on its failure mode or cost.
+  Name the relevant library or API only — no code, no snippets.
+  End by naming the axis the decision actually turns on.
+  No preamble, no summary.
+parameters:
+  - key: question
+    input_type: string
+    requirement: required
+    description: "The question to answer"
+
+prompt: |
+  {{ question }}

@@ -37,8 +37,6 @@
     (lib.mkOrder 1200 ''
       export PATH="$PATH:/Users/stefan/.local/bin/"
       export PATH="$PATH:/Users/stefan/go/bin/"
-      export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-      export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
     '')
 
     # Google Cloud SDK

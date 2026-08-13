@@ -1,6 +1,5 @@
 { pkgs, lib, ... }:
 
-# Portable zsh core — used on every target (Mac, Linux desktop, Docker capsule).
 # macOS-only PATH/brew/gcloud/launchctl wiring lives in apps/zsh-darwin.nix,
 # imported by home/stefan/darwin.nix and merged in via mkOrder.
 {

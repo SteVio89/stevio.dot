@@ -13,8 +13,6 @@
     nixd
     vtsls
     prettierd
-    copilot-language-server
-    simple-completion-language-server
     pgformatter
     postgres-language-server
   ];

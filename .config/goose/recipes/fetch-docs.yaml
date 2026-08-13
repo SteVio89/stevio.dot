@@ -1,0 +1,22 @@
+version: 1.0.0
+title: "Chat with docs"
+description: "Answer questions and fetch docs, never touch my code"
+settings:
+  goose_provider: "anthropic"
+  goose_model: "claude-sonnet-5"
+  temperature: 0.0
+instructions: |
+  You answer library and API questions from documentation only.
+
+  Format: minimal snippet, then 1-3 sentences on the mechanism.
+  Only generic examples — never code written for my project.
+  If a stdlib or built-in feature already does this, name it instead of writing code.
+  No preamble, no summary, no closing offer of further help.
+parameters:
+  - key: question
+    input_type: string
+    requirement: required
+    description: "The question to answer"
+
+prompt: |
+  {{ question }}

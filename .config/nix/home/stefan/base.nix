@@ -1,9 +1,5 @@
 { pkgs, inputs, ... }:
 
-# Universal home-manager core — imported by every target for user stefan
-# (Mac, Linux desktop, Docker capsule). Platform facts live in darwin.nix /
-# linux.nix; interactive-terminal extras (tmux, terminal emulators) in
-# desktop.nix; the headless capsule adds claude-code via container.nix.
 {
   imports = [
     ./apps/zsh.nix
@@ -11,12 +7,11 @@
     ./apps/neovim.nix
     ./apps/yazi.nix
     ./apps/shell-aliases.nix
+    ./apps/goose.nix
     inputs.catppuccin.homeModules.catppuccin
   ];
 
   home.username = "stefan";
-  # home.homeDirectory + home.stateVersion are platform facts — set in
-  # darwin.nix / linux.nix, whichever the target composes.
 
   xdg.enable = true;
 
@@ -44,6 +39,40 @@
     kubie
     repgrep
     presenterm
+    evil-helix
+    _7zz
+    act
+    age
+    buf
+    ccache
+    dstask
+    exercism
+    ffmpegthumbnailer
+    gh
+    glab
+    imagemagick
+    k9s
+    krew
+    clusterctl
+    kubectl
+    kubelogin-oidc
+    kubernetes-helm
+    kubeseal
+    magic-wormhole
+    ninja
+    pandoc
+    parallel
+    poppler-utils
+    shellcheck
+    skim
+    sops
+    topgrade
+    typst
+    universal-ctags
+    uv
+    wget
+    yq-go
+
     inputs.tuicr.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
