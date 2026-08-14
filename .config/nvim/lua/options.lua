@@ -27,6 +27,14 @@ opt.inccommand = "split"
 opt.breakindent = true
 opt.updatetime = 250
 opt.fillchars = { eob = " " }
+opt.listchars = {
+	tab = "→ ",
+	trail = "·",
+	nbsp = "␣",
+	extends = "›",
+	precedes = "‹",
+	eol = "¬",
+}
 opt.foldlevel = 99
 
 vim.api.nvim_create_autocmd("TextYankPost", {

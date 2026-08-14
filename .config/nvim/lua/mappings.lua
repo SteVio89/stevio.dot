@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Toggle wrap" })
+vim.keymap.set("n", "<leader>tl", "<cmd>set list!<cr>", { desc = "Toggle invisible characters" })
 vim.keymap.set("n", "<leader>tu", "<cmd>Undotree<cr>", { desc = "Toggle undo tree" })
 vim.keymap.set("n", "<leader>op", ":lua vim.pack.update()<cr>", { desc = "Update plugins" })
 vim.keymap.set("n", "<leader>tc", function()
