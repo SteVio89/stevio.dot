@@ -1,6 +1,6 @@
 require("mini.diff").setup({ view = { style = "number" } })
 
-vim.keymap.set("n", "<leader>go", function()
+vim.keymap.set("n", "<leader>tg", function()
 	local MiniDiff = require("mini.diff")
 	if MiniDiff.get_buf_data(0) == nil then
 		vim.notify("Git diff overlay: not enabled in this buffer", vim.log.levels.WARN)
@@ -377,14 +377,6 @@ vim.keymap.set("n", "<leader>gr", function()
 	vim.notify(string.format("Git review: %d file(s)", #items))
 end, { desc = "Git review (walk changes)" })
 
-vim.keymap.set("n", "<leader>gn", function()
-	nav(true)
-end, { desc = "Git review: next file" })
-
-vim.keymap.set("n", "<leader>gp", function()
-	nav(false)
-end, { desc = "Git review: previous file" })
-
-vim.keymap.set("n", "<leader>gR", function()
+vim.keymap.set("n", "<leader>gq", function()
 	end_review()
 end, { desc = "Git review end" })

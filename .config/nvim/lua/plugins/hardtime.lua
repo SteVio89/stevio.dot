@@ -6,4 +6,4 @@ require("hardtime").setup({
 	disable_mouse = false,
 })
 
-vim.keymap.set("n", "<leader>oh", "<cmd>HardtimeToggle<cr>", { desc = "Toggle hardtime" })
+vim.keymap.set("n", "<leader>th", "<cmd>HardtimeToggle<cr>", { desc = "Toggle hardtime" })

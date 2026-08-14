@@ -4,4 +4,4 @@ vim.pack.add({
 
 require("taka-time").setup()
 
-vim.keymap.set("n", "<leader>td", "<cmd>TakaDash<cr>", { desc = "Open Taka-Time Dashboard" })
+vim.keymap.set("n", "<leader>ot", "<cmd>TakaDash<cr>", { desc = "Open Taka-Time Dashboard" })

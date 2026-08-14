@@ -65,31 +65,30 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>fT", function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ bufnr = bufnr })
-	if #clients == 0 then
-		vim.notify("No LSP client attached — nothing to populate", vim.log.levels.WARN)
-		return
-	end
-	for _, client in ipairs(clients) do
-		require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-	end
-	vim.notify("Populating workspace diagnostics for all project files…", vim.log.levels.INFO)
-end, { desc = "Find trouble (workspace-wide diagnostics)" })
-
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show lsp hover" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Goto definition" })
-vim.keymap.set("n", "<leader>ca", function()
-	require("tiny-code-action").code_action()
-end, { desc = "Code action" })
 vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({ async = true })
 end, { desc = "Code format" })
-vim.keymap.set("n", "<leader>cr", function()
-	vim.lsp.buf.rename()
-end, { desc = "Rename" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if not client then
+			return
+		end
+		local fzf = require("fzf-lua")
+		local function map(lhs, method, fn, desc)
+			if client:supports_method(method) then
+				vim.keymap.set("n", lhs, fn, { buffer = ev.buf, desc = desc })
+			end
+		end
+		map("gra", "textDocument/codeAction", function()
+			require("tiny-code-action").code_action()
+		end, "Code action")
+		map("grr", "textDocument/references", fzf.lsp_references, "References")
+		map("gO", "textDocument/documentSymbol", fzf.lsp_document_symbols, "Document symbols")
+	end,
+})
 
 local doc_hl = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
 

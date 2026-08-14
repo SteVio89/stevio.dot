@@ -1,6 +1,7 @@
 require("options")
 require("mappings")
 require("unsaved")
+require("goose")
 
 vim.cmd("packadd nvim.undotree")
 vim.cmd("packadd nvim.difftool")

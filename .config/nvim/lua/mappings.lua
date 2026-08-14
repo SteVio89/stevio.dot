@@ -1,9 +1,9 @@
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>ow", "<cmd>set wrap!<cr>", { desc = "Toggle wrap" })
-vim.keymap.set("n", "<leader>ou", "<cmd>Undotree<cr>", { desc = "Toggle undo tree" })
+vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>", { desc = "Toggle wrap" })
+vim.keymap.set("n", "<leader>tu", "<cmd>Undotree<cr>", { desc = "Toggle undo tree" })
 vim.keymap.set("n", "<leader>op", ":lua vim.pack.update()<cr>", { desc = "Update plugins" })
-vim.keymap.set("n", "<leader>oc", function()
+vim.keymap.set("n", "<leader>tc", function()
   local enabled = not vim.lsp.inline_completion.is_enabled()
   vim.lsp.inline_completion.enable(enabled)
   vim.notify("Inline completion: " .. (enabled and "on" or "off"))
@@ -11,7 +11,6 @@ end, { desc = "Toggle inline completion" })
 vim.keymap.set("n", "<leader>bc", "<cmd>bd<cr>", { desc = "Close current buffer" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
 
--- Window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
@@ -24,26 +23,11 @@ vim.keymap.set("i", "öö", "@", { desc = "Insert @" })
 vim.keymap.set({ "i", "c" }, "ö5", "[", { remap = true, desc = "Insert [" })
 vim.keymap.set({ "i", "c" }, "ö6", "]", { remap = true, desc = "Insert ]" })
 
--- Buffer cycling
-vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-
--- Diagnostic jumping
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
-
--- Visual line moving
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
--- Terminal escape
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Quickfix navigation
-vim.keymap.set("n", "[q", "<cmd>cprevious<cr>", { desc = "Previous quickfix" })
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Next quickfix" })
-
--- Native BufOnly command (replaces BufOnly.nvim)
 vim.api.nvim_create_user_command("BufOnly", function()
   local cur = vim.api.nvim_get_current_buf()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do

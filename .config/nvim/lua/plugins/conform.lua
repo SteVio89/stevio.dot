@@ -35,3 +35,5 @@ require("conform").setup({
   notify_on_error = true,
   notify_no_formatters = false,
 })
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

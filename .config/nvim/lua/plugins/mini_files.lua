@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 	callback = set_widths,
 })
 
-vim.keymap.set("n", "<leader>fe", function()
+vim.keymap.set("n", "<leader>e", function()
 	local buffer_name = vim.api.nvim_buf_get_name(0)
 	if buffer_name == "" or vim.fn.filereadable(buffer_name) == 0 then
 		MiniFiles.open(vim.uv.cwd())

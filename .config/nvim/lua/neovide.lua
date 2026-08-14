@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>oo", function()
 	end)
 end, { desc = "Open project (zoxide)" })
 
-vim.keymap.set("n", "<leader>oO", function()
+vim.keymap.set("n", "<leader>on", function()
 	zoxide_pick(function(dir)
 		vim.system({ "zoxide", "add", dir })
 		vim.system({ "neovide", "." }, { cwd = dir, detach = true })

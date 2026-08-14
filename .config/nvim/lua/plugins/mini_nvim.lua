@@ -29,7 +29,7 @@ require("mini.pairs").setup({
 })
 
 require("mini.sessions").setup()
-vim.keymap.set("n", "<leader>sS", function()
+vim.keymap.set("n", "<leader>sw", function()
 	local cwd = vim.fn.getcwd()
 	local last_folder = cwd:match("([^/]+)$")
 	require("mini.sessions").write(last_folder)
@@ -89,11 +89,11 @@ vim.keymap.set("n", "<leader>fo", function()
 	visits_picker("Recent> ")
 end, { desc = "Recent files (this project)" })
 
-vim.keymap.set("n", "<leader>fv", function()
+vim.keymap.set("n", "<leader>fp", function()
 	visits_picker("Pinned> ", PIN_LABEL)
 end, { desc = "Pinned files" })
 
-vim.keymap.set("n", "<leader>fV", function()
+vim.keymap.set("n", "<leader>tp", function()
 	local MiniVisits = require("mini.visits")
 	local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":p")
 	if path == "" or vim.fn.filereadable(path) ~= 1 then
@@ -121,40 +121,39 @@ miniclue.setup({
 	triggers = {
 		{ mode = "n", keys = "<Leader>" },
 		{ mode = "x", keys = "<Leader>" },
-		-- Built-in completions
 		{ mode = "i", keys = "<C-x>" },
-		-- `g` key
 		{ mode = "n", keys = "g" },
 		{ mode = "x", keys = "g" },
-		-- Marks
 		{ mode = "n", keys = "'" },
 		{ mode = "x", keys = "'" },
-		-- Registers
+		{ mode = "n", keys = "`" },
+		{ mode = "x", keys = "`" },
 		{ mode = "n", keys = '"' },
 		{ mode = "x", keys = '"' },
-		-- Window commands
+		{ mode = "n", keys = "s" },
+		{ mode = "x", keys = "s" },
 		{ mode = "n", keys = "<C-w>" },
-		-- `z` key
 		{ mode = "n", keys = "z" },
 		{ mode = "x", keys = "z" },
-		-- Brackets
 		{ mode = "n", keys = "[" },
 		{ mode = "n", keys = "]" },
 	},
 	clues = {
-		-- Your leader groups
-		{ mode = "n", keys = "<Leader>f", desc = "+file" },
+		{ mode = "n", keys = "<Leader>f", desc = "+find" },
+		{ mode = "n", keys = "<Leader>t", desc = "+toggle" },
 		{ mode = "n", keys = "<Leader>b", desc = "+buffer" },
 		{ mode = "n", keys = "<Leader>g", desc = "+git" },
+		{ mode = "x", keys = "<Leader>g", desc = "+git" },
 		{ mode = "n", keys = "<Leader>c", desc = "+code" },
-		{ mode = "n", keys = "<Leader>o", desc = "+other" },
-		{ mode = "n", keys = "<Leader>s", desc = "+sessions" },
-		{ mode = "n", keys = "<leader>t", desc = "+Taka-Time" },
-		-- Built-in clue enhancers
+		{ mode = "n", keys = "<Leader>o", desc = "+open" },
+		{ mode = "n", keys = "<Leader>s", desc = "+session" },
+		{ mode = "n", keys = "s", desc = "+surround" },
+		{ mode = "x", keys = "s", desc = "+surround" },
 		miniclue.gen_clues.builtin_completion(),
 		miniclue.gen_clues.g(),
 		miniclue.gen_clues.marks(),
 		miniclue.gen_clues.registers(),
+		miniclue.gen_clues.square_brackets(),
 		miniclue.gen_clues.windows(),
 		miniclue.gen_clues.z(),
 	},
