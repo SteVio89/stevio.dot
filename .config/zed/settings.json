@@ -1,5 +1,6 @@
 // Zed settings
 {
+  "proxy": "",
   "cli_default_open_behavior": "new_window",
   "outline_panel": {
     "dock": "left",
@@ -93,7 +94,7 @@
   },
   "colorize_brackets": true,
   "helix_mode": false,
-  "disable_ai": false, //nice option :)
+  "disable_ai": true, //nice option :)
   "tab_size": 2,
   "auto_update": false, //managed with brew
   "base_keymap": "VSCode",

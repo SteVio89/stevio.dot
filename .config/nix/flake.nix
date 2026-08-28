@@ -15,10 +15,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    capsule = {
-      url = "github:SteVio89/capsule";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     tuicr = {
       url = "github:agavra/tuicr";
       inputs.nixpkgs.follows = "nixpkgs";

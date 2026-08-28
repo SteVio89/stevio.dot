@@ -67,6 +67,7 @@
     skim
     sops
     topgrade
+    tree-sitter
     typst
     universal-ctags
     uv
@@ -77,10 +78,13 @@
   ];
 
   # Static templates consumed by the `dev` shell helper (apps/zsh.nix).
-  # Per-language presets: each dir holds a `packages` list (injected into
-  # flake.nix) and a `justfile`. Drop in a new dir + a line here to add a language.
+  # Per-language presets: `packages` is injected into flake.nix, every other file
+  # is copied into the project as-is. An optional `flake.nix` replaces the shared
+  # one, for languages needing extra inputs (rust, rustlings). Add a language: new dir + a line here.
   xdg.configFile."dev-helpers/devshell-flake.nix".source = ./templates/devshell-flake.nix;
   xdg.configFile."dev-helpers/go".source = ./templates/dev-helpers/go;
+  xdg.configFile."dev-helpers/rust".source = ./templates/dev-helpers/rust;
+  xdg.configFile."dev-helpers/rustlings".source = ./templates/dev-helpers/rustlings;
   xdg.configFile."dev-helpers/zig".source = ./templates/dev-helpers/zig;
 
   programs.direnv = {

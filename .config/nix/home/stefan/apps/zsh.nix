@@ -66,9 +66,13 @@
       '')
 
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
-      # `dev init [lang] [name]` — optional lang (go/zig/…) seeds packages + a justfile.
+      # `dev init [lang] [name]` — optional lang (go/rust/zig/…) seeds packages + a justfile.
       (lib.mkOrder 1700 ''
+        # A language may ship its own flake.nix when the shared one cannot express it
+        # (rust needs a second input + an overlay). Falls back to the shared template.
         _dev_template() {
+          local own="$XDG_CONFIG_HOME/dev-helpers/$1/flake.nix"
+          [[ -n "$1" && -f "$own" ]] && { echo "$own"; return }
           echo "$XDG_CONFIG_HOME/dev-helpers/devshell-flake.nix"
         }
 
@@ -86,18 +90,27 @@
             return 1
           fi
           local project="''${name:-''${PWD:t}}"
-          sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template)" > flake.nix
+          local -a seeded=(flake.nix)
+          sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template "$lang")" > flake.nix
           if [[ -n "$lang" ]]; then
             _dev_inject_pkgs $(grep -v '^[[:space:]]*$' "$helpers/$lang/packages")
-            [[ -f justfile ]] || install -m 644 "$helpers/$lang/justfile" justfile
+            local f
+            for f in "$helpers/$lang"/*(.N); do
+              [[ "''${f:t}" == (packages|flake.nix) ]] && continue
+              [[ -f "''${f:t}" ]] || { install -m 644 "$f" "''${f:t}"; seeded+=("''${f:t}") }
+            done
           fi
-          [[ -f .envrc ]] || echo "use flake" > .envrc
+          [[ -f .envrc ]] || { echo "use flake" > .envrc; seeded+=(.envrc) }
           if [[ -f .gitignore ]]; then
             grep -q '\.direnv' .gitignore || printf '\n.direnv/\n' >> .gitignore
           else
             echo ".direnv/" > .gitignore
+            seeded+=(.gitignore)
           fi
           [[ -d .git ]] || git init -q
+          # Nix reads a flake from git, not from disk: untracked files are invisible to
+          # `nix develop`, so a fresh repo would fail on its own flake.nix.
+          git add -N "''${seeded[@]}" 2>/dev/null
           direnv allow
         }
 
@@ -146,98 +159,23 @@
           direnv reload
         }
 
-        _dev_update() {
-          if [[ ! -f flake.nix ]]; then
-            echo "no flake.nix here" >&2
-            return 1
-          fi
-          nix flake update && direnv reload
-        }
-
-        _dev_vm() {
-          if ! git remote get-url vm >/dev/null 2>&1; then
-            echo "no 'vm' remote — run \`capsule\` once to bootstrap" >&2
-            return 1
-          fi
-        }
-
-        _dev_vm_fetched() {
-          _dev_vm || return 1
-          if ! git rev-parse --verify -q vm/capsule >/dev/null; then
-            echo "no vm/capsule — run \`dev fetch\` first" >&2
-            return 1
-          fi
-        }
-
-        _dev_push() {
-          _dev_vm || return 1
-          git push vm HEAD:capsule
-        }
-
-        _dev_fetch() {
-          _dev_vm || return 1
-          git fetch vm
-        }
-
-        _dev_review() {
-          _dev_vm_fetched || return 1
-          git log -p --reverse HEAD..vm/capsule
-        }
-
-        _dev_merge() {
-          _dev_vm_fetched || return 1
-          local n
-          n=$(git rev-list --count HEAD..vm/capsule)
-          if (( n == 0 )); then
-            echo "nothing to merge — vm/capsule has no commits beyond $(git rev-parse --abbrev-ref HEAD)" >&2
-            return 0
-          fi
-          echo "merging $n commit(s) from vm/capsule into $(git rev-parse --abbrev-ref HEAD):"
-          git log --oneline --reverse HEAD..vm/capsule
-          echo
-          git diff --stat HEAD...vm/capsule
-          echo
-          if read -q "?merge these? [y/N] "; then
-            echo
-            git merge --no-ff vm/capsule
-          else
-            echo "\naborted"
-            return 1
-          fi
-        }
-
         _dev_usage() {
           print -P '
-%Bdev%b — flake devshells and the capsule handoff
+%Bdev%b — flake devshells
 
-%Bproject%b
   %F{cyan}init%f [lang] [name]  scaffold flake.nix, .envrc, git repo
   %F{cyan}add%f <pkg>...        add packages to flake.nix
   %F{cyan}rm%f <pkg>...         remove packages from flake.nix
-  %F{cyan}update%f              nix flake update, then reload
-  %F{cyan}reload%f              direnv reload
-
-%Bcapsule%b (vm remote)
-  %F{cyan}push%f                push HEAD to vm/capsule
-  %F{cyan}fetch%f               fetch vm refs, changes nothing
-  %F{cyan}review%f              show commits + patch in vm/capsule
-  %F{cyan}merge%f               diffstat, confirm, merge --no-ff
 '
         }
 
         dev() {
           case "$1" in
-            init)   shift; _dev_init "$@" ;;
-            add)    shift; _dev_add "$@" ;;
-            rm)     shift; _dev_rm "$@" ;;
-            update) _dev_update ;;
-            reload) direnv reload ;;
-            push)   _dev_push ;;
-            fetch)  _dev_fetch ;;
-            review) _dev_review ;;
-            merge)  _dev_merge ;;
-            "")     _dev_usage ;;
-            *)      echo "dev: unknown command '$1'" >&2; _dev_usage >&2; return 2 ;;
+            init) shift; _dev_init "$@" ;;
+            add)  shift; _dev_add "$@" ;;
+            rm)   shift; _dev_rm "$@" ;;
+            "")   _dev_usage ;;
+            *)    echo "dev: unknown command '$1'" >&2; _dev_usage >&2; return 2 ;;
           esac
         }
       '')

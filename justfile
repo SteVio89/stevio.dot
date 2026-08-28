@@ -27,15 +27,20 @@ init-nix:
   sudo -i nix run nix-darwin -- switch --flake /Users/stefan/.config/nix-darwin
 
 update-nix:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  token="$(security find-generic-password -a "$USER" -s github-nix-token -w)"
+  export NIX_CONFIG="access-tokens = github.com=$token"
   nix flake update --flake ~/.config/nix
   sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev
 
 update-nix-full:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  token="$(security find-generic-password -a "$USER" -s github-nix-token -w)"
+  export NIX_CONFIG="access-tokens = github.com=$token"
   nix flake update --flake ~/.config/nix
   sudo darwin-rebuild switch --flake ~/.config/nix#stevio-dev-full
-
-update-kids:
-  sudo nixos-rebuild switch --flake ~/.config/nix#kids-laptop
 
 fix-gpg-agent:
   gpgconf --kill gpg-agent

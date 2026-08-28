@@ -1,10 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 # macOS-specific home facts + GUI packages + the macOS-only zsh wiring.
 {
   imports = [
     ./apps/zsh-darwin.nix
-    inputs.capsule.homeModules.default
   ];
 
   home.homeDirectory = "/Users/stefan";
@@ -18,6 +17,5 @@
     gitui
     dua
     procs
-    bottom
   ];
 }
