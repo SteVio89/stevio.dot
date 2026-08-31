@@ -1,0 +1,3 @@
+#!/bin/sh
+[ -n "$TAKA_UPLOAD_BIN" ] || exit 1
+exec "$TAKA_UPLOAD_BIN" "$@" -language "${TAKA_LANGUAGE:-unknown}"

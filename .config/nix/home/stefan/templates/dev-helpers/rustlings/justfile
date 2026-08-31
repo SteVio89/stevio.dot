@@ -1,0 +1,22 @@
+# Default recipes for rustlings (seeded by `dev init rustlings`).
+# Recipes cd into ./rustlings because rustlings resolves exercises from cwd.
+
+dir := "rustlings"
+
+default:
+    @just --list
+
+init:
+    rustlings init
+
+watch:
+    cd {{dir}} && rustlings
+
+run *name:
+    cd {{dir}} && rustlings run {{name}}
+
+hint *name:
+    cd {{dir}} && rustlings hint {{name}}
+
+reset name:
+    cd {{dir}} && rustlings reset {{name}}

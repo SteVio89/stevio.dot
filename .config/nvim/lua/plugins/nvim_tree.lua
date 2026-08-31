@@ -18,7 +18,7 @@ require("nvim-tree").setup({
 	renderer = {
 		group_empty = true,
 	},
-	actions = { open_file = { quit_on_open = true } },
+	actions = { open_file = { quit_on_open = false } },
 	git = { enable = true },
 	modified = { enable = false },
 	diagnostics = { enable = false },

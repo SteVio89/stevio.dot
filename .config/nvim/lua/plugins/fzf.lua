@@ -42,7 +42,7 @@ end, { desc = "Diagnostics all buffers" })
 
 vim.keymap.set("n", "<leader>fs", fzf.lsp_workspace_symbols, { desc = "Find symbol (workspace)" })
 vim.keymap.set("n", "<leader>ft", function()
-	fzf.grep({ search = "TODO|FIXME|HACK|NOTE" })
+	fzf.grep({ search = [[\b(TODO|FIXME|HACK|NOTE)\b]], no_esc = true })
 end, { desc = "Project Todos" })
 
 local explorer_group = vim.api.nvim_create_augroup("FzfDefaultExplorer", { clear = true })

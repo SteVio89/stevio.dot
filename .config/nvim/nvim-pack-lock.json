@@ -41,23 +41,23 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini": {
-      "rev": "e58ad4b0c9e9376096b9704f98fc00d4c9448870",
+      "rev": "a311ed247d527db9592bb434356badc705363746",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "37e0f22a2345bad1bffe01b31970885882f46275",
+      "rev": "5adc81b26232954cd7a90f158aa7844c18fc3165",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nui": {
-      "rev": "a25dd472316d806eb38a5dd667c2e40da5570c75",
+      "rev": "10fc361835c856ba4233ef5ea135b919bf3dce97",
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lint": {
-      "rev": "5b5b794458b5ff0b17d26c9d7400faaebd00b32d",
+      "rev": "3d55c8f67c6ae5c15e1042571e107c7a3d5c5f4e",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "bff1bd61cb1455040533201ca1edf1e84efa578f",
+      "rev": "16286347bdba1333c7d124d9de9fe6630731b2b2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "47434659a3d24be4ac568e74f337e1b4364ae1cf",
+      "rev": "c41ce98dc7b8a28556ae9197176580139c10fc7d",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "transparent": {
@@ -81,7 +81,7 @@
       "src": "https://github.com/xiyaowong/transparent.nvim"
     },
     "treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "857651fce37eba032ebe28f3a206283cdc65c45a",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "treesitter-textobjects": {
