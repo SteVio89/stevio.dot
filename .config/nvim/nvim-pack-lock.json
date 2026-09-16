@@ -17,15 +17,15 @@
       "src": "https://github.com/Bekaboo/dropbar.nvim"
     },
     "fzf": {
-      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
+      "rev": "02bc882f208f3481aa959dbbee8ce5edad2fd8b2",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "hardtime": {
-      "rev": "244753782b945def87472d8f4e9e6a9d4ec18689",
+      "rev": "5165840fe680eab46de1fc6dbff48f148fdcf018",
       "src": "https://github.com/m4xshen/hardtime.nvim"
     },
     "img-clip": {
-      "rev": "b6ddfb97b5600d99afe3452d707444afda658aca",
+      "rev": "99848daf801789dbebe2192b475eb887d375002c",
       "src": "https://github.com/hakonharnes/img-clip.nvim"
     },
     "inline-diagnostic": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini": {
-      "rev": "a311ed247d527db9592bb434356badc705363746",
+      "rev": "ac5dffcc52b8378fbb15efeb0497a83e57a0b01c",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
@@ -57,11 +57,11 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "16286347bdba1333c7d124d9de9fe6630731b2b2",
+      "rev": "ac9d2f7c4757db6320cab6697fe73e5e8adb2457",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree": {
-      "rev": "b2aadda94b107480c48e548d6db51c6840b7b33c",
+      "rev": "8d814495983e8db87d02d2f1da293f25b2fd1bdc",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "plenary": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "c41ce98dc7b8a28556ae9197176580139c10fc7d",
+      "rev": "0239d16c36c6d1f9acd361f1e270fbdfef0faa6b",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "transparent": {
@@ -81,11 +81,11 @@
       "src": "https://github.com/xiyaowong/transparent.nvim"
     },
     "treesitter": {
-      "rev": "857651fce37eba032ebe28f3a206283cdc65c45a",
+      "rev": "9a168f6357ed21c3a636e1727bc7d382abc451b8",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "treesitter-textobjects": {
-      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
+      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "workspace-diagnostics": {

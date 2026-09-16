@@ -66,6 +66,7 @@
     shellcheck
     skim
     sops
+    qemu
     topgrade
     tree-sitter
     typst
@@ -90,6 +91,7 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    silent = true;
   };
 
   programs.atuin = {

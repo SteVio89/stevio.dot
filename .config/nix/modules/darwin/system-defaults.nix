@@ -36,7 +36,6 @@
       "/Applications/Helium.app"
       "/Users/stefan/Applications/Home Manager Apps/Ghostty.app"
       "/Users/stefan/Applications/Home Manager Apps/Neovide.app"
-      "/Applications/Claude.app"
     ];
   };
 

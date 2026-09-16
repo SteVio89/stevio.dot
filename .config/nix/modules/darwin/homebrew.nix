@@ -19,9 +19,18 @@
     # trusted defaults to false for taps (Homebrew 6 HOMEBREW_REQUIRE_TAP_TRUST),
     # and plain cask/brew names resolve through the tap, so trust must live here.
     taps = [
-      { name = "dail8859/notepadnext"; trusted = true; }
-      { name = "jetbrains/utils"; trusted = true; }
-      { name = "nikitabobko/tap"; trusted = true; }
+      {
+        name = "dail8859/notepadnext";
+        trusted = true;
+      }
+      {
+        name = "jetbrains/utils";
+        trusted = true;
+      }
+      {
+        name = "nikitabobko/tap";
+        trusted = true;
+      }
     ];
 
     brews = [
@@ -55,7 +64,6 @@
     casks = [
       "aerospace"
       "android-platform-tools"
-      "another-redis-desktop-manager"
       "discord"
       "gimp"
       "gstreamer-runtime"
