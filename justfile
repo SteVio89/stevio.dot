@@ -61,3 +61,6 @@ setup-secure-enclave-ssh:
   cat ~/.ssh/id_ecdsa_sk_rk.pub
   echo ""
   echo "Add this key to GitHub (Settings → SSH keys) and your servers."
+
+connect-thb:
+  sudo openfortivpn -c /Users/stefan/.config/openfortivpn/my-config

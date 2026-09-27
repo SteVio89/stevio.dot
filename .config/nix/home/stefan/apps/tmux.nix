@@ -374,6 +374,11 @@ in
       set -g pane-border-style 'fg=#45475a'
       set -g pane-active-border-style 'fg=#cba6f7,bold'
 
+      set -g allow-passthrough on
+      set -g default-terminal "tmux-256color"
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
+
       set -g pane-border-status top
       set -g pane-border-format '#{?pane_active,#[fg=#1e1e2e#,bg=#cba6f7#,bold] #P #[default],#[fg=#6c7086] #P }'
 

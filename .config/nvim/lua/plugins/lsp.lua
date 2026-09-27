@@ -32,6 +32,12 @@ vim.lsp.config("kotlin_lsp", {
 	root_markers = { "build.gradle", "build.gradle.kts", "pom.xml", "module.yaml", "project.yaml" },
 })
 
+vim.lsp.config["tinymist"] = {
+	cmd = { "tinymist" },
+	filetypes = { "typst" },
+	settings = {},
+}
+
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("bashls")
@@ -44,6 +50,7 @@ vim.lsp.enable("vtsls")
 vim.lsp.enable("postgres_lsp")
 vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("yamlls")
+vim.lsp.enable("tinymist")
 vim.lsp.inlay_hint.enable()
 
 -- TODO: drop once Neovim ships neovim/neovim#40569 (inlay hints moved onto the capability

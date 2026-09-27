@@ -70,6 +70,7 @@
     topgrade
     tree-sitter
     typst
+    openfortivpn
     universal-ctags
     uv
     wget

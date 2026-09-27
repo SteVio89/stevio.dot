@@ -1,7 +1,7 @@
 {
   "plugins": {
     "code-action": {
-      "rev": "0d040ed81f7953118b81cd12681fcdfcac069803",
+      "rev": "91a9c32228e9a7761d241023d9ebb9d11d8fb10d",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
     },
     "conform": {
@@ -13,11 +13,11 @@
       "src": "https://github.com/actionshrimp/direnv.nvim"
     },
     "dropbar": {
-      "rev": "808ba31cde89aec8833e9789f5e04557cd31c9e1",
+      "rev": "f7c6fa21e2a7c32576e7a1791774a3736987f467",
       "src": "https://github.com/Bekaboo/dropbar.nvim"
     },
     "fzf": {
-      "rev": "02bc882f208f3481aa959dbbee8ce5edad2fd8b2",
+      "rev": "ec1b98d3f5f44a1cff1f2c3832af2f09c3d806ca",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "hardtime": {
@@ -40,13 +40,21 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
+    "lua-utils": {
+      "rev": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd",
+      "src": "https://github.com/nvim-neorg/lua-utils.nvim"
+    },
     "mini": {
-      "rev": "ac5dffcc52b8378fbb15efeb0497a83e57a0b01c",
+      "rev": "561751e839b99a4baca36b9d963166b66d2536a6",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
       "rev": "5adc81b26232954cd7a90f158aa7844c18fc3165",
       "src": "https://github.com/NeogitOrg/neogit"
+    },
+    "neorg": {
+      "rev": "6fda795b0108c92840fd32db6d5dd54e7f997fa8",
+      "src": "https://github.com/nvim-neorg/neorg"
     },
     "nui": {
       "rev": "10fc361835c856ba4233ef5ea135b919bf3dce97",
@@ -57,12 +65,16 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "ac9d2f7c4757db6320cab6697fe73e5e8adb2457",
+      "rev": "a9bb4d5f4276aa5cddc015faa3ecc5a7b5a26b14",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree": {
-      "rev": "8d814495983e8db87d02d2f1da293f25b2fd1bdc",
+      "rev": "478c69c0fe253caea88de9c5e138bfa77395a59a",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
+    },
+    "pathlib": {
+      "rev": "a0d3dbbe00ce6a546426b1aed3838a82fe6bfc42",
+      "src": "https://github.com/pysan3/pathlib.nvim"
     },
     "plenary": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
@@ -73,7 +85,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "taka-time": {
-      "rev": "0239d16c36c6d1f9acd361f1e270fbdfef0faa6b",
+      "rev": "d726d31dc33d24221bcd00ef120edc3c9ada3123",
       "src": "https://github.com/Rtarun3606k/TakaTime"
     },
     "transparent": {
@@ -81,7 +93,7 @@
       "src": "https://github.com/xiyaowong/transparent.nvim"
     },
     "treesitter": {
-      "rev": "9a168f6357ed21c3a636e1727bc7d382abc451b8",
+      "rev": "728e031f6b11d03d1f0708b7dc4fb0f1d9c8a137",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "treesitter-textobjects": {
@@ -89,7 +101,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "workspace-diagnostics": {
-      "rev": "a35321d8401878cc9558e357acfd0da58b582739",
+      "rev": "ea93521c0344fa2530c6f6da8b059d1b944ca550",
       "src": "https://github.com/artemave/workspace-diagnostics.nvim"
     }
   }

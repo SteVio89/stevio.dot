@@ -39,6 +39,7 @@
       "cdrtools"
       "dfu-util"
       "gnupg"
+      "leaf-markdown-viewer"
       "ios-deploy"
       "libgit2@1.7"
       "libimobiledevice"
@@ -57,7 +58,6 @@
       "xcodegen"
       "ykman"
       "ykpers"
-
       "jetbrains/utils/kotlin-lsp"
     ];
 
