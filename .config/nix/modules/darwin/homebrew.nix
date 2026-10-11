@@ -20,6 +20,10 @@
     # and plain cask/brew names resolve through the tap, so trust must live here.
     taps = [
       {
+        name = "docker/tap";
+        trusted = true;
+      }
+      {
         name = "dail8859/notepadnext";
         trusted = true;
       }
@@ -73,8 +77,18 @@
       "octarine"
       "sf-symbols"
       "signal"
-      "thaw"
       "zed"
+      "docker/tap/sbx"
     ];
   };
+
+  # `sbx run|create` default to --clone unless it was passed explicitly.
+  programs.zsh.interactiveShellInit = ''
+    sbx() {
+      case "$1" in
+        run|create) case " $* " in *" --clone"*) ;; *) local c=$1; shift; set -- "$c" --clone "$@" ;; esac ;;
+      esac
+      command sbx "$@"
+    }
+  '';
 }

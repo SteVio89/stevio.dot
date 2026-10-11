@@ -6,7 +6,14 @@
   },
   "permissions": {
     "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "LSP",
       "WebSearch",
+      "mcp__plugin_context7_context7",
+      "mcp__claude_ai_Context7",
+      "Edit(~/.claude/projects/*/memory/**)",
       "Bash(git status*)",
       "Bash(git log*)",
       "Bash(git diff*)",
@@ -25,8 +32,9 @@
       "Bash(git tag -l*)",
       "Bash(git stash list*)",
       "Bash(git remote -v)",
-      "Bash(git config --get*)",
-      "Bash(git config --list*)",
+      "Bash(ls*)",
+      "Bash(rg *)",
+      "Bash(wc *)",
       "WebFetch(domain:docs.rs)",
       "WebFetch(domain:doc.rust-lang.org)",
       "WebFetch(domain:rust-lang.org)",
@@ -67,28 +75,6 @@
       "Bash(git reset*)",
       "Bash(git rebase*)",
       "Bash(git checkout*)",
-      "Bash(npm install*)",
-      "Bash(npm i *)",
-      "Bash(npm ci*)",
-      "Bash(npm add*)",
-      "Bash(npm update*)",
-      "Bash(npm exec*)",
-      "Bash(npx *)",
-      "Bash(pnpm add*)",
-      "Bash(pnpm install*)",
-      "Bash(pnpm i *)",
-      "Bash(pnpm dlx*)",
-      "Bash(yarn add*)",
-      "Bash(yarn install*)",
-      "Bash(yarn dlx*)",
-      "Bash(bun add*)",
-      "Bash(bun install*)",
-      "Bash(bun x *)",
-      "Bash(bunx *)",
-      "Bash(corepack *)",
-      "Bash(nvm install*)",
-      "Bash(volta install*)",
-      "Bash(brew install *)",
       "Bash(sudo *)",
       "Bash(security find-*)",
       "Bash(security dump-keychain*)",
@@ -154,99 +140,46 @@
       "Read(**/id_rsa*)",
       "Read(**/id_ed25519*)",
       "Read(**/id_ecdsa*)",
-      "Edit(**/.git/**)",
-      "Edit(~/.zshrc)",
-      "Edit(~/.zprofile)",
-      "Edit(~/.zshenv)",
-      "Edit(~/.bashrc)",
-      "Edit(~/.gitconfig)",
-      "Edit(~/.config/git/**)",
-      "Edit(~/Library/LaunchAgents/**)",
-      "Edit(~/.claude/settings.json)",
-      "Edit(~/.claude/settings.local.json)",
-      "Edit(~/.claude/statusline.sh)",
-      "Edit(~/.claude/hooks/**)"
+      "Read(**/.gradle/gradle.properties)",
+      "Read(**/.m2/settings*.xml)"
     ],
-    "defaultMode": "auto",
+    "defaultMode": "dontAsk",
     "disableBypassPermissionsMode": "disable",
     "blockReadsOutsideWorkingDirectories": true
   },
   "model": "opus",
   "enableAllProjectMcpServers": false,
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Read|Grep|Glob|Edit|Write|MultiEdit|NotebookEdit|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/block-secrets.py",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/git-readonly.py",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/scan-secrets.py",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "WebFetch",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/webfetch-allowlist.py",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
-        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit|WebFetch",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/audit-log.sh",
+            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/audit.py",
             "timeout": 5,
             "async": true
           }
         ]
       }
     ],
-    "Notification": [
+    "PostToolUseFailure": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.sh",
+            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/audit.py",
             "timeout": 5,
             "async": true
           }
         ]
       }
     ],
-    "Stop": [
+    "PermissionDenied": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.sh",
+            "command": "/opt/homebrew/bin/python3 -I ~/.claude/hooks/audit.py",
             "timeout": 5,
             "async": true
           }
@@ -276,10 +209,44 @@
   "sandbox": {
     "enabled": true,
     "failIfUnavailable": true,
-    "autoAllowBashIfSandboxed": true,
+    "autoAllowBashIfSandboxed": false,
     "allowUnsandboxedCommands": false,
     "network": {
-      "allowedDomains": [],
+      "allowedDomains": [
+        "docs.rs",
+        "doc.rust-lang.org",
+        "rust-lang.org",
+        "crates.io",
+        "lib.rs",
+        "developer.apple.com",
+        "swift.org",
+        "swiftpackageindex.com",
+        "nixos.org",
+        "nix.dev",
+        "nix-community.github.io",
+        "nix-darwin.github.io",
+        "kubernetes.io",
+        "docs.docker.com",
+        "helm.sh",
+        "cluster-api.sigs.k8s.io",
+        "opentofu.org",
+        "developer.hashicorp.com",
+        "docs.hetzner.com",
+        "docs.hetzner.cloud",
+        "github.com",
+        "docs.github.com",
+        "raw.githubusercontent.com",
+        "docs.claude.com",
+        "code.claude.com",
+        "docs.anthropic.com",
+        "developer.mozilla.org",
+        "stackoverflow.com",
+        "man7.org",
+        "docs.python.org",
+        "git-scm.com",
+        "warcraft.wiki.gg",
+        "wowpedia.fandom.com"
+      ],
       "deniedDomains": [
         "registry.npmjs.org",
         "registry.yarnpkg.com",
@@ -290,14 +257,7 @@
     },
     "filesystem": {
       "denyWrite": [
-        "**/.git",
-        "~/.zshrc",
-        "~/.zprofile",
-        "~/.zshenv",
-        "~/.bashrc",
-        "~/.gitconfig",
-        "~/.config/git",
-        "~/Library/LaunchAgents"
+        "~"
       ],
       "denyRead": [
         "~",
@@ -356,69 +316,31 @@
         "~/.local/state/nix",
         "~/.gitconfig",
         "~/.config/git"
-      ],
-      "allowWrite": [
-        "/var/folders/y9/5b285mms4z5_dy6b4n4ymtf80000gn/C/clang/ModuleCache",
-        "~/Library/Caches/org.swift.swiftpm",
-        "~/Library/org.swift.swiftpm",
-        "~/Library/Developer/Xcode/DerivedData",
-        "/var/folders/y9/5b285mms4z5_dy6b4n4ymtf80000gn/T"
       ]
     },
     "credentials": {
       "envVars": [
-        {
-          "name": "GH_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "GITHUB_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "GITLAB_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "ANTHROPIC_API_KEY",
-          "mode": "deny"
-        },
-        {
-          "name": "OPENAI_API_KEY",
-          "mode": "deny"
-        },
-        {
-          "name": "AWS_ACCESS_KEY_ID",
-          "mode": "deny"
-        },
-        {
-          "name": "AWS_SECRET_ACCESS_KEY",
-          "mode": "deny"
-        },
-        {
-          "name": "AWS_SESSION_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "HCLOUD_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "NPM_TOKEN",
-          "mode": "deny"
-        },
-        {
-          "name": "SOPS_AGE_KEY",
-          "mode": "deny"
-        },
-        {
-          "name": "KUBECONFIG",
-          "mode": "deny"
-        }
+        { "name": "GH_TOKEN", "mode": "deny" },
+        { "name": "GITHUB_TOKEN", "mode": "deny" },
+        { "name": "GITLAB_TOKEN", "mode": "deny" },
+        { "name": "ANTHROPIC_API_KEY", "mode": "deny" },
+        { "name": "OPENAI_API_KEY", "mode": "deny" },
+        { "name": "AWS_ACCESS_KEY_ID", "mode": "deny" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "mode": "deny" },
+        { "name": "AWS_SESSION_TOKEN", "mode": "deny" },
+        { "name": "HCLOUD_TOKEN", "mode": "deny" },
+        { "name": "NPM_TOKEN", "mode": "deny" },
+        { "name": "SOPS_AGE_KEY", "mode": "deny" },
+        { "name": "KUBECONFIG", "mode": "deny" }
       ]
     }
   },
   "feedbackDrafts": "off",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "pluginConfigs": {
@@ -433,23 +355,5 @@
   "autoMemoryEnabled": true,
   "theme": "dark",
   "editorMode": "vim",
-  "switchModelsOnFlag": true,
-  "fileCheckpointingEnabled": true,
-  "autoMode": {
-    "hard_deny": [
-      "$defaults",
-      "Any git command that modifies a repository, its refs, index, config or remotes (commit, push, fetch, reset, checkout, stash, rebase, merge, tag creation, etc.)",
-      "Reading, printing, copying or uploading credentials, private keys, kubeconfigs, docker auth, cloud provider config, .env files or shell history",
-      "Installing node packages or running npx, pnpm dlx, yarn dlx, bunx or corepack",
-      "Installing any additional software on the system",
-      "Modifying ~/.claude settings, ~/.claude/hooks, the status line script, or shell rc files",
-      "Working around a hook or sandbox block instead of reporting it to the user"
-    ]
-  },
-  "_disabled_deny": [
-    "Edit(~/.claude/settings.json)",
-    "Edit(~/.claude/settings.local.json)",
-    "Edit(~/.claude/statusline.sh)",
-    "Edit(~/.claude/hooks/**)"
-  ]
+  "switchModelsOnFlag": true
 }
