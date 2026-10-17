@@ -65,6 +65,15 @@
         ZVM_INIT_MODE=sourcing
       '')
 
+      # `cdg` — cd to the root of the current git repo (stays put outside one).
+      (lib.mkOrder 1600 ''
+        cdg() {
+          local root
+          root=$(git rev-parse --show-toplevel) || return
+          cd "$root"
+        }
+      '')
+
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
       # `dev init [lang] [name]` — optional lang (go/rust/zig/…) seeds packages + a justfile.
       (lib.mkOrder 1700 ''
