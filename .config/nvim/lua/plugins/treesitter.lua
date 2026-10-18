@@ -17,6 +17,7 @@ require("nvim-treesitter").install({
 	"c",
 	"cpp",
 	"kotlin",
+	"java",
 	"yaml",
 	"json",
 	"toml",
