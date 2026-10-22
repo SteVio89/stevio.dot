@@ -35,6 +35,10 @@
         name = "nikitabobko/tap";
         trusted = true;
       }
+      {
+        name = "raine/aven";
+        trusted = true;
+      }
     ];
 
     brews = [
@@ -63,6 +67,7 @@
       "ykman"
       "ykpers"
       "jetbrains/utils/kotlin-lsp"
+      "raine/aven/aven"
     ];
 
     casks = [
@@ -83,11 +88,16 @@
   };
 
   # `sbx run|create` default to --clone unless it was passed explicitly.
+  # `sbx run claude` also passes my kit right after `claude` (unless --kit was given).
   programs.zsh.interactiveShellInit = ''
     sbx() {
       case "$1" in
         run|create) case " $* " in *" --clone"*) ;; *) local c=$1; shift; set -- "$c" --clone "$@" ;; esac ;;
       esac
+      local i=''${argv[(i)claude]}
+      if [[ $1 == run && $i -le $# && " $* " != *" --kit"* ]]; then
+        set -- "''${(@)argv[1,i]}" --kit ~/.config/sbx-kits/global-claude/ "''${(@)argv[i+1,-1]}"
+      fi
       command sbx "$@"
     }
   '';
