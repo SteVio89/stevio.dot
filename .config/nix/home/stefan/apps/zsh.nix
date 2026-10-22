@@ -75,7 +75,7 @@
       '')
 
       # `dev` — minimal devbox replacement on top of plain flake.nix + nix-direnv.
-      # `dev init [lang] [name]` — optional lang (go/rust/zig/…) seeds packages + a justfile.
+      # `dev init [lang] [name]` — optional lang (go/rust/zig/jdk17/…) seeds packages + a justfile.
       (lib.mkOrder 1700 ''
         # A language may ship its own flake.nix when the shared one cannot express it
         # (rust needs a second input + an overlay). Falls back to the shared template.
@@ -91,16 +91,23 @@
             return 1
           fi
           local helpers="$XDG_CONFIG_HOME/dev-helpers"
-          local lang="$1" name="$2"
+          local lang="$1" name="$2" jdk=""
+          # Java is selected by JDK version: `jdk17` → java preset with pkgs.jdk17.
+          if [[ "$lang" == jdk<-> ]]; then
+            jdk="$lang"; lang=java
+          elif [[ "$lang" == java ]]; then
+            echo "java needs a JDK version, e.g. \`dev init jdk17\` / jdk24 / jdk25" >&2
+            return 1
+          fi
           if [[ -n "$lang" && ! -d "$helpers/$lang" ]]; then
             local avail
             avail=$(ls -d "$helpers"/*/ 2>/dev/null | xargs -n1 basename 2>/dev/null | paste -sd, -)
-            echo "unknown language: $lang — available: $avail" >&2
+            echo "unknown language: $lang — available: ''${avail/java/jdk<NN>}" >&2
             return 1
           fi
           local project="''${name:-''${PWD:t}}"
           local -a seeded=(flake.nix)
-          sed "s/PROJECT_NAME/''${project}/g" "$(_dev_template "$lang")" > flake.nix
+          sed -e "s/PROJECT_NAME/''${project}/g" -e "s/JDK_ATTR/''${jdk}/g" "$(_dev_template "$lang")" > flake.nix
           if [[ -n "$lang" ]]; then
             _dev_inject_pkgs $(grep -v '^[[:space:]]*$' "$helpers/$lang/packages")
             local f
@@ -173,6 +180,7 @@
 %Bdev%b — flake devshells
 
   %F{cyan}init%f [lang] [name]  scaffold flake.nix, .envrc, git repo
+                      lang: go, rust, rustlings, zig, jdk<NN> (e.g. jdk17, jdk25)
   %F{cyan}add%f <pkg>...        add packages to flake.nix
   %F{cyan}rm%f <pkg>...         remove packages from flake.nix
 '

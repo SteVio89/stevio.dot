@@ -1,0 +1,20 @@
+# Default recipes for Java projects (seeded by `dev init jdk<NN>`).
+# Maven if pom.xml exists, otherwise Gradle (./gradlew when present).
+
+maven := path_exists("pom.xml")
+gradle := if path_exists("gradlew") == "true" { "./gradlew" } else { "gradle" }
+
+default:
+    @just --list
+
+build:
+    {{ if maven == "true" { "mvn compile" } else { gradle + " assemble" } }}
+
+test:
+    {{ if maven == "true" { "mvn test" } else { gradle + " test" } }}
+
+package:
+    {{ if maven == "true" { "mvn package" } else { gradle + " build" } }}
+
+clean:
+    {{ if maven == "true" { "mvn clean" } else { gradle + " clean" } }}
