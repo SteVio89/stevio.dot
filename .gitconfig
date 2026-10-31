@@ -17,3 +17,6 @@
 [pull]
 [gpg]
 	program = /opt/homebrew/bin/gpg
+[hook "gitleaks"]
+	event = pre-commit
+	command = gitleaks git --pre-commit --staged --redact
